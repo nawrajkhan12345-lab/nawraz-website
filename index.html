@@ -16,245 +16,367 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #03040b;
+    background: #050505;
     color: white;
     overflow-x: hidden;
 }
 
-/* =====================================================
-   ANIMATED BACKGROUND
-===================================================== */
+/* =========================================
+   WHITE ANIME DREAMSCAPE
+========================================= */
 
-.background {
+.scene {
     position: fixed;
     inset: 0;
-    z-index: -10;
+    z-index: -20;
     overflow: hidden;
     background:
-        radial-gradient(circle at 20% 30%, rgba(0, 119, 255, .18), transparent 30%),
-        radial-gradient(circle at 80% 60%, rgba(140, 0, 255, .18), transparent 30%),
-        linear-gradient(180deg, #02030a 0%, #07091a 60%, #02030a 100%);
+        radial-gradient(circle at 50% 35%,
+        rgba(255,255,255,.13),
+        transparent 25%),
+        linear-gradient(
+        180deg,
+        #020202 0%,
+        #090909 55%,
+        #000000 100%);
 }
 
-/* Neon glow */
+/* Moon */
 
-.neon-blue {
+.moon {
     position: absolute;
-    width: 500px;
-    height: 500px;
-    background: #0077ff;
-    filter: blur(180px);
-    opacity: .12;
-    left: -150px;
-    top: 20%;
-    animation: blueGlow 8s ease-in-out infinite alternate;
+
+    width: 210px;
+    height: 210px;
+
+    border-radius: 50%;
+
+    right: 13%;
+    top: 13%;
+
+    background: #fff;
+
+    box-shadow:
+        0 0 30px rgba(255,255,255,.9),
+        0 0 90px rgba(255,255,255,.35),
+        0 0 180px rgba(255,255,255,.12);
+
+    animation: moonFloat 7s ease-in-out infinite alternate;
 }
 
-.neon-purple {
-    position: absolute;
-    width: 450px;
-    height: 450px;
-    background: #9b00ff;
-    filter: blur(180px);
-    opacity: .12;
-    right: -120px;
-    bottom: 10%;
-    animation: purpleGlow 10s ease-in-out infinite alternate;
-}
+@keyframes moonFloat {
 
-@keyframes blueGlow {
     from {
-        transform: translate(0, 0);
+        transform: translateY(0);
     }
+
     to {
-        transform: translate(180px, -80px);
+        transform: translateY(18px);
     }
 }
 
-@keyframes purpleGlow {
-    from {
-        transform: translate(0, 0);
-    }
-    to {
-        transform: translate(-150px, 60px);
-    }
-}
+/* Moon shadow */
 
-/* =====================================================
-   CITY
-===================================================== */
-
-.city {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 38%;
-    display: flex;
-    align-items: flex-end;
-    gap: 5px;
-    opacity: .8;
-}
-
-.building {
-    position: relative;
-    background: linear-gradient(180deg, #080a16, #020207);
-    border-top: 1px solid rgba(0, 170, 255, .15);
-    flex: 1;
-}
-
-.building:nth-child(1) { height: 60%; }
-.building:nth-child(2) { height: 85%; }
-.building:nth-child(3) { height: 48%; }
-.building:nth-child(4) { height: 75%; }
-.building:nth-child(5) { height: 95%; }
-.building:nth-child(6) { height: 55%; }
-.building:nth-child(7) { height: 82%; }
-.building:nth-child(8) { height: 62%; }
-.building:nth-child(9) { height: 90%; }
-.building:nth-child(10) { height: 50%; }
-.building:nth-child(11) { height: 78%; }
-.building:nth-child(12) { height: 65%; }
-
-.building::before {
+.moon::after {
     content: "";
+
     position: absolute;
-    inset: 12px 8px;
-    background:
-        repeating-linear-gradient(
-            90deg,
-            rgba(0, 170, 255, .25) 0 3px,
-            transparent 3px 18px
-        ),
-        repeating-linear-gradient(
-            0deg,
-            rgba(120, 60, 255, .18) 0 3px,
-            transparent 3px 22px
-        );
+
+    width: 210px;
+    height: 210px;
+
+    border-radius: 50%;
+
+    background: #090909;
+
+    left: 55px;
+    top: -18px;
+}
+
+/* =========================================
+   LIGHT BEAMS
+========================================= */
+
+.light {
+    position: absolute;
+
+    width: 700px;
+    height: 700px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,.05);
+
+    left: 50%;
+    top: 45%;
+
+    transform: translate(-50%,-50%);
+
+    animation: lightPulse 6s ease-in-out infinite;
+}
+
+.light::before,
+.light::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 60px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,.04);
+}
+
+.light::after {
+    inset: 130px;
+}
+
+@keyframes lightPulse {
+
+    0%,100% {
+        transform: translate(-50%,-50%) scale(1);
+        opacity: .5;
+    }
+
+    50% {
+        transform: translate(-50%,-50%) scale(1.08);
+        opacity: 1;
+    }
+}
+
+/* =========================================
+   CLOUDS
+========================================= */
+
+.cloud {
+    position: absolute;
+
+    width: 300px;
+    height: 70px;
+
+    background: rgba(255,255,255,.035);
+
+    border-radius: 100px;
+
+    filter: blur(12px);
+
+    animation: cloudMove linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+    content: "";
+
+    position: absolute;
+
+    background: inherit;
+
+    border-radius: 50%;
+}
+
+.cloud::before {
+    width: 130px;
+    height: 130px;
+
+    left: 45px;
+    bottom: 5px;
+}
+
+.cloud::after {
+    width: 100px;
+    height: 100px;
+
+    right: 45px;
+    bottom: 0;
+}
+
+.cloud.one {
+    top: 27%;
+    left: -350px;
+    animation-duration: 35s;
+}
+
+.cloud.two {
+    top: 43%;
+    left: -450px;
+    animation-duration: 48s;
+    animation-delay: 8s;
     opacity: .5;
 }
 
-/* =====================================================
-   NEON SIGNS
-===================================================== */
+@keyframes cloudMove {
 
-.sign {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(140vw);
+    }
+}
+
+/* =========================================
+   WHITE PARTICLES
+========================================= */
+
+.particles {
     position: absolute;
-    padding: 8px 14px;
-    border: 1px solid #00aaff;
-    color: #00aaff;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-shadow: 0 0 10px #00aaff;
-    box-shadow: 0 0 15px rgba(0,170,255,.35);
-    transform: rotate(-5deg);
-    opacity: .7;
+    inset: 0;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.8) 1px,
+            transparent 2px
+        );
+
+    background-size: 110px 110px;
+
+    opacity: .3;
+
+    animation: particlesMove 30s linear infinite;
 }
 
-.sign.one {
-    left: 12%;
-    bottom: 20%;
+@keyframes particlesMove {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-220px);
+    }
 }
 
-.sign.two {
-    right: 15%;
-    bottom: 30%;
-    color: #bd5cff;
-    border-color: #bd5cff;
-    text-shadow: 0 0 10px #bd5cff;
-    box-shadow: 0 0 15px rgba(189,92,255,.35);
-    transform: rotate(4deg);
-}
+/* =========================================
+   FALLING SNOW / PETALS
+========================================= */
 
-/* =====================================================
-   RAIN
-===================================================== */
-
-.rain {
+.snow {
     position: absolute;
     inset: 0;
     pointer-events: none;
 }
 
-.drop {
+.flake {
     position: absolute;
-    top: -100px;
-    width: 1px;
-    height: 70px;
-    background: linear-gradient(
-        transparent,
-        rgba(100,190,255,.7)
-    );
-    transform: rotate(12deg);
-    animation: rainFall linear infinite;
+
+    width: 4px;
+    height: 4px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 8px white;
+
+    animation: fall linear infinite;
 }
 
-@keyframes rainFall {
-    to {
-        transform: translateY(120vh) rotate(12deg);
-    }
-}
+@keyframes fall {
 
-/* =====================================================
-   ROAD REFLECTION
-===================================================== */
-
-.road {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 13%;
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(0,140,255,.08),
-            transparent,
-            rgba(150,50,255,.08),
-            transparent
-        );
-    filter: blur(3px);
-}
-
-/* =====================================================
-   PARTICLES
-===================================================== */
-
-.particles {
-    position: absolute;
-    inset: 0;
-    background-image:
-        radial-gradient(circle, rgba(255,255,255,.7) 1px, transparent 2px);
-    background-size: 130px 130px;
-    opacity: .18;
-    animation: particlesMove 25s linear infinite;
-}
-
-@keyframes particlesMove {
     from {
-        transform: translateY(0);
+        transform:
+            translateY(-20px)
+            translateX(0)
+            rotate(0deg);
     }
+
     to {
-        transform: translateY(-260px);
+        transform:
+            translateY(110vh)
+            translateX(100px)
+            rotate(360deg);
     }
 }
 
-/* =====================================================
+/* =========================================
+   MOUNTAINS
+========================================= */
+
+.mountains {
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 32%;
+}
+
+.mountain {
+    position: absolute;
+
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left: 250px solid transparent;
+    border-right: 250px solid transparent;
+    border-bottom: 300px solid #050505;
+
+    filter:
+        drop-shadow(0 -5px 10px rgba(255,255,255,.04));
+}
+
+.mountain.one {
+    left: -80px;
+}
+
+.mountain.two {
+    left: 25%;
+    border-bottom-height: 380px;
+}
+
+.mountain.three {
+    right: -100px;
+    border-bottom: 340px solid #040404;
+}
+
+/* =========================================
+   FOREGROUND GLOW
+========================================= */
+
+.ground-glow {
+    position: absolute;
+
+    bottom: -100px;
+    left: 50%;
+
+    width: 900px;
+    height: 250px;
+
+    transform: translateX(-50%);
+
+    background: rgba(255,255,255,.08);
+
+    filter: blur(100px);
+
+    border-radius: 50%;
+}
+
+/* =========================================
    NAVBAR
-===================================================== */
+========================================= */
 
 nav {
     position: fixed;
+
     top: 0;
     width: 100%;
+
     padding: 20px 8%;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    background: rgba(2,4,12,.55);
-    backdrop-filter: blur(16px);
+    background: rgba(0,0,0,.45);
+
+    backdrop-filter: blur(18px);
 
     border-bottom: 1px solid rgba(255,255,255,.08);
 
@@ -264,45 +386,59 @@ nav {
 .logo {
     font-size: 24px;
     font-weight: bold;
+
     letter-spacing: 3px;
 }
 
 .logo span {
-    color: #00aaff;
-    text-shadow: 0 0 12px #00aaff;
+    color: white;
+
+    text-shadow:
+        0 0 10px white,
+        0 0 25px rgba(255,255,255,.5);
 }
 
 nav a {
-    color: #ddd;
+    color: #bbb;
+
     text-decoration: none;
+
     margin-left: 25px;
+
     transition: .3s;
 }
 
 nav a:hover {
-    color: #00aaff;
-    text-shadow: 0 0 12px #00aaff;
+    color: white;
+
+    text-shadow:
+        0 0 10px white;
 }
 
-/* =====================================================
+/* =========================================
    HERO
-===================================================== */
+========================================= */
 
 .hero {
     min-height: 100vh;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     text-align: center;
+
     padding: 20px;
+
     position: relative;
 }
 
 .hero-content {
-    animation: heroIn 1.4s ease;
+    animation: heroIn 1.5s ease;
 }
 
 @keyframes heroIn {
+
     from {
         opacity: 0;
         transform: translateY(40px);
@@ -316,187 +452,246 @@ nav a:hover {
 
 .hero h1 {
     font-size: 72px;
+
     margin-bottom: 15px;
-    text-shadow: 0 0 30px rgba(0,170,255,.2);
+
+    text-shadow:
+        0 0 30px rgba(255,255,255,.2);
 }
 
 .hero h1 span {
-    color: #00aaff;
+    color: white;
+
     text-shadow:
-        0 0 10px #00aaff,
-        0 0 30px rgba(0,170,255,.5);
+        0 0 10px white,
+        0 0 35px rgba(255,255,255,.45);
 }
 
 .hero p {
-    color: #aaa;
     font-size: 22px;
+
+    color: #999;
+
     margin-bottom: 32px;
 }
 
+/* =========================================
+   BUTTON
+========================================= */
+
 .button {
     display: inline-block;
+
     padding: 15px 32px;
-    color: white;
-    background: rgba(0,150,255,.8);
+
+    color: black;
+
+    background: white;
+
     border-radius: 30px;
+
     text-decoration: none;
+
     font-weight: bold;
 
-    box-shadow: 0 0 25px rgba(0,150,255,.3);
+    box-shadow:
+        0 0 25px rgba(255,255,255,.25);
 
     transition: .3s;
 }
 
 .button:hover {
+
     transform: scale(1.08);
-    background: #008cff;
-    box-shadow: 0 0 40px rgba(0,150,255,.6);
+
+    box-shadow:
+        0 0 45px rgba(255,255,255,.6);
 }
 
-.scroll {
-    position: absolute;
-    bottom: 30px;
-    color: #777;
-    font-size: 13px;
-    animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-    50% {
-        transform: translateY(10px);
-    }
-}
-
-/* =====================================================
+/* =========================================
    SECTIONS
-===================================================== */
+========================================= */
 
 section {
+
     padding: 120px 10%;
+
     text-align: center;
+
     position: relative;
 }
 
 section h2 {
+
     font-size: 42px;
+
     margin-bottom: 30px;
 }
 
 section h2::after {
+
     content: "";
+
     display: block;
-    width: 60px;
-    height: 3px;
-    background: #00aaff;
+
+    width: 55px;
+    height: 2px;
+
+    background: white;
+
     margin: 14px auto;
-    box-shadow: 0 0 15px #00aaff;
+
+    box-shadow:
+        0 0 12px white;
 }
 
 section p {
+
     max-width: 700px;
+
     margin: auto;
-    color: #aaa;
+
+    color: #999;
+
     line-height: 1.7;
+
     font-size: 18px;
 }
 
-/* =====================================================
+/* =========================================
    GLASS CARDS
-===================================================== */
+========================================= */
 
 .skills,
 .projects {
+
     display: flex;
+
     justify-content: center;
+
     flex-wrap: wrap;
+
     gap: 25px;
+
     margin-top: 40px;
 }
 
 .skill,
 .project {
-    background: rgba(255,255,255,.055);
-    border: 1px solid rgba(255,255,255,.1);
-    backdrop-filter: blur(14px);
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    backdrop-filter: blur(15px);
+
     border-radius: 20px;
 
     transition: .4s;
 }
 
 .skill {
+
     padding: 22px 32px;
 }
 
 .project {
+
     width: 290px;
+
     padding: 35px 25px;
 }
 
 .skill:hover,
 .project:hover {
-    transform: translateY(-10px);
-    border-color: #00aaff;
+
+    transform:
+        translateY(-10px);
+
+    border-color:
+        rgba(255,255,255,.6);
+
     box-shadow:
-        0 0 30px rgba(0,170,255,.2),
-        inset 0 0 20px rgba(0,170,255,.03);
+        0 0 30px rgba(255,255,255,.12);
 }
 
 .project h3 {
+
     margin-bottom: 15px;
 }
 
-/* =====================================================
-   CONTACT
-===================================================== */
+/* =========================================
+   SOCIAL
+========================================= */
 
 .social {
+
     margin-top: 30px;
+
     display: flex;
+
     justify-content: center;
+
     flex-wrap: wrap;
 }
 
 .social a {
+
     margin: 8px;
+
     padding: 13px 23px;
 
     color: white;
+
     text-decoration: none;
 
-    background: rgba(255,255,255,.04);
-    border: 1px solid rgba(255,255,255,.12);
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid rgba(255,255,255,.12);
 
     border-radius: 25px;
-
-    backdrop-filter: blur(10px);
 
     transition: .3s;
 }
 
 .social a:hover {
-    background: #00aaff;
-    border-color: #00aaff;
-    transform: translateY(-4px);
-    box-shadow: 0 0 25px rgba(0,170,255,.5);
+
+    background: white;
+
+    color: black;
+
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 0 25px rgba(255,255,255,.35);
 }
 
-/* =====================================================
+/* =========================================
    FOOTER
-===================================================== */
+========================================= */
 
 footer {
+
     padding: 30px;
+
     text-align: center;
-    color: #777;
-    border-top: 1px solid rgba(255,255,255,.08);
-    background: rgba(0,0,0,.3);
+
+    color: #666;
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
 }
 
-/* =====================================================
+/* =========================================
    MOBILE
-===================================================== */
+========================================= */
 
-@media (max-width: 700px) {
+@media (max-width:700px) {
 
     nav {
         padding: 15px 5%;
@@ -519,6 +714,18 @@ footer {
         font-size: 18px;
     }
 
+    .moon {
+        width: 120px;
+        height: 120px;
+        right: 8%;
+    }
+
+    .moon::after {
+        width: 120px;
+        height: 120px;
+        left: 35px;
+    }
+
     section {
         padding: 90px 7%;
     }
@@ -535,50 +742,41 @@ footer {
 </style>
 </head>
 
-
 <body>
 
-<!-- =====================================================
-     BACKGROUND
-===================================================== -->
+<!-- =========================================
+     ANIME BACKGROUND
+========================================= -->
 
-<div class="background">
+<div class="scene">
 
-    <div class="neon-blue"></div>
-    <div class="neon-purple"></div>
+    <div class="moon"></div>
+
+    <div class="light"></div>
+
+    <div class="cloud one"></div>
+    <div class="cloud two"></div>
 
     <div class="particles"></div>
 
-    <div class="city">
+    <div class="snow" id="snow"></div>
 
-        <div class="building"></div>
-        <div class="building"></div>
-        <div class="building"></div>
-        <div class="building"></div>
-        <div class="building"></div>
-        <div class="building"></div>
-        <div class="building"></div>
-        <div class="building"></div>
-        <div class="building"></div>
-        <div class="building"></div>
-        <div class="building"></div>
-        <div class="building"></div>
+    <div class="mountains">
+
+        <div class="mountain one"></div>
+        <div class="mountain two"></div>
+        <div class="mountain three"></div>
 
     </div>
 
-    <div class="sign one">NAWRAZ</div>
-    <div class="sign two">CREATIVE</div>
-
-    <div class="road"></div>
-
-    <div class="rain" id="rain"></div>
+    <div class="ground-glow"></div>
 
 </div>
 
 
-<!-- =====================================================
+<!-- =========================================
      NAVBAR
-===================================================== -->
+========================================= -->
 
 <nav>
 
@@ -599,9 +797,9 @@ footer {
 </nav>
 
 
-<!-- =====================================================
+<!-- =========================================
      HOME
-===================================================== -->
+========================================= -->
 
 <section class="hero" id="home">
 
@@ -621,16 +819,12 @@ footer {
 
     </div>
 
-    <div class="scroll">
-        ↓ Scroll Down
-    </div>
-
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================
      ABOUT
-===================================================== -->
+========================================= -->
 
 <section id="about">
 
@@ -645,9 +839,9 @@ footer {
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================
      SKILLS
-===================================================== -->
+========================================= -->
 
 <section id="skills">
 
@@ -676,9 +870,9 @@ footer {
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================
      PROJECTS
-===================================================== -->
+========================================= -->
 
 <section id="projects">
 
@@ -696,7 +890,6 @@ footer {
 
         </div>
 
-
         <div class="project">
 
             <h3>🎨 Designs</h3>
@@ -706,7 +899,6 @@ footer {
             </p>
 
         </div>
-
 
         <div class="project">
 
@@ -723,9 +915,9 @@ footer {
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================
      CONTACT
-===================================================== -->
+========================================= -->
 
 <section id="contact">
 
@@ -762,9 +954,9 @@ footer {
 </section>
 
 
-<!-- =====================================================
+<!-- =========================================
      FOOTER
-===================================================== -->
+========================================= -->
 
 <footer>
 
@@ -773,47 +965,64 @@ footer {
 </footer>
 
 
-<!-- =====================================================
-     RAIN JAVASCRIPT
-===================================================== -->
+<!-- =========================================
+     SNOW / LIGHT PARTICLES
+========================================= -->
 
 <script>
 
-const rain = document.getElementById("rain");
+const snow = document.getElementById("snow");
 
-for (let i = 0; i < 160; i++) {
+for (let i = 0; i < 100; i++) {
 
-    const drop = document.createElement("div");
+    const flake =
+        document.createElement("div");
 
-    drop.className = "drop";
+    flake.className = "flake";
 
-    drop.style.left = Math.random() * 100 + "%";
+    flake.style.left =
+        Math.random() * 100 + "%";
 
-    drop.style.height =
-        (40 + Math.random() * 70) + "px";
+    flake.style.width =
+        (2 + Math.random() * 4) + "px";
 
-    drop.style.opacity =
-        (0.15 + Math.random() * 0.6);
+    flake.style.height =
+        flake.style.width;
 
-    drop.style.animationDuration =
-        (0.45 + Math.random() * 0.8) + "s";
+    flake.style.opacity =
+        .2 + Math.random() * .8;
 
-    drop.style.animationDelay =
-        Math.random() * 2 + "s";
+    flake.style.animationDuration =
+        (5 + Math.random() * 8) + "s";
 
-    rain.appendChild(drop);
+    flake.style.animationDelay =
+        Math.random() * 8 + "s";
+
+    snow.appendChild(flake);
 }
 
 
-/* Subtle mouse movement */
+/* Subtle mouse parallax */
 
-document.addEventListener("mousemove", (e) => {
+document.addEventListener("mousemove", function(e) {
 
-    const x = (e.clientX / window.innerWidth - 0.5);
-    const y = (e.clientY / window.innerHeight - 0.5);
+    const x =
+        (e.clientX / window.innerWidth - .5);
 
-    document.querySelector(".city").style.transform =
-        `translate(${x * 8}px, ${y * 4}px)`;
+    const y =
+        (e.clientY / window.innerHeight - .5);
+
+    const moon =
+        document.querySelector(".moon");
+
+    const mountains =
+        document.querySelector(".mountains");
+
+    moon.style.transform =
+        `translate(${x * 15}px, ${y * 10}px)`;
+
+    mountains.style.transform =
+        `translateX(${x * 8}px)`;
 
 });
 
