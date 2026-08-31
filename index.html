@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Nawraz Khan | Personal Website</title>
+    <title>Nawraz Khan | Creator • Editor • Student</title>
 
     <style>
         * {
@@ -16,11 +16,147 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: #0a0a0a;
+            background: #03040a;
             color: white;
+            overflow-x: hidden;
         }
 
-        /* NAVBAR */
+        /* =========================
+           ANIME LIVE BACKGROUND
+        ========================= */
+
+        .anime-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -10;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(0, 140, 255, 0.18), transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(130, 40, 255, 0.18), transparent 30%),
+                linear-gradient(135deg, #03040a, #080b18, #03040a);
+        }
+
+        /* Moon */
+
+        .moon {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: #ffffff;
+            top: 15%;
+            right: 12%;
+            box-shadow:
+                0 0 30px rgba(255,255,255,0.7),
+                0 0 80px rgba(150,190,255,0.3);
+            opacity: 0.9;
+            animation: moonFloat 6s ease-in-out infinite alternate;
+        }
+
+        .moon::after {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: #080b18;
+            left: 35px;
+            top: -10px;
+        }
+
+        @keyframes moonFloat {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(15px);
+            }
+        }
+
+        /* Stars */
+
+        .stars {
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(2px 2px at 10% 20%, white, transparent),
+                radial-gradient(1px 1px at 20% 80%, white, transparent),
+                radial-gradient(2px 2px at 30% 40%, white, transparent),
+                radial-gradient(1px 1px at 40% 15%, white, transparent),
+                radial-gradient(2px 2px at 50% 70%, white, transparent),
+                radial-gradient(1px 1px at 60% 30%, white, transparent),
+                radial-gradient(2px 2px at 70% 85%, white, transparent),
+                radial-gradient(1px 1px at 80% 45%, white, transparent),
+                radial-gradient(2px 2px at 90% 15%, white, transparent),
+                radial-gradient(1px 1px at 95% 75%, white, transparent);
+
+            background-size: 300px 300px;
+            animation: starsMove 20s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes starsMove {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-300px);
+            }
+        }
+
+        /* Glow */
+
+        .glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: #008cff;
+            filter: blur(180px);
+            opacity: 0.12;
+            top: 20%;
+            left: 35%;
+            animation: glowMove 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes glowMove {
+            from {
+                transform: translate(-150px, -50px);
+            }
+
+            to {
+                transform: translate(150px, 80px);
+            }
+        }
+
+        /* Floating particles */
+
+        .particles {
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle, rgba(0,170,255,0.7) 1px, transparent 2px);
+            background-size: 120px 120px;
+            animation: particleMove 25s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes particleMove {
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(120px, -250px);
+            }
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
         nav {
             position: fixed;
             top: 0;
@@ -29,18 +165,28 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(10px);
+
+            background: rgba(5, 7, 15, 0.55);
+            backdrop-filter: blur(15px);
+
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+
             z-index: 1000;
         }
 
         .logo {
             font-size: 24px;
             font-weight: bold;
+            letter-spacing: 2px;
+            color: #ffffff;
+        }
+
+        .logo span {
+            color: #00aaff;
         }
 
         nav a {
-            color: white;
+            color: #ddd;
             text-decoration: none;
             margin-left: 25px;
             transition: 0.3s;
@@ -48,9 +194,13 @@
 
         nav a:hover {
             color: #00aaff;
+            text-shadow: 0 0 10px #00aaff;
         }
 
-        /* HERO */
+        /* =========================
+           HERO
+        ========================= */
+
         .hero {
             min-height: 100vh;
             display: flex;
@@ -58,15 +208,34 @@
             align-items: center;
             text-align: center;
             padding: 20px;
+            position: relative;
+        }
+
+        .hero-content {
+            animation: heroAppear 1.5s ease;
+        }
+
+        @keyframes heroAppear {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero h1 {
             font-size: 70px;
             margin-bottom: 15px;
+            text-shadow: 0 0 30px rgba(0,170,255,0.25);
         }
 
         .hero h1 span {
             color: #00aaff;
+            text-shadow: 0 0 20px rgba(0,170,255,0.7);
         }
 
         .hero p {
@@ -75,31 +244,55 @@
             margin-bottom: 30px;
         }
 
+        .typing {
+            color: #00aaff;
+        }
+
+        /* BUTTON */
+
         .button {
             display: inline-block;
             padding: 14px 30px;
-            background: #00aaff;
+            background: rgba(0,170,255,0.9);
             color: white;
             text-decoration: none;
             border-radius: 30px;
             font-weight: bold;
             transition: 0.3s;
+            box-shadow: 0 0 25px rgba(0,170,255,0.3);
         }
 
         .button:hover {
             transform: scale(1.08);
             background: #0088cc;
+            box-shadow: 0 0 40px rgba(0,170,255,0.6);
         }
 
-        /* SECTIONS */
+        /* =========================
+           SECTIONS
+        ========================= */
+
         section {
-            padding: 100px 10%;
+            padding: 120px 10%;
             text-align: center;
+            position: relative;
         }
 
         section h2 {
             font-size: 40px;
             margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(0,170,255,0.2);
+        }
+
+        section h2::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #00aaff;
+            margin: 12px auto;
+            border-radius: 5px;
+            box-shadow: 0 0 15px #00aaff;
         }
 
         section p {
@@ -110,7 +303,10 @@
             font-size: 18px;
         }
 
-        /* SKILLS */
+        /* =========================
+           SKILLS
+        ========================= */
+
         .skills {
             display: flex;
             justify-content: center;
@@ -120,18 +316,27 @@
         }
 
         .skill {
-            padding: 20px 30px;
-            background: #151515;
+            padding: 22px 32px;
+
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+
+            backdrop-filter: blur(12px);
+
             border-radius: 15px;
-            transition: 0.3s;
+            transition: 0.4s;
         }
 
         .skill:hover {
-            transform: translateY(-8px);
-            background: #1d1d1d;
+            transform: translateY(-10px) scale(1.04);
+            border-color: #00aaff;
+            box-shadow: 0 0 30px rgba(0,170,255,0.2);
         }
 
-        /* PROJECTS */
+        /* =========================
+           PROJECTS
+        ========================= */
+
         .projects {
             display: flex;
             justify-content: center;
@@ -142,58 +347,121 @@
 
         .project {
             width: 280px;
-            padding: 30px;
-            background: #151515;
+            padding: 35px 25px;
+
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+
+            backdrop-filter: blur(12px);
+
             border-radius: 20px;
-            transition: 0.3s;
+            transition: 0.4s;
         }
 
         .project:hover {
-            transform: translateY(-10px);
+            transform: translateY(-12px);
+            border-color: #00aaff;
+            box-shadow: 0 0 35px rgba(0,170,255,0.2);
         }
 
         .project h3 {
             margin-bottom: 15px;
+            font-size: 21px;
         }
 
-        /* SOCIAL */
+        .project p {
+            font-size: 15px;
+        }
+
+        /* =========================
+           CONTACT
+        ========================= */
+
         .social {
             margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .social a {
             display: inline-block;
             margin: 10px;
             padding: 12px 22px;
-            border: 1px solid #333;
+
+            border: 1px solid rgba(255,255,255,0.15);
             border-radius: 25px;
+
             color: white;
             text-decoration: none;
+
+            background: rgba(255,255,255,0.04);
+
+            backdrop-filter: blur(10px);
+
             transition: 0.3s;
         }
 
         .social a:hover {
             background: #00aaff;
             border-color: #00aaff;
+            box-shadow: 0 0 25px rgba(0,170,255,0.5);
+            transform: translateY(-4px);
         }
 
-        /* FOOTER */
+        /* =========================
+           FOOTER
+        ========================= */
+
         footer {
             text-align: center;
             padding: 30px;
             color: #777;
-            border-top: 1px solid #222;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0,0,0,0.3);
         }
 
-        /* MOBILE */
+        /* =========================
+           SCROLL INDICATOR
+        ========================= */
+
+        .scroll {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #777;
+            font-size: 13px;
+            animation: scrollBounce 2s infinite;
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% {
+                transform: translate(-50%, 0);
+            }
+
+            50% {
+                transform: translate(-50%, 10px);
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
         @media (max-width: 700px) {
+
             nav {
                 padding: 15px 5%;
             }
 
+            .logo {
+                font-size: 20px;
+            }
+
             nav a {
-                margin-left: 10px;
-                font-size: 14px;
+                margin-left: 8px;
+                font-size: 12px;
             }
 
             .hero h1 {
@@ -203,15 +471,53 @@
             .hero p {
                 font-size: 18px;
             }
+
+            .moon {
+                width: 90px;
+                height: 90px;
+                right: 8%;
+            }
+
+            .moon::after {
+                width: 90px;
+                height: 90px;
+                left: 20px;
+            }
+
+            section {
+                padding: 90px 7%;
+            }
+
+            section h2 {
+                font-size: 32px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
+    <!-- =========================
+         ANIME BACKGROUND
+    ========================= -->
+
+    <div class="anime-bg">
+        <div class="stars"></div>
+        <div class="particles"></div>
+        <div class="glow"></div>
+        <div class="moon"></div>
+    </div>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
     <nav>
-        <div class="logo">NAWRAZ</div>
+
+        <div class="logo">
+            NAW<span>RAZ</span>
+        </div>
 
         <div>
             <a href="#home">Home</a>
@@ -220,21 +526,45 @@
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
         </div>
+
     </nav>
 
-    <!-- HOME -->
+
+    <!-- =========================
+         HOME
+    ========================= -->
+
     <section class="hero" id="home">
-        <div>
-            <h1>Hi, I'm <span>Nawraz</span> 👋</h1>
 
-            <p>Creator • Editor • Student</p>
+        <div class="hero-content">
 
-            <a href="#about" class="button">Explore My Website</a>
+            <h1>
+                Hi, I'm <span>Nawraz</span> 👋
+            </h1>
+
+            <p>
+                Creator • Editor • Student
+            </p>
+
+            <a href="#about" class="button">
+                Explore My Website
+            </a>
+
         </div>
+
+        <div class="scroll">
+            ↓ Scroll Down
+        </div>
+
     </section>
 
-    <!-- ABOUT -->
+
+    <!-- =========================
+         ABOUT
+    ========================= -->
+
     <section id="about">
+
         <h2>About Me</h2>
 
         <p>
@@ -242,10 +572,16 @@
             who loves editing, technology, gaming and creating
             cool things.
         </p>
+
     </section>
 
-    <!-- SKILLS -->
+
+    <!-- =========================
+         SKILLS
+    ========================= -->
+
     <section id="skills">
+
         <h2>My Skills</h2>
 
         <div class="skills">
@@ -267,40 +603,63 @@
             </div>
 
         </div>
+
     </section>
 
-    <!-- PROJECTS -->
+
+    <!-- =========================
+         PROJECTS
+    ========================= -->
+
     <section id="projects">
+
         <h2>My Projects</h2>
 
         <div class="projects">
 
             <div class="project">
+
                 <h3>🎬 Video Editing</h3>
+
                 <p>
                     My video editing projects and creative work.
                 </p>
+
             </div>
 
+
             <div class="project">
+
                 <h3>🎨 Designs</h3>
+
                 <p>
                     Thumbnails, graphics and other designs.
                 </p>
+
             </div>
 
+
             <div class="project">
+
                 <h3>🌐 Websites</h3>
+
                 <p>
                     Websites and experiments I create.
                 </p>
+
             </div>
 
         </div>
+
     </section>
 
-    <!-- CONTACT -->
+
+    <!-- =========================
+         CONTACT
+    ========================= -->
+
     <section id="contact">
+
         <h2>Let's Connect</h2>
 
         <p>
@@ -308,12 +667,13 @@
         </p>
 
         <div class="social">
-            <a href="https://wa.me/8801934841616" target="_blank">
-                💬 WhatsApp
-            </a>
 
             <a href="https://instagram.com/_bixuuu_" target="_blank">
                 📸 Instagram
+            </a>
+
+            <a href="https://wa.me/8801712345678" target="_blank">
+                💬 WhatsApp
             </a>
 
             <a href="https://youtube.com/@playwithnawcorebabe" target="_blank">
@@ -329,11 +689,18 @@
             </a>
 
         </div>
+
     </section>
 
-    <!-- FOOTER -->
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
     <footer>
+
         © 2026 Nawraz Khan. All rights reserved.
+
     </footer>
 
 </body>
