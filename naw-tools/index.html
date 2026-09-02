@@ -4,47 +4,54 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NAW TOOLS | Free Creative Tools</title>
-<meta name="description" content="NAW TOOLS - Free creative tools by Nawraz Khan. Fancy text, QR codes, image tools, color tools and more.">
+<title>NAW TOOLS | Free Online Tools</title>
+<meta name="description" content="NAW TOOLS - Free online tools for text, QR codes, passwords, images, colors and more.">
+<meta name="theme-color" content="#080808">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
+}
+
+html{
     scroll-behavior:smooth;
 }
 
 body{
     font-family:Arial,Helvetica,sans-serif;
-    background:#070914;
+    background:#080808;
     color:#fff;
+    min-height:100vh;
     overflow-x:hidden;
 }
 
-/* BACKGROUND */
+/* ================= BACKGROUND ================= */
+
 body::before{
     content:"";
     position:fixed;
     inset:0;
+    z-index:-5;
     background:
-        radial-gradient(circle at 20% 20%,rgba(93,62,255,.18),transparent 30%),
-        radial-gradient(circle at 80% 30%,rgba(0,170,255,.14),transparent 30%),
-        radial-gradient(circle at 50% 100%,rgba(166,50,255,.15),transparent 35%);
-    pointer-events:none;
-    z-index:-3;
+        radial-gradient(circle at 15% 20%,rgba(229,9,20,.16),transparent 28%),
+        radial-gradient(circle at 85% 70%,rgba(229,9,20,.10),transparent 30%),
+        linear-gradient(180deg,#050505 0%,#0a0a0a 50%,#050505 100%);
 }
 
 .grid{
     position:fixed;
     inset:0;
+    z-index:-4;
+    opacity:.13;
     background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-    background-size:45px 45px;
+        linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
+    background-size:55px 55px;
     mask-image:linear-gradient(to bottom,transparent,black 20%,black 80%,transparent);
-    pointer-events:none;
-    z-index:-2;
 }
 
 .city{
@@ -52,463 +59,556 @@ body::before{
     bottom:0;
     left:0;
     width:100%;
-    height:130px;
-    opacity:.28;
-    z-index:-1;
-    display:flex;
-    align-items:end;
-    gap:4px;
+    height:260px;
+    z-index:-3;
+    opacity:.18;
+    background:
+        linear-gradient(to top,rgba(255,255,255,.13),transparent),
+        repeating-linear-gradient(
+            90deg,
+            #fff 0px,
+            #fff 35px,
+            transparent 35px,
+            transparent 65px
+        );
+    clip-path:polygon(
+        0 100%,0 72%,4% 72%,4% 50%,8% 50%,8% 68%,
+        12% 68%,12% 35%,17% 35%,17% 65%,22% 65%,
+        22% 45%,27% 45%,27% 70%,32% 70%,32% 28%,
+        37% 28%,37% 60%,43% 60%,43% 40%,48% 40%,
+        48% 68%,53% 68%,53% 32%,58% 32%,58% 58%,
+        63% 58%,63% 45%,68% 45%,68% 70%,74% 70%,
+        74% 36%,79% 36%,79% 65%,84% 65%,84% 48%,
+        90% 48%,90% 68%,95% 68%,95% 38%,100% 38%,
+        100% 100%
+    );
 }
 
-.building{
-    flex:1;
-    background:linear-gradient(to top,#11152a,#20264a);
-    border-top:1px solid rgba(140,130,255,.3);
-}
+/* ================= MOUSE GLOW ================= */
 
-.b1{height:35%}
-.b2{height:55%}
-.b3{height:75%}
-.b4{height:45%}
-.b5{height:90%}
-.b6{height:62%}
-.b7{height:80%}
-.b8{height:48%}
-.b9{height:70%}
-.b10{height:95%}
-
-.particle{
-    position:fixed;
-    width:3px;
-    height:3px;
-    background:#fff;
-    border-radius:50%;
-    opacity:.45;
-    animation:float 8s infinite ease-in-out;
-    z-index:-1;
-}
-
-.p1{left:10%;top:30%}
-.p2{left:25%;top:70%;animation-delay:2s}
-.p3{left:48%;top:25%;animation-delay:4s}
-.p4{left:70%;top:60%;animation-delay:1s}
-.p5{left:88%;top:35%;animation-delay:3s}
-.p6{left:58%;top:80%;animation-delay:5s}
-
-@keyframes float{
-    0%,100%{transform:translateY(0);opacity:.2}
-    50%{transform:translateY(-25px);opacity:.8}
-}
-
-/* MOUSE GLOW */
 .mouse-glow{
     position:fixed;
-    width:350px;
-    height:350px;
+    width:420px;
+    height:420px;
     border-radius:50%;
-    background:radial-gradient(circle,rgba(100,80,255,.13),transparent 70%);
     pointer-events:none;
+    z-index:-2;
+    background:radial-gradient(
+        circle,
+        rgba(229,9,20,.13),
+        transparent 65%
+    );
     transform:translate(-50%,-50%);
-    z-index:-1;
 }
 
-/* NAVBAR */
-nav{
-    position:sticky;
-    top:0;
-    z-index:100;
-    padding:18px 6%;
+/* ================= HEADER ================= */
+
+header{
+    width:min(1200px,92%);
+    margin:auto;
+    padding:28px 0 20px;
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    background:rgba(7,9,20,.65);
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid rgba(255,255,255,.07);
+    justify-content:space-between;
 }
 
 .logo{
-    font-size:20px;
+    font-size:26px;
     font-weight:900;
-    letter-spacing:3px;
+    letter-spacing:2px;
 }
 
 .logo span{
-    color:#8c7cff;
+    color:#E50914;
 }
 
-.nav-links{
+nav{
     display:flex;
     gap:25px;
 }
 
-.nav-links a{
-    color:#bbb;
+nav a{
+    color:#aaa;
     text-decoration:none;
     font-size:14px;
-    transition:.3s;
+    transition:.25s;
 }
 
-.nav-links a:hover{
-    color:#fff;
+nav a:hover{
+    color:#E50914;
 }
 
-/* HERO */
+/* ================= HERO ================= */
+
 .hero{
-    min-height:75vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    width:min(1200px,92%);
+    margin:60px auto 70px;
     text-align:center;
-    padding:80px 20px;
-}
-
-.hero-content{
-    max-width:900px;
 }
 
 .badge{
     display:inline-block;
-    padding:9px 16px;
-    border:1px solid rgba(140,124,255,.35);
-    background:rgba(140,124,255,.08);
-    border-radius:30px;
-    color:#bdb5ff;
-    font-size:12px;
-    margin-bottom:25px;
+    padding:8px 15px;
+    border:1px solid rgba(229,9,20,.45);
+    border-radius:50px;
+    background:rgba(229,9,20,.08);
+    color:#ff5b63;
+    font-size:13px;
+    margin-bottom:20px;
 }
 
 .hero h1{
-    font-size:clamp(55px,10vw,120px);
-    line-height:.9;
-    letter-spacing:8px;
-    background:linear-gradient(90deg,#fff,#a99cff,#6fdcff,#fff);
-    background-size:300%;
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    animation:shine 8s linear infinite;
+    font-size:clamp(42px,8vw,82px);
+    line-height:1;
+    font-weight:900;
+    letter-spacing:-3px;
 }
 
-@keyframes shine{
-    to{background-position:300%}
+.hero h1 span{
+    color:#E50914;
+    text-shadow:0 0 35px rgba(229,9,20,.35);
 }
 
 .hero p{
-    margin:30px auto;
     max-width:650px;
-    color:#a8adbd;
-    line-height:1.8;
-    font-size:16px;
+    margin:22px auto 0;
+    color:#a1a1aa;
+    font-size:17px;
+    line-height:1.7;
 }
 
-.hero-btn{
-    display:inline-block;
-    padding:14px 25px;
-    border-radius:12px;
-    color:#fff;
-    text-decoration:none;
-    background:linear-gradient(135deg,#6457ff,#9c4dff);
-    box-shadow:0 10px 35px rgba(105,80,255,.25);
-    transition:.3s;
-}
+/* ================= TOOLS ================= */
 
-.hero-btn:hover{
-    transform:translateY(-3px);
-}
-
-/* SECTION */
-section{
-    padding:70px 6%;
+.tools{
+    width:min(1200px,92%);
+    margin:auto;
 }
 
 .section-title{
     text-align:center;
-    margin-bottom:40px;
+    margin-bottom:30px;
 }
 
 .section-title h2{
-    font-size:34px;
-    margin-bottom:10px;
+    font-size:32px;
 }
 
 .section-title p{
-    color:#8f94a8;
+    color:#777;
+    margin-top:8px;
 }
 
-/* TOOL CARDS */
-.tools-grid{
-    max-width:1200px;
-    margin:auto;
+.tool-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    grid-template-columns:repeat(3,1fr);
     gap:20px;
 }
 
-.tool-card{
+.card{
+    position:relative;
     padding:25px;
-    border-radius:20px;
+    border-radius:22px;
     background:rgba(255,255,255,.055);
-    border:1px solid rgba(255,255,255,.09);
-    backdrop-filter:blur(18px);
-    transition:.35s;
-    cursor:pointer;
+    border:1px solid rgba(255,255,255,.10);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    box-shadow:0 15px 45px rgba(0,0,0,.35);
+    transition:.3s ease;
+    overflow:hidden;
 }
 
-.tool-card:hover{
-    transform:translateY(-6px);
-    border-color:rgba(140,124,255,.45);
-    box-shadow:0 15px 50px rgba(70,50,180,.18);
+.card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:2px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #E50914,
+        transparent
+    );
+    opacity:.65;
 }
 
-.tool-icon{
-    font-size:30px;
-    margin-bottom:15px;
+.card:hover{
+    transform:translateY(-5px);
+    border-color:rgba(229,9,20,.42);
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.5),
+        0 0 25px rgba(229,9,20,.10);
 }
 
-.tool-card h3{
+.icon{
+    font-size:32px;
+    margin-bottom:13px;
+}
+
+.card h3{
+    font-size:20px;
     margin-bottom:8px;
 }
 
-.tool-card p{
-    color:#8f94a8;
-    font-size:14px;
-    line-height:1.6;
+.card-desc{
+    color:#888;
+    font-size:13px;
+    margin-bottom:20px;
 }
 
-/* TOOL BOX */
-.tool-section{
-    max-width:1050px;
-    margin:0 auto 50px;
-}
-
-.tool-box{
-    padding:28px;
-    background:rgba(255,255,255,.055);
-    border:1px solid rgba(255,255,255,.09);
-    border-radius:22px;
-    backdrop-filter:blur(20px);
-}
+/* ================= INPUTS ================= */
 
 textarea,
 input,
 select{
     width:100%;
-    padding:13px 15px;
-    margin:7px 0;
-    background:rgba(0,0,0,.25);
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:10px;
-    color:#fff;
+    border:1px solid rgba(255,255,255,.12);
     outline:none;
+    background:#111;
+    color:#fff;
+    border-radius:12px;
+    padding:12px 13px;
+    font-size:14px;
+    margin-bottom:10px;
 }
 
 textarea{
-    min-height:120px;
     resize:vertical;
+    min-height:110px;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#E50914;
+    box-shadow:0 0 0 2px rgba(229,9,20,.08);
 }
 
 button{
-    padding:11px 17px;
-    margin:6px 4px 6px 0;
     border:none;
-    border-radius:9px;
-    background:linear-gradient(135deg,#6558ff,#914fff);
-    color:#fff;
+    outline:none;
     cursor:pointer;
+    color:#fff;
+    background:#E50914;
+    border-radius:11px;
+    padding:11px 15px;
+    font-weight:700;
     transition:.25s;
 }
 
 button:hover{
-    transform:translateY(-2px);
-    filter:brightness(1.12);
+    background:#ff2630;
+    box-shadow:0 0 20px rgba(229,9,20,.22);
 }
 
-.secondary{
-    background:rgba(255,255,255,.08);
+.secondary-btn{
+    background:#1b1b1b;
+    border:1px solid rgba(255,255,255,.10);
 }
 
-.controls{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:10px;
+.secondary-btn:hover{
+    background:#242424;
+}
+
+.row{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.row > *{
+    flex:1;
 }
 
 .result{
-    margin-top:18px;
+    margin-top:12px;
+    padding:13px;
+    background:#0c0c0c;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:12px;
+    word-break:break-word;
 }
 
-/* FANCY TEXT */
+.result-actions{
+    margin-top:8px;
+}
+
+.small{
+    font-size:12px;
+    color:#777;
+}
+
+/* ================= FANCY TEXT ================= */
+
+.fancy-list{
+    max-height:330px;
+    overflow:auto;
+    margin-top:12px;
+}
+
 .fancy-item{
     display:flex;
+    gap:8px;
     align-items:center;
-    gap:10px;
-    padding:13px;
-    margin:8px 0;
-    border-radius:12px;
-    background:rgba(255,255,255,.035);
+    padding:10px;
+    margin-bottom:7px;
+    background:#0d0d0d;
     border:1px solid rgba(255,255,255,.06);
+    border-radius:10px;
 }
 
-.fancy-output{
+.fancy-text{
     flex:1;
+    min-width:0;
     word-break:break-word;
-    color:#eee;
-    font-size:16px;
+    font-size:14px;
 }
 
-.copy-fancy{
-    flex-shrink:0;
-    margin:0;
-    padding:8px 13px;
+.copy-btn{
+    flex:0 0 auto;
+    padding:7px 10px;
+    font-size:11px;
 }
 
-/* STATS */
+/* ================= QR ================= */
+
+.qr-output{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:190px;
+    background:#fff;
+    border-radius:14px;
+    margin-top:12px;
+    padding:15px;
+}
+
+.qr-output img{
+    max-width:100%;
+}
+
+/* ================= COUNTER ================= */
+
 .stats{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-    gap:10px;
-    margin-top:15px;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-top:12px;
 }
 
 .stat{
-    padding:16px;
+    padding:12px 5px;
     text-align:center;
-    background:rgba(255,255,255,.045);
-    border-radius:12px;
+    border-radius:11px;
+    background:#101010;
+    border:1px solid rgba(255,255,255,.06);
 }
 
 .stat strong{
     display:block;
-    font-size:25px;
-    color:#a99cff;
+    font-size:20px;
+    color:#fff;
 }
 
-/* QR */
-.qr-area{
-    text-align:center;
-    margin-top:20px;
+.stat span{
+    font-size:10px;
+    color:#777;
 }
 
-.qr-area img{
-    max-width:100%;
-    border-radius:12px;
-    background:#fff;
-    padding:8px;
+/* ================= PASSWORD ================= */
+
+.password-box{
+    display:flex;
+    gap:7px;
 }
 
-/* PASSWORD */
-.password-result{
-    font-family:monospace;
-    font-size:18px;
-    letter-spacing:1px;
-    word-break:break-all;
+.password-box input{
+    margin:0;
 }
 
 .strength{
-    height:8px;
-    background:rgba(255,255,255,.1);
-    border-radius:20px;
-    overflow:hidden;
-    margin:12px 0;
+    margin:10px 0;
 }
 
 .strength-bar{
+    height:5px;
+    border-radius:10px;
+    background:#222;
+    overflow:hidden;
+}
+
+.strength-fill{
     height:100%;
     width:0;
+    background:#E50914;
     transition:.3s;
 }
 
-/* IMAGE */
+.strength-text{
+    font-size:11px;
+    color:#888;
+    margin-top:5px;
+}
+
+/* ================= IMAGE TOOLS ================= */
+
 .preview{
-    max-width:100%;
-    max-height:350px;
-    margin-top:15px;
+    width:100%;
+    max-height:210px;
+    object-fit:contain;
+    background:#0c0c0c;
+    border:1px solid rgba(255,255,255,.08);
     border-radius:12px;
-    display:block;
-}
-
-.download{
-    display:inline-block;
-    padding:11px 17px;
     margin-top:10px;
-    border-radius:9px;
-    color:#fff;
-    text-decoration:none;
-    background:linear-gradient(135deg,#6558ff,#914fff);
+    display:none;
 }
 
-/* COLOR */
+.file-input{
+    padding:9px;
+}
+
+.range-value{
+    color:#E50914;
+    font-weight:bold;
+}
+
+/* ================= COLOR TOOL ================= */
+
 .color-preview{
     width:100%;
-    height:120px;
-    border-radius:15px;
+    height:90px;
+    border-radius:14px;
+    margin-bottom:12px;
     border:1px solid rgba(255,255,255,.1);
-    margin:15px 0;
 }
 
-.palette{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:8px;
-    margin-top:15px;
-}
-
-.palette div{
-    height:70px;
-    border-radius:10px;
-    cursor:pointer;
-}
-
-/* ABOUT */
-.about{
-    max-width:800px;
-    margin:auto;
-    text-align:center;
-    color:#a8adbd;
+.color-code{
+    font-family:monospace;
+    font-size:13px;
     line-height:1.8;
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
+
 footer{
+    width:min(1200px,92%);
+    margin:80px auto 30px;
+    padding-top:30px;
+    border-top:1px solid rgba(255,255,255,.08);
     text-align:center;
-    padding:45px 20px;
-    border-top:1px solid rgba(255,255,255,.07);
-    color:#777d91;
+}
+
+.footer-logo{
+    font-size:22px;
+    font-weight:900;
+}
+
+.footer-logo span{
+    color:#E50914;
+}
+
+footer p{
+    color:#666;
+    margin:10px 0 18px;
+    font-size:13px;
 }
 
 .socials{
-    margin-top:15px;
+    display:flex;
+    justify-content:center;
+    gap:18px;
 }
 
 .socials a{
     color:#aaa;
     text-decoration:none;
-    margin:0 8px;
-    transition:.3s;
+    font-size:13px;
 }
 
 .socials a:hover{
-    color:#fff;
+    color:#E50914;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:850px){
+
+    .tool-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero{
+        margin-top:40px;
+    }
 }
 
 @media(max-width:600px){
-    .nav-links{
+
+    html{
+        scroll-behavior:auto;
+    }
+
+    header{
+        padding-top:20px;
+    }
+
+    nav{
         display:none;
     }
 
+    .logo{
+        font-size:22px;
+    }
+
+    .hero{
+        margin:35px auto 50px;
+    }
+
     .hero h1{
-        letter-spacing:4px;
+        font-size:48px;
+        letter-spacing:-2px;
     }
 
-    .tool-box{
-        padding:18px;
+    .hero p{
+        font-size:14px;
     }
 
-    .fancy-item{
-        align-items:flex-start;
+    .tool-grid{
+        grid-template-columns:1fr;
     }
 
-    .copy-fancy{
-        margin-top:0;
+    .card{
+        backdrop-filter:none;
+        -webkit-backdrop-filter:none;
+        background:rgba(17,17,17,.94);
+        box-shadow:none;
+    }
+
+    .card:hover{
+        transform:none;
+        box-shadow:none;
+    }
+
+    .mouse-glow{
+        display:none;
+    }
+
+    .grid{
+        opacity:.06;
+    }
+
+    .city{
+        opacity:.08;
+    }
+
+    .city,
+    .grid{
+        animation:none;
+    }
+
+    .stats{
+        grid-template-columns:repeat(3,1fr);
     }
 }
 </style>
@@ -517,953 +617,765 @@ footer{
 <body>
 
 <div class="grid"></div>
-
-<div class="city">
-    <div class="building b1"></div>
-    <div class="building b2"></div>
-    <div class="building b3"></div>
-    <div class="building b4"></div>
-    <div class="building b5"></div>
-    <div class="building b6"></div>
-    <div class="building b7"></div>
-    <div class="building b8"></div>
-    <div class="building b9"></div>
-    <div class="building b10"></div>
-</div>
-
-<div class="particle p1"></div>
-<div class="particle p2"></div>
-<div class="particle p3"></div>
-<div class="particle p4"></div>
-<div class="particle p5"></div>
-<div class="particle p6"></div>
-
+<div class="city"></div>
 <div class="mouse-glow" id="mouseGlow"></div>
 
-<nav>
+<header>
     <div class="logo">NAW <span>TOOLS</span></div>
 
-    <div class="nav-links">
+    <nav>
         <a href="#tools">Tools</a>
         <a href="#about">About</a>
-    </div>
-</nav>
-
-<header class="hero">
-    <div class="hero-content">
-
-        <div class="badge">✦ FREE CREATIVE TOOLS BY NAWRAZ KHAN</div>
-
-        <h1>NAW TOOLS</h1>
-
-        <p>
-            Simple, fast and free tools for creators, students and everyone.
-            Create fancy text, QR codes, edit images, generate passwords
-            and more — directly in your browser.
-        </p>
-
-        <a href="#tools" class="hero-btn">🛠️ Explore My Tools</a>
-
-    </div>
+    </nav>
 </header>
 
-<section id="tools">
+<section class="hero">
+    <div class="badge">⚡ FREE ONLINE TOOLKIT</div>
 
-    <div class="section-title">
-        <h2>My Tools</h2>
-        <p>Everything you need, in one place.</p>
-    </div>
+    <h1>NAW <span>TOOLS</span></h1>
 
-    <div class="tools-grid">
-
-        <div class="tool-card" onclick="location.href='#fancy'">
-            <div class="tool-icon">✨</div>
-            <h3>Fancy Text Generator</h3>
-            <p>Create 50+ stylish Unicode text designs.</p>
-        </div>
-
-        <div class="tool-card" onclick="location.href='#case'">
-            <div class="tool-icon">🔤</div>
-            <h3>Case Converter</h3>
-            <p>Convert text into different letter cases.</p>
-        </div>
-
-        <div class="tool-card" onclick="location.href='#qr'">
-            <div class="tool-icon">📱</div>
-            <h3>QR Code Generator</h3>
-            <p>Create real downloadable QR codes.</p>
-        </div>
-
-        <div class="tool-card" onclick="location.href='#counter'">
-            <div class="tool-icon">📝</div>
-            <h3>Word & Character Counter</h3>
-            <p>Count words, characters, sentences and more.</p>
-        </div>
-
-        <div class="tool-card" onclick="location.href='#password'">
-            <div class="tool-icon">🔐</div>
-            <h3>Password Generator</h3>
-            <p>Generate strong random passwords.</p>
-        </div>
-
-        <div class="tool-card" onclick="location.href='#resize'">
-            <div class="tool-icon">📐</div>
-            <h3>Image Resizer</h3>
-            <p>Resize images directly in your browser.</p>
-        </div>
-
-        <div class="tool-card" onclick="location.href='#compress'">
-            <div class="tool-icon">🖼️</div>
-            <h3>Image Compressor</h3>
-            <p>Reduce image file size quickly.</p>
-        </div>
-
-        <div class="tool-card" onclick="location.href='#convert'">
-            <div class="tool-icon">🔄</div>
-            <h3>Image Converter</h3>
-            <p>Convert images between PNG, JPG and WebP.</p>
-        </div>
-
-        <div class="tool-card" onclick="location.href='#color'">
-            <div class="tool-icon">🎨</div>
-            <h3>Color Toolkit</h3>
-            <p>HEX, RGB, HSL, palettes and gradients.</p>
-        </div>
-
-    </div>
+    <p>
+        Simple, fast and powerful online tools for creators,
+        students, designers and everyday use.
+    </p>
 </section>
 
+<section class="tools" id="tools">
 
+<div class="section-title">
+    <h2>All Tools</h2>
+    <p>Everything you need, in one place.</p>
+</div>
+
+<div class="tool-grid">
+
+<!-- ================================================= -->
 <!-- 1 FANCY TEXT -->
-<section class="tool-section" id="fancy">
+<!-- ================================================= -->
 
-    <div class="section-title">
-        <h2>✨ Fancy Text Generator</h2>
-        <p>50+ stylish text designs</p>
+<div class="card">
+    <div class="icon">✨</div>
+    <h3>Fancy Text Generator</h3>
+    <p class="card-desc">50+ stylish text variations.</p>
+
+    <input
+        id="fancyInput"
+        type="text"
+        placeholder="Type something..."
+        oninput="generateFancy()"
+    >
+
+    <div class="fancy-list" id="fancyList"></div>
+</div>
+
+
+<!-- ================================================= -->
+<!-- 2 CASE CONVERTER -->
+<!-- ================================================= -->
+
+<div class="card">
+    <div class="icon">🔤</div>
+    <h3>Case Converter</h3>
+    <p class="card-desc">Change your text case instantly.</p>
+
+    <textarea
+        id="caseInput"
+        placeholder="Enter your text..."
+        oninput="convertCase()"
+    ></textarea>
+
+    <select id="caseType" onchange="convertCase()">
+        <option value="upper">UPPERCASE</option>
+        <option value="lower">lowercase</option>
+        <option value="title">Title Case</option>
+        <option value="sentence">Sentence case</option>
+        <option value="alternate">AlTeRnAtE cAsE</option>
+        <option value="inverse">iNVERSE cASE</option>
+    </select>
+
+    <textarea id="caseResult" readonly></textarea>
+
+    <button onclick="copyText('caseResult')">📋 Copy</button>
+</div>
+
+
+<!-- ================================================= -->
+<!-- 3 QR GENERATOR -->
+<!-- ================================================= -->
+
+<div class="card">
+    <div class="icon">📱</div>
+    <h3>QR Code Generator</h3>
+    <p class="card-desc">Create real downloadable QR codes.</p>
+
+    <input
+        id="qrText"
+        type="text"
+        placeholder="Enter text or URL"
+    >
+
+    <div class="row">
+
+        <select id="qrLevel">
+            <option value="L">Low</option>
+            <option value="M" selected>Medium</option>
+            <option value="Q">Quartile</option>
+            <option value="H">High</option>
+        </select>
+
+        <select id="qrSize">
+            <option value="180">180px</option>
+            <option value="240" selected>240px</option>
+            <option value="320">320px</option>
+            <option value="400">400px</option>
+        </select>
+
     </div>
 
-    <div class="tool-box">
+    <button onclick="generateQR()">Generate QR</button>
 
-        <textarea id="fancyInput" placeholder="Type something...">Nawraz Khan</textarea>
-
-        <div id="fancyResults" class="result"></div>
-
-    </div>
-</section>
-
-
-<!-- 2 CASE -->
-<section class="tool-section" id="case">
-
-    <div class="section-title">
-        <h2>🔤 Case Converter</h2>
-        <p>Change your text case instantly</p>
+    <div class="qr-output" id="qrOutput">
+        <span style="color:#777">Your QR code will appear here</span>
     </div>
 
-    <div class="tool-box">
-
-        <textarea id="caseInput" placeholder="Enter your text..."></textarea>
-
-        <button onclick="convertCase('upper')">UPPERCASE</button>
-        <button onclick="convertCase('lower')">lowercase</button>
-        <button onclick="convertCase('title')">Title Case</button>
-        <button onclick="convertCase('sentence')">Sentence case</button>
-        <button onclick="convertCase('alternate')">aLtErNaTe</button>
-        <button onclick="convertCase('inverse')">iNVERSE</button>
-
-        <textarea id="caseOutput" placeholder="Result..." readonly></textarea>
-
-        <button onclick="copyText('caseOutput')">📋 Copy Result</button>
-
-    </div>
-</section>
+    <button
+        id="qrDownload"
+        onclick="downloadQR()"
+        style="display:none;margin-top:10px;"
+    >
+        ⬇️ Download QR
+    </button>
+</div>
 
 
-<!-- 3 QR -->
-<section class="tool-section" id="qr">
+<!-- ================================================= -->
+<!-- 4 WORD COUNTER -->
+<!-- ================================================= -->
 
-    <div class="section-title">
-        <h2>📱 QR Code Generator</h2>
-        <p>Create real downloadable QR codes</p>
-    </div>
+<div class="card">
+    <div class="icon">📝</div>
+    <h3>Word & Character Counter</h3>
+    <p class="card-desc">Analyze your text instantly.</p>
 
-    <div class="tool-box">
+    <textarea
+        id="counterInput"
+        placeholder="Start typing..."
+        oninput="updateCounter()"
+    ></textarea>
 
-        <textarea id="qrInput" placeholder="Enter text or URL..."></textarea>
+    <div class="stats">
 
-        <div class="controls">
-
-            <div>
-                <label>Error Correction</label>
-                <select id="qrLevel">
-                    <option value="L">Low</option>
-                    <option value="M" selected>Medium</option>
-                    <option value="Q">Quartile</option>
-                    <option value="H">High</option>
-                </select>
-            </div>
-
-            <div>
-                <label>Size</label>
-                <select id="qrSize">
-                    <option value="180">180px</option>
-                    <option value="240" selected>240px</option>
-                    <option value="320">320px</option>
-                    <option value="400">400px</option>
-                </select>
-            </div>
-
+        <div class="stat">
+            <strong id="words">0</strong>
+            <span>Words</span>
         </div>
 
-        <button onclick="generateQR()">Generate QR</button>
+        <div class="stat">
+            <strong id="chars">0</strong>
+            <span>Characters</span>
+        </div>
 
-        <div id="qrArea" class="qr-area"></div>
+        <div class="stat">
+            <strong id="charsNoSpace">0</strong>
+            <span>No Spaces</span>
+        </div>
 
-    </div>
-</section>
+        <div class="stat">
+            <strong id="sentences">0</strong>
+            <span>Sentences</span>
+        </div>
 
+        <div class="stat">
+            <strong id="lines">0</strong>
+            <span>Lines</span>
+        </div>
 
-<!-- 4 COUNTER -->
-<section class="tool-section" id="counter">
-
-    <div class="section-title">
-        <h2>📝 Word & Character Counter</h2>
-        <p>Live text statistics</p>
-    </div>
-
-    <div class="tool-box">
-
-        <textarea id="counterInput" placeholder="Start typing..."></textarea>
-
-        <div class="stats">
-
-            <div class="stat">
-                <strong id="words">0</strong>
-                Words
-            </div>
-
-            <div class="stat">
-                <strong id="characters">0</strong>
-                Characters
-            </div>
-
-            <div class="stat">
-                <strong id="noSpaces">0</strong>
-                No Spaces
-            </div>
-
-            <div class="stat">
-                <strong id="sentences">0</strong>
-                Sentences
-            </div>
-
-            <div class="stat">
-                <strong id="lines">0</strong>
-                Lines
-            </div>
-
-            <div class="stat">
-                <strong id="paragraphs">0</strong>
-                Paragraphs
-            </div>
-
+        <div class="stat">
+            <strong id="paragraphs">0</strong>
+            <span>Paragraphs</span>
         </div>
 
     </div>
-</section>
+</div>
 
 
-<!-- 5 PASSWORD -->
-<section class="tool-section" id="password">
+<!-- ================================================= -->
+<!-- 5 PASSWORD GENERATOR -->
+<!-- ================================================= -->
 
-    <div class="section-title">
-        <h2>🔐 Password Generator</h2>
-        <p>Generate strong random passwords</p>
+<div class="card">
+    <div class="icon">🔐</div>
+    <h3>Password Generator</h3>
+    <p class="card-desc">Generate strong random passwords.</p>
+
+    <label class="small">
+        Length:
+        <span id="lengthValue" class="range-value">16</span>
+    </label>
+
+    <input
+        type="range"
+        id="passwordLength"
+        min="4"
+        max="64"
+        value="16"
+        oninput="updateLength()"
+    >
+
+    <div class="small">Include:</div>
+
+    <label class="small">
+        <input type="checkbox" id="upperCheck" checked>
+        Uppercase
+    </label>
+
+    <label class="small">
+        <input type="checkbox" id="lowerCheck" checked>
+        Lowercase
+    </label>
+
+    <label class="small">
+        <input type="checkbox" id="numberCheck" checked>
+        Numbers
+    </label>
+
+    <label class="small">
+        <input type="checkbox" id="symbolCheck" checked>
+        Symbols
+    </label>
+
+    <div class="password-box">
+        <input id="passwordResult" readonly>
+        <button onclick="generatePassword()">Generate</button>
     </div>
 
-    <div class="tool-box">
-
-        <div class="controls">
-
-            <div>
-                <label>Length</label>
-                <input id="passLength" type="number" min="4" max="64" value="16">
-            </div>
-
-            <div>
-                <label>Uppercase</label>
-                <select id="passUpper">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
-            </div>
-
-            <div>
-                <label>Lowercase</label>
-                <select id="passLower">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
-            </div>
-
-            <div>
-                <label>Numbers</label>
-                <select id="passNumbers">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
-            </div>
-
-            <div>
-                <label>Symbols</label>
-                <select id="passSymbols">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
-            </div>
-
+    <div class="strength">
+        <div class="strength-bar">
+            <div class="strength-fill" id="strengthFill"></div>
         </div>
 
-        <button onclick="generatePassword()">Generate Password</button>
-
-        <div class="password-result" id="passwordResult">
-            Click generate...
+        <div class="strength-text" id="strengthText">
+            Generate a password
         </div>
-
-        <div class="strength">
-            <div class="strength-bar" id="strengthBar"></div>
-        </div>
-
-        <div id="strengthText"></div>
-
-        <button onclick="copyPassword()">📋 Copy Password</button>
-
-    </div>
-</section>
-
-
-<!-- 6 RESIZER -->
-<section class="tool-section" id="resize">
-
-    <div class="section-title">
-        <h2>📐 Image Resizer</h2>
-        <p>Resize images in your browser</p>
     </div>
 
-    <div class="tool-box">
-
-        <input type="file" id="resizeFile" accept="image/*">
-
-        <div class="controls">
-
-            <div>
-                <label>Width</label>
-                <input type="number" id="resizeWidth">
-            </div>
-
-            <div>
-                <label>Height</label>
-                <input type="number" id="resizeHeight">
-            </div>
-
-        </div>
-
-        <label>
-            <input type="checkbox" id="lockRatio" checked style="width:auto">
-            Lock aspect ratio
-        </label>
-
-        <button onclick="resizeImage()">Resize Image</button>
-
-        <div id="resizeResult"></div>
-
-    </div>
-</section>
+    <button onclick="copyText('passwordResult')">
+        📋 Copy Password
+    </button>
+</div>
 
 
-<!-- 7 COMPRESSOR -->
-<section class="tool-section" id="compress">
+<!-- ================================================= -->
+<!-- 6 IMAGE RESIZER -->
+<!-- ================================================= -->
 
-    <div class="section-title">
-        <h2>🖼️ Image Compressor</h2>
-        <p>Reduce image size while keeping quality</p>
-    </div>
+<div class="card">
+    <div class="icon">📐</div>
+    <h3>Image Resizer</h3>
+    <p class="card-desc">Resize images quickly.</p>
 
-    <div class="tool-box">
+    <input
+        class="file-input"
+        type="file"
+        id="resizeFile"
+        accept="image/*"
+        onchange="loadResizeImage(event)"
+    >
 
-        <input type="file" id="compressFile" accept="image/*">
-
-        <label>Quality: <span id="qualityValue">80</span>%</label>
+    <div class="row">
 
         <input
-            type="range"
-            id="compressQuality"
-            min="10"
-            max="100"
-            value="80"
+            id="resizeWidth"
+            type="number"
+            placeholder="Width"
         >
 
-        <button onclick="compressImage()">Compress Image</button>
-
-        <div id="compressInfo"></div>
-
-        <div id="compressResult"></div>
+        <input
+            id="resizeHeight"
+            type="number"
+            placeholder="Height"
+        >
 
     </div>
+
+    <label class="small">
+        <input
+            type="checkbox"
+            id="lockRatio"
+            checked
+        >
+        Lock aspect ratio
+    </label>
+
+    <img id="resizePreview" class="preview">
+
+    <button onclick="resizeImage()">Resize & Download</button>
+</div>
+
+
+<!-- ================================================= -->
+<!-- 7 IMAGE COMPRESSOR -->
+<!-- ================================================= -->
+
+<div class="card">
+    <div class="icon">🖼️</div>
+    <h3>Image Compressor</h3>
+    <p class="card-desc">Reduce image file size.</p>
+
+    <input
+        class="file-input"
+        type="file"
+        id="compressFile"
+        accept="image/*"
+        onchange="loadCompressImage(event)"
+    >
+
+    <label class="small">
+        Quality:
+        <span id="qualityValue" class="range-value">80</span>%
+    </label>
+
+    <input
+        type="range"
+        id="compressQuality"
+        min="10"
+        max="100"
+        value="80"
+        oninput="updateQuality()"
+    >
+
+    <img id="compressPreview" class="preview">
+
+    <div id="compressInfo" class="small"></div>
+
+    <button onclick="compressImage()">Compress & Download</button>
+</div>
+
+
+<!-- ================================================= -->
+<!-- 8 IMAGE CONVERTER -->
+<!-- ================================================= -->
+
+<div class="card">
+    <div class="icon">🔄</div>
+    <h3>Image Converter</h3>
+    <p class="card-desc">Convert PNG, JPG and WebP.</p>
+
+    <input
+        class="file-input"
+        type="file"
+        id="convertFile"
+        accept="image/*"
+        onchange="loadConvertImage(event)"
+    >
+
+    <select id="convertFormat">
+        <option value="image/png">PNG</option>
+        <option value="image/jpeg">JPG</option>
+        <option value="image/webp">WebP</option>
+    </select>
+
+    <label class="small">
+        Quality:
+        <span id="convertQualityValue" class="range-value">90</span>%
+    </label>
+
+    <input
+        type="range"
+        id="convertQuality"
+        min="10"
+        max="100"
+        value="90"
+        oninput="updateConvertQuality()"
+    >
+
+    <img id="convertPreview" class="preview">
+
+    <button onclick="convertImage()">Convert & Download</button>
+</div>
+
+
+<!-- ================================================= -->
+<!-- 9 COLOR TOOLKIT -->
+<!-- ================================================= -->
+
+<div class="card">
+    <div class="icon">🎨</div>
+    <h3>Color Toolkit</h3>
+    <p class="card-desc">Pick colors, palettes and gradients.</p>
+
+    <input
+        type="color"
+        id="colorPicker"
+        value="#E50914"
+        onchange="updateColor()"
+        style="height:55px;padding:5px;"
+    >
+
+    <div
+        class="color-preview"
+        id="colorPreview"
+        style="background:#E50914;"
+    ></div>
+
+    <div class="result color-code" id="colorResult">
+        HEX: #E50914<br>
+        RGB: rgb(229, 9, 20)<br>
+        HSL: hsl(357, 92%, 47%)
+    </div>
+
+    <div class="row" style="margin-top:10px;">
+        <button onclick="randomColor()">🎲 Random</button>
+        <button onclick="copyColorCSS()">📋 Copy CSS</button>
+    </div>
+
+    <div
+        id="palette"
+        style="
+        display:grid;
+        grid-template-columns:repeat(5,1fr);
+        gap:5px;
+        margin-top:12px;
+        "
+    ></div>
+
+    <div
+        id="gradient"
+        style="
+        height:45px;
+        border-radius:10px;
+        margin-top:10px;
+        background:linear-gradient(90deg,#E50914,#fff);
+        "
+    ></div>
+</div>
+
+</div>
 </section>
 
 
-<!-- 8 CONVERTER -->
-<section class="tool-section" id="convert">
+<!-- ================= FOOTER ================= -->
 
-    <div class="section-title">
-        <h2>🔄 Image Converter</h2>
-        <p>Convert PNG, JPG and WebP</p>
+<footer id="about">
+
+    <div class="footer-logo">
+        NAW <span>TOOLS</span>
     </div>
 
-    <div class="tool-box">
-
-        <input type="file" id="convertFile" accept="image/*">
-
-        <div class="controls">
-
-            <div>
-                <label>Output Format</label>
-                <select id="convertFormat">
-                    <option value="image/png">PNG</option>
-                    <option value="image/jpeg">JPG</option>
-                    <option value="image/webp">WebP</option>
-                </select>
-            </div>
-
-            <div>
-                <label>Quality</label>
-                <select id="convertQuality">
-                    <option value="1">100%</option>
-                    <option value=".9" selected>90%</option>
-                    <option value=".8">80%</option>
-                    <option value=".7">70%</option>
-                </select>
-            </div>
-
-        </div>
-
-        <button onclick="convertImage()">Convert Image</button>
-
-        <div id="convertResult"></div>
-
-    </div>
-</section>
-
-
-<!-- 9 COLOR -->
-<section class="tool-section" id="color">
-
-    <div class="section-title">
-        <h2>🎨 Color Toolkit</h2>
-        <p>Explore colors, palettes and gradients</p>
-    </div>
-
-    <div class="tool-box">
-
-        <input type="color" id="colorPicker" value="#7c5cff">
-
-        <div class="color-preview" id="colorPreview"></div>
-
-        <div class="stats">
-
-            <div class="stat">
-                <strong id="hexValue">#7C5CFF</strong>
-                HEX
-            </div>
-
-            <div class="stat">
-                <strong id="rgbValue">124,92,255</strong>
-                RGB
-            </div>
-
-            <div class="stat">
-                <strong id="hslValue">251,100%,68%</strong>
-                HSL
-            </div>
-
-        </div>
-
-        <button onclick="randomColor()">🎲 Random Color</button>
-        <button onclick="copyColor()">📋 Copy HEX</button>
-
-        <h3 style="margin-top:25px">🎨 Palette</h3>
-
-        <div class="palette" id="palette"></div>
-
-        <h3 style="margin-top:25px">🌈 Gradient Generator</h3>
-
-        <div class="controls">
-
-            <input type="color" id="gradient1" value="#6558ff">
-            <input type="color" id="gradient2" value="#ff4fd8">
-
-        </div>
-
-        <div class="color-preview" id="gradientPreview"></div>
-
-        <button onclick="copyGradient()">📋 Copy CSS</button>
-
-    </div>
-</section>
-
-
-<section id="about">
-
-    <div class="section-title">
-        <h2>About NAW TOOLS</h2>
-    </div>
-
-    <div class="about">
-
-        <p>
-            NAW TOOLS is a free collection of useful browser-based tools
-            created by <strong>Nawraz Khan</strong>.
-            The goal is simple: make useful tools that are fast,
-            clean and easy for everyone to use.
-        </p>
-
-    </div>
-
-</section>
-
-
-<footer>
-
-    <div>© 2026 NAW TOOLS — Made by Nawraz Khan</div>
+    <p>
+        Built for creators. Made by Nawraz Khan.
+    </p>
 
     <div class="socials">
-        <a href="https://instagram.com/_bixuuu_" target="_blank">Instagram</a>
-        <a href="https://youtube.com/@playwithnawcorebabe" target="_blank">YouTube</a>
-        <a href="https://x.com/Nawraz808" target="_blank">X</a>
+        <a href="https://instagram.com/_bixuuu_" target="_blank">
+            Instagram
+        </a>
+
+        <a href="https://youtube.com/@playwithnawcorebabe" target="_blank">
+            YouTube
+        </a>
+
+        <a href="https://x.com/Nawraz808" target="_blank">
+            X
+        </a>
     </div>
 
 </footer>
 
 
-<!-- REAL QR CODE LIBRARY -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
-
 <script>
 
-/* =========================
+/* =========================================================
    MOUSE GLOW
-========================= */
+========================================================= */
 
 const mouseGlow = document.getElementById("mouseGlow");
 
-document.addEventListener("mousemove", e => {
-    mouseGlow.style.left = e.clientX + "px";
-    mouseGlow.style.top = e.clientY + "px";
-});
+if(window.matchMedia("(pointer:fine)").matches){
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let glowX = 0;
+    let glowY = 0;
+
+    document.addEventListener("mousemove",(e)=>{
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function animateGlow(){
+
+        glowX += (mouseX - glowX) * .08;
+        glowY += (mouseY - glowY) * .08;
+
+        mouseGlow.style.left = glowX + "px";
+        mouseGlow.style.top = glowY + "px";
+
+        requestAnimationFrame(animateGlow);
+    }
+
+    animateGlow();
+}
 
 
-/* =========================
-   FANCY TEXT GENERATOR
-   50+ STYLES + COPY BUTTON
-========================= */
-
-const fancyInput = document.getElementById("fancyInput");
-const fancyResults = document.getElementById("fancyResults");
+/* =========================================================
+   FANCY TEXT
+========================================================= */
 
 const fancyStyles = [
 
-    ["Bold","𝐀𝐁𝐂𝐃𝐄𝐅𝐆𝐇𝐈𝐉𝐊𝐋𝐌𝐍𝐎𝐏𝐐𝐑𝐒𝐓𝐔𝐕𝐖𝐗𝐘𝐙"],
-    ["Bold Serif","𝗔𝗕𝗖𝗗𝗘𝗙𝗚𝗛𝗜𝗝𝗞𝗟𝗠𝗡𝗢𝗣𝗤𝗥𝗦𝗧𝗨𝗩𝗪𝗫𝗬𝗭"],
-    ["Italic","𝘈𝘉𝘊𝘋𝘌𝘍𝘎𝘏𝘐𝘑𝘒𝘓𝘔𝘕𝘖𝘗𝘘𝘙𝘚𝘛𝘜𝘝𝘞𝘟𝘠𝘡"],
-    ["Bold Italic","𝘼𝘽𝘾𝘿𝙀𝙁𝙂𝙃𝙄𝙅𝙆𝙇𝙈𝙉𝙊𝙋𝙌𝙍𝙎𝙏𝙐𝙑𝙒𝙓𝙔𝙕"],
-    ["Script","𝒜ℬ𝒞𝒟ℰℱ𝒢ℋℐ𝒥𝒦ℒℳ𝒩𝒪𝒫𝒬ℛ𝒮𝒯𝒰𝒱𝒲𝒳𝒴𝒵"],
-    ["Bold Script","𝓐𝓑𝓒𝓓𝓔𝓕𝓖𝓗𝓘𝓙𝓚𝓛𝓜𝓝𝓞𝓟𝓠𝓡𝓢𝓣𝓤𝓥𝓦𝓧𝓨𝓩"],
-    ["Fraktur","𝔄𝔅ℭ𝔇𝔈𝔉𝔊ℌℑ𝔍𝔎𝔏𝔐𝔑𝔒𝔓𝔔ℜ𝔖𝔗𝔘𝔙𝔚𝔛𝔜ℨ"],
-    ["Bold Fraktur","𝕬𝕭𝕮𝕯𝕰𝕱𝕲𝕳𝕴𝕵𝕶𝕷𝕸𝕹𝕺𝕻𝕼𝕽𝕾𝕿𝖀𝖁𝖂𝖃𝖄𝖅"],
-    ["Double","𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ"],
-    ["Monospace","𝙰𝙱𝙲𝙳𝙴𝙵𝙶𝙷𝙸𝙹𝙺𝙻𝙼𝙽𝙾𝙿𝚀𝚁𝚂𝚃𝚄𝚅𝚆𝚇𝚈𝚉"],
+["Bold", s => mapUnicode(s,{
+a:"𝐚",b:"𝐛",c:"𝐜",d:"𝐝",e:"𝐞",f:"𝐟",g:"𝐠",h:"𝐡",i:"𝐢",j:"𝐣",k:"𝐤",l:"𝐥",m:"𝐦",n:"𝐧",o:"𝐨",p:"𝐩",q:"𝐪",r:"𝐫",s:"𝐬",t:"𝐭",u:"𝐮",v:"𝐯",w:"𝐰",x:"𝐱",y:"𝐲",z:"𝐳",
+A:"𝐀",B:"𝐁",C:"𝐂",D:"𝐃",E:"𝐄",F:"𝐅",G:"𝐆",H:"𝐇",I:"𝐈",J:"𝐉",K:"𝐊",L:"𝐋",M:"𝐌",N:"𝐍",O:"𝐎",P:"𝐏",Q:"𝐐",R:"𝐑",S:"𝐒",T:"𝐓",U:"𝐔",V:"𝐕",W:"𝐖",X:"𝐗",Y:"𝐘",Z:"𝐙"
+})],
 
-    ["Small Caps","ᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ"],
-    ["Circled","ⒶⒷⒸⒹⒺⒻⒼⒽⒾⒿⓀⓁⓂⓃⓄⓅⓆⓇⓈⓉⓊⓋⓌⓍⓎⓏ"],
-    ["Squared","🄰🄱🄲🄳🄴🄵🄶🄷🄸🄹🄺🄻🄼🄽🄾🄿🅀🅁🅂🅃🅄🅅🅆🅇🅈🅉"],
-    ["Parenthesized","⒜⒝⒞⒟⒠⒡⒢⒣⒤⒥⒦⒧⒨⒩⒪⒫⒬⒭⒮⒯⒰⒱⒲⒳⒴⒵"],
-    ["Fullwidth","ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ"],
+["Bold Serif", s => mapUnicode(s,{
+a:"𝒂",b:"𝒃",c:"𝒄",d:"𝒅",e:"𝒆",f:"𝒇",g:"𝒈",h:"𝒉",i:"𝒊",j:"𝒋",k:"𝒌",l:"𝒍",m:"𝒎",n:"𝒏",o:"𝒐",p:"𝒑",q:"𝒒",r:"𝒓",s:"𝒔",t:"𝒕",u:"𝒖",v:"𝒗",w:"𝒘",x:"𝒙",y:"𝒚",z:"𝒛"
+})],
 
-    ["Underline","A̲B̲C̲D̲E̲F̲G̲H̲I̲J̲K̲L̲M̲N̲O̲P̲Q̲R̲S̲T̲U̲V̲W̲X̲Y̲Z̲"],
-    ["Strike","A̶B̶C̶D̶E̶F̶G̶H̶I̶J̶K̶L̶M̶N̶O̶P̶Q̶R̶S̶T̶U̶V̶W̶X̶Y̶Z̶"],
-    ["Slash","A̷B̷C̷D̷E̷F̷G̷H̷I̷J̷K̷L̷M̷N̷O̷P̷Q̷R̷S̷T̷U̷V̷W̷X̷Y̷Z̷"],
-    ["Dot","ȦḂĊḊĖḞĠḢİJ̇K̇L̇ṀṄȮṖQ̇ṘṠṪU̇V̇ẆẊẎŻ"],
-    ["Wave","ÃB̃C̃D̃ẼF̃G̃H̃ĨJ̃K̃L̃M̃ÑÕP̃Q̃R̃S̃T̃ŨṼW̃X̃ỸZ̃"],
+["Italic", s => mapUnicode(s,{
+a:"𝑎",b:"𝑏",c:"𝑐",d:"𝑑",e:"𝑒",f:"𝑓",g:"𝑔",h:"ℎ",i:"𝑖",j:"𝑗",k:"𝑘",l:"𝑙",m:"𝑚",n:"𝑛",o:"𝑜",p:"𝑝",q:"𝑞",r:"𝑟",s:"𝑠",t:"𝑡",u:"𝑢",v:"𝑣",w:"𝑤",x:"𝑥",y:"𝑦",z:"𝑧"
+})],
 
-    ["Stars","★彡 TEXT 彡★"],
-    ["Sparkle","✧･ﾟ: *✧･ﾟ:* TEXT *:･ﾟ✧*:･ﾟ✧"],
-    ["Royal","♛ TEXT ♛"],
-    ["Crown","♔ TEXT ♔"],
-    ["Hearts","♡ TEXT ♡"],
-    ["Love","♥ TEXT ♥"],
-    ["Arrow","➳ TEXT ➳"],
-    ["Wings","ʚɞ TEXT ʚɞ"],
-    ["Fire","🔥 TEXT 🔥"],
-    ["Diamond","◆ TEXT ◆"],
-    ["Flower","❀ TEXT ❀"],
-    ["Music","♪ TEXT ♪"],
-    ["Lightning","⚡ TEXT ⚡"],
-    ["Cloud","☁ TEXT ☁"],
-    ["Moon","☾ TEXT ☽"],
-    ["Sun","☀ TEXT ☀"],
-    ["Cross","✞ TEXT ✞"],
-    ["Angel","꧁ TEXT ꧂"],
-    ["Luxury","『 TEXT 』"],
-    ["Bracket","【 TEXT 】"],
-    ["Japanese","『 TEXT 』"],
-    ["Dark","༺ TEXT ༻"],
-    ["Mystic","༒ TEXT ༒"],
-    ["Aesthetic","•°¯`•• TEXT ••´¯°•"],
-    ["Cute","૮ ˶ᵔ ᵕ ᵔ˶ ა TEXT"],
-    ["Minimal","— TEXT —"],
-    ["Box","╔══ TEXT ══╗"],
-    ["Wave Frame","〰 TEXT 〰"],
-    ["Point","• TEXT •"],
-    ["Star Frame","☆.｡.:* TEXT *:.｡.☆"],
-    ["Fancy Frame","╭─❀ TEXT ❀─╮"],
-    ["Neon","⚡『 TEXT 』⚡"],
-    ["Galaxy","✦｡ﾟ TEXT ﾟ｡✦"],
-    ["Magic","⋆｡°✩ TEXT ✩°｡⋆"]
+["Script", s => mapUnicode(s,{
+a:"𝒶",b:"𝒷",c:"𝒸",d:"𝒹",e:"ℯ",f:"𝒻",g:"ℊ",h:"𝒽",i:"𝒾",j:"𝒿",k:"𝓀",l:"𝓁",m:"𝓂",n:"𝓃",o:"ℴ",p:"𝓅",q:"𝓆",r:"𝓇",s:"𝓈",t:"𝓉",u:"𝓊",v:"𝓋",w:"𝓌",x:"𝓍",y:"𝓎",z:"𝓏"
+})],
 
+["Double", s => mapUnicode(s,{
+a:"𝕒",b:"𝕓",c:"𝕔",d:"𝕕",e:"𝕖",f:"𝕗",g:"𝕘",h:"𝕙",i:"𝕚",j:"𝕛",k:"𝕜",l:"𝕝",m:"𝕞",n:"𝕟",o:"𝕠",p:"𝕡",q:"𝕢",r:"𝕣",s:"𝕤",t:"𝕥",u:"𝕦",v:"𝕧",w:"𝕨",x:"𝕩",y:"𝕪",z:"𝕫"
+})],
+
+["Monospace", s => mapUnicode(s,{
+a:"𝚊",b:"𝚋",c:"𝚌",d:"𝚍",e:"𝚎",f:"𝚏",g:"𝚐",h:"𝚑",i:"𝚒",j:"𝚓",k:"𝚔",l:"𝚕",m:"𝚖",n:"𝚗",o:"𝚘",p:"𝚙",q:"𝚚",r:"𝚛",s:"𝚜",t:"𝚝",u:"𝚞",v:"𝚟",w:"𝚠",x:"𝚡",y:"𝚢",z:"𝚣"
+})],
+
+["Circled", s => decorate(s,"ⓘ")],
+["Squared", s => decorate(s,"▣")],
+["Fullwidth", s => s.replace(/[!-~]/g,c=>String.fromCharCode(c.charCodeAt(0)+65248))],
+["Underline", s => addCombining(s,"̲")],
+["Strike", s => addCombining(s,"̶")],
+["Slash", s => addCombining(s,"̷")],
+["Dot", s => addCombining(s,"̇")],
+["Wave", s => addCombining(s,"̃")],
+["Stars", s => "★ " + s + " ★"],
+["Sparkle", s => "✦ " + s + " ✦"],
+["Royal", s => "♛ " + s + " ♛"],
+["Crown", s => "👑 " + s + " 👑"],
+["Hearts", s => "♡ " + s + " ♡"],
+["Love", s => "♥ " + s + " ♥"],
+["Arrow", s => "➜ " + s + " ➜"],
+["Wings", s => "꧁ " + s + " ꧂"],
+["Fire", s => "🔥 " + s + " 🔥"],
+["Diamond", s => "◆ " + s + " ◆"],
+["Flower", s => "❀ " + s + " ❀"],
+["Music", s => "♫ " + s + " ♫"],
+["Lightning", s => "ϟ " + s + " ϟ"],
+["Cloud", s => "☁ " + s + " ☁"],
+["Moon", s => "☾ " + s + " ☽"],
+["Sun", s => "☀ " + s + " ☀"],
+["Cross", s => "✞ " + s + " ✞"],
+["Angel", s => "☁︎ " + s + " ☁︎"],
+["Luxury", s => "『 " + s + " 』"],
+["Bracket", s => "【 " + s + " 】"],
+["Japanese", s => "「 " + s + " 」"],
+["Dark", s => "☠ " + s + " ☠"],
+["Mystic", s => "𖤐 " + s + " 𖤐"],
+["Aesthetic", s => "˚₊‧ " + s + " ‧₊˚"],
+["Cute", s => "૮ ˶ᵔ ᵕ ᵔ˶ ა " + s],
+["Minimal", s => "— " + s + " —"],
+["Box", s => "▰ " + s + " ▰"],
+["Wave Frame", s => "〰 " + s + " 〰"],
+["Point", s => "• " + s + " •"],
+["Star Frame", s => "☆彡 " + s + " 彡☆"],
+["Fancy Frame", s => "╰┈➤ " + s + ""],
+["Neon", s => "⟦ " + s + " ⟧"],
+["Galaxy", s => "✧･ﾟ: *✧ " + s + " ✧* :ﾟ･✧"],
+["Magic", s => "༺ " + s + " ༻"]
 ];
 
 
-/* Unicode transformation maps */
+function mapUnicode(text,map){
 
-const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-const maps = {
-
-bold:"𝐀𝐁𝐂𝐃𝐄𝐅𝐆𝐇𝐈𝐉𝐊𝐋𝐌𝐍𝐎𝐏𝐐𝐑𝐒𝐓𝐔𝐕𝐖𝐗𝐘𝐙",
-boldSerif:"𝗔𝗕𝗖𝗗𝗘𝗙𝗚𝗛𝗜𝗝𝗞𝗟𝗠𝗡𝗢𝗣𝗤𝗥𝗦𝗧𝗨𝗩𝗪𝗫𝗬𝗭",
-italic:"𝘈𝘉𝘊𝘋𝘌𝘍𝘎𝘏𝘐𝘑𝘒𝘓𝘔𝘕𝘖𝘗𝘘𝘙𝘚𝘛𝘜𝘝𝘞𝘟𝘠𝘡",
-boldItalic:"𝘼𝘽𝘾𝘿𝙀𝙁𝙂𝙃𝙄𝙅𝙆𝙇𝙈𝙉𝙊𝙋𝙌𝙍𝙎𝙏𝙐𝙑𝙒𝙓𝙔𝙕",
-script:"𝒜ℬ𝒞𝒟ℰℱ𝒢ℋℐ𝒥𝒦ℒℳ𝒩𝒪𝒫𝒬ℛ𝒮𝒯𝒰𝒱𝒲𝒳𝒴𝒵",
-boldScript:"𝓐𝓑𝓒𝓓𝓔𝓕𝓖𝓗𝓘𝓙𝓚𝓛𝓜𝓝𝓞𝓟𝓠𝓡𝓢𝓣𝓤𝓥𝓦𝓧𝓨𝓩",
-fraktur:"𝔄𝔅ℭ𝔇𝔈𝔉𝔊ℌℑ𝔍𝔎𝔏𝔐𝔑𝔒𝔓𝔔ℜ𝔖𝔗𝔘𝔙𝔚𝔛𝔜ℨ",
-double:"𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ",
-mono:"𝙰𝙱𝙲𝙳𝙴𝙵𝙶𝙷𝙸𝙹𝙺𝙻𝙼𝙽𝙾𝙿𝚀𝚁𝚂𝚃𝚄𝚅𝚆𝚇𝚈𝚉"
-};
-
-
-function unicodeMap(text,map){
-
-    return [...text].map(char => {
-
-        const index = upper.indexOf(char.toUpperCase());
-
-        if(index === -1) return char;
-
-        let result = map[index];
-
-        if(char === char.toLowerCase()){
-            const lowerMap = [...map];
-            result = lowerMap[index] || result;
-        }
-
-        return result;
-
-    }).join("");
-
+    return [...text]
+        .map(c=>map[c] || map[c.toLowerCase()] || c)
+        .join("");
 }
 
-
-function decorate(text,style){
-
-    if(style === "Stars")
-        return "★彡 " + text + " 彡★";
-
-    if(style === "Sparkle")
-        return "✧･ﾟ: *✧･ﾟ:* " + text + " *:･ﾟ✧*:･ﾟ✧";
-
-    if(style === "Royal")
-        return "♛ " + text + " ♛";
-
-    if(style === "Crown")
-        return "♔ " + text + " ♔";
-
-    if(style === "Hearts")
-        return "♡ " + text + " ♡";
-
-    if(style === "Love")
-        return "♥ " + text + " ♥";
-
-    if(style === "Arrow")
-        return "➳ " + text + " ➳";
-
-    if(style === "Wings")
-        return "ʚɞ " + text + " ʚɞ";
-
-    if(style === "Fire")
-        return "🔥 " + text + " 🔥";
-
-    if(style === "Diamond")
-        return "◆ " + text + " ◆";
-
-    if(style === "Flower")
-        return "❀ " + text + " ❀";
-
-    if(style === "Music")
-        return "♪ " + text + " ♪";
-
-    if(style === "Lightning")
-        return "⚡ " + text + " ⚡";
-
-    if(style === "Cloud")
-        return "☁ " + text + " ☁";
-
-    if(style === "Moon")
-        return "☾ " + text + " ☽";
-
-    if(style === "Sun")
-        return "☀ " + text + " ☀";
-
-    if(style === "Cross")
-        return "✞ " + text + " ✞";
-
-    if(style === "Angel")
-        return "꧁ " + text + " ꧂";
-
-    if(style === "Luxury")
-        return "『 " + text + " 』";
-
-    if(style === "Bracket")
-        return "【 " + text + " 】";
-
-    if(style === "Japanese")
-        return "『 " + text + " 』";
-
-    if(style === "Dark")
-        return "༺ " + text + " ༻";
-
-    if(style === "Mystic")
-        return "༒ " + text + " ༒";
-
-    if(style === "Aesthetic")
-        return "•°¯`•• " + text + " ••´¯°•";
-
-    if(style === "Cute")
-        return "૮ ˶ᵔ ᵕ ᵔ˶ ა " + text;
-
-    if(style === "Minimal")
-        return "— " + text + " —";
-
-    if(style === "Box")
-        return "╔══ " + text + " ══╗";
-
-    if(style === "Wave Frame")
-        return "〰 " + text + " 〰";
-
-    if(style === "Point")
-        return "• " + text + " •";
-
-    if(style === "Star Frame")
-        return "☆.｡.:* " + text + " *:.｡.☆";
-
-    if(style === "Fancy Frame")
-        return "╭─❀ " + text + " ❀─╮";
-
-    if(style === "Neon")
-        return "⚡『 " + text + " 』⚡";
-
-    if(style === "Galaxy")
-        return "✦｡ﾟ " + text + " ﾟ｡✦";
-
-    if(style === "Magic")
-        return "⋆｡°✩ " + text + " ✩°｡⋆";
-
-    return text;
+function decorate(text,symbol){
+    return symbol + " " + text + " " + symbol;
 }
 
-
-function makeFancy(text,style){
-
-    if(style === "Bold")
-        return unicodeMap(text,maps.bold);
-
-    if(style === "Bold Serif")
-        return unicodeMap(text,maps.boldSerif);
-
-    if(style === "Italic")
-        return unicodeMap(text,maps.italic);
-
-    if(style === "Bold Italic")
-        return unicodeMap(text,maps.boldItalic);
-
-    if(style === "Script")
-        return unicodeMap(text,maps.script);
-
-    if(style === "Bold Script")
-        return unicodeMap(text,maps.boldScript);
-
-    if(style === "Fraktur")
-        return unicodeMap(text,maps.fraktur);
-
-    if(style === "Double")
-        return unicodeMap(text,maps.double);
-
-    if(style === "Monospace")
-        return unicodeMap(text,maps.mono);
-
-    if(style === "Small Caps")
-        return text.toUpperCase().replace(/[A-Z]/g,c =>
-            "ᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ"[upper.indexOf(c)]
-        );
-
-    if(style === "Fullwidth")
-        return [...text].map(c=>{
-            if(c===" ") return "　";
-            const code=c.charCodeAt(0);
-            if(code>=33 && code<=126)
-                return String.fromCharCode(code+65248);
-            return c;
-        }).join("");
-
-    if(style === "Underline")
-        return [...text].map(c=>c+"̲").join("");
-
-    if(style === "Strike")
-        return [...text].map(c=>c+"̶").join("");
-
-    if(style === "Slash")
-        return [...text].map(c=>c+"̷").join("");
-
-    if(style === "Dot")
-        return [...text].map(c=>c+"̇").join("");
-
-    if(style === "Wave")
-        return [...text].map(c=>c+"̃").join("");
-
-    return decorate(text,style);
+function addCombining(text,mark){
+    return [...text]
+        .map(c=>c + mark)
+        .join("");
 }
 
+function generateFancy(){
 
-function renderFancy(){
+    const text=document.getElementById("fancyInput").value;
+    const list=document.getElementById("fancyList");
 
-    const text = fancyInput.value || " ";
+    if(!text){
+        list.innerHTML="";
+        return;
+    }
 
-    fancyResults.innerHTML = "";
+    list.innerHTML="";
 
-    fancyStyles.forEach((style,index)=>{
+    fancyStyles.forEach(([name,fn])=>{
 
-        const output = makeFancy(text,style[0]);
+        const value=fn(text);
 
-        const item = document.createElement("div");
-        item.className = "fancy-item";
+        const item=document.createElement("div");
+        item.className="fancy-item";
 
-        const outputDiv = document.createElement("div");
-        outputDiv.className = "fancy-output";
-        outputDiv.textContent = output;
+        const span=document.createElement("div");
+        span.className="fancy-text";
+        span.textContent=value;
 
-        const button = document.createElement("button");
-        button.className = "copy-fancy";
-        button.textContent = "📋 Copy";
+        const button=document.createElement("button");
+        button.className="copy-btn";
+        button.textContent="📋 Copy";
 
-        button.addEventListener("click", async ()=>{
+        button.onclick=async()=>{
 
-            try{
+            await copyValue(value);
 
-                await navigator.clipboard.writeText(output);
+            button.textContent="✅ Copied!";
 
-                button.textContent = "✅ Copied!";
+            setTimeout(()=>{
+                button.textContent="📋 Copy";
+            },1200);
+        };
 
-                setTimeout(()=>{
-                    button.textContent = "📋 Copy";
-                },1200);
-
-            }catch{
-
-                const temp = document.createElement("textarea");
-                temp.value = output;
-                document.body.appendChild(temp);
-                temp.select();
-                document.execCommand("copy");
-                temp.remove();
-
-                button.textContent = "✅ Copied!";
-
-                setTimeout(()=>{
-                    button.textContent = "📋 Copy";
-                },1200);
-            }
-
-        });
-
-        item.appendChild(outputDiv);
+        item.appendChild(span);
         item.appendChild(button);
 
-        fancyResults.appendChild(item);
-
+        list.appendChild(item);
     });
-
 }
 
-fancyInput.addEventListener("input",renderFancy);
 
-renderFancy();
+/* =========================================================
+   COPY
+========================================================= */
 
+async function copyValue(text){
 
-/* =========================
-   COPY GENERAL
-========================= */
+    try{
+        await navigator.clipboard.writeText(text);
+    }catch{
+
+        const area=document.createElement("textarea");
+        area.value=text;
+
+        document.body.appendChild(area);
+        area.select();
+
+        document.execCommand("copy");
+
+        area.remove();
+    }
+}
 
 function copyText(id){
 
     const element=document.getElementById(id);
 
-    navigator.clipboard.writeText(element.value);
-
+    copyValue(element.value || element.textContent);
 }
 
 
-/* =========================
+/* =========================================================
    CASE CONVERTER
-========================= */
+========================================================= */
 
-function convertCase(type){
+function titleCase(text){
 
-    const input=document.getElementById("caseInput").value;
+    return text
+        .toLowerCase()
+        .replace(/\b\w/g,c=>c.toUpperCase());
+}
 
-    let output="";
+function sentenceCase(text){
+
+    return text
+        .toLowerCase()
+        .replace(/(^\s*\w|[.!?]\s+\w)/g,m=>m.toUpperCase());
+}
+
+function alternateCase(text){
+
+    let i=0;
+
+    return [...text]
+        .map(c=>{
+
+            if(/[a-z]/i.test(c)){
+                const result=i%2===0
+                    ?c.toUpperCase()
+                    :c.toLowerCase();
+
+                i++;
+                return result;
+            }
+
+            return c;
+        })
+        .join("");
+}
+
+function inverseCase(text){
+
+    return [...text]
+        .map(c=>{
+            if(c===c.toUpperCase())
+                return c.toLowerCase();
+
+            return c.toUpperCase();
+        })
+        .join("");
+}
+
+function convertCase(){
+
+    const text=document.getElementById("caseInput").value;
+    const type=document.getElementById("caseType").value;
+
+    let result=text;
 
     if(type==="upper")
-        output=input.toUpperCase();
+        result=text.toUpperCase();
 
     if(type==="lower")
-        output=input.toLowerCase();
+        result=text.toLowerCase();
 
     if(type==="title")
-        output=input.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());
+        result=titleCase(text);
 
     if(type==="sentence")
-        output=input.toLowerCase().replace(/(^\s*\w|[.!?]\s+\w)/g,c=>c.toUpperCase());
+        result=sentenceCase(text);
 
     if(type==="alternate")
-        output=[...input].map((c,i)=>i%2?c.toLowerCase():c.toUpperCase()).join("");
+        result=alternateCase(text);
 
     if(type==="inverse")
-        output=[...input].map(c=>{
-            return c===c.toUpperCase()?c.toLowerCase():c.toUpperCase();
-        }).join("");
+        result=inverseCase(text);
 
-    document.getElementById("caseOutput").value=output;
-
+    document.getElementById("caseResult").value=result;
 }
 
 
-/* =========================
-   QR GENERATOR
-========================= */
+/* =========================================================
+   QR CODE
+========================================================= */
+
+let currentQR="";
 
 function generateQR(){
 
-    const text=document.getElementById("qrInput").value.trim();
+    const text=document.getElementById("qrText").value.trim();
 
     if(!text){
         alert("Please enter text or a URL.");
@@ -1471,80 +1383,92 @@ function generateQR(){
     }
 
     const level=document.getElementById("qrLevel").value;
-    const size=parseInt(document.getElementById("qrSize").value);
+    const size=document.getElementById("qrSize").value;
 
     const qr=qrcode(0,level);
 
     qr.addData(text);
     qr.make();
 
-    const dataURL=qr.createDataURL(6,0);
+    currentQR=qr.createDataURL(6,0);
 
-    const area=document.getElementById("qrArea");
+    const output=document.getElementById("qrOutput");
 
-    area.innerHTML="";
+    output.innerHTML="";
 
     const img=document.createElement("img");
 
-    img.src=dataURL;
+    img.src=currentQR;
     img.width=size;
     img.height=size;
-    img.alt="Generated QR Code";
 
-    const br=document.createElement("br");
+    output.appendChild(img);
 
-    const download=document.createElement("a");
+    document.getElementById("qrDownload").style.display="block";
+}
 
-    download.href=dataURL;
-    download.download="naw-tools-qr.png";
-    download.className="download";
-    download.textContent="⬇️ Download QR";
+function downloadQR(){
 
-    area.appendChild(img);
-    area.appendChild(br);
-    area.appendChild(download);
+    if(!currentQR) return;
 
+    const link=document.createElement("a");
+
+    link.href=currentQR;
+    link.download="naw-tools-qr.png";
+
+    link.click();
 }
 
 
-/* =========================
-   COUNTER
-========================= */
-
-const counterInput=document.getElementById("counterInput");
-
-counterInput.addEventListener("input",updateCounter);
+/* =========================================================
+   WORD COUNTER
+========================================================= */
 
 function updateCounter(){
 
-    const text=counterInput.value;
+    const text=document.getElementById("counterInput").value;
 
-    const words=text.trim()?text.trim().split(/\s+/).length:0;
+    const words=text.trim()
+        ?text.trim().split(/\s+/).length
+        :0;
 
-    const sentences=text.trim()?text.split(/[.!?]+/).filter(x=>x.trim()).length:0;
+    const sentences=text.trim()
+        ?(text.match(/[.!?]+/g)||[]).length
+        :0;
 
-    const lines=text?text.split("\n").length:0;
+    const lines=text
+        ?text.split(/\n/).length
+        :0;
 
-    const paragraphs=text.trim()?text.split(/\n\s*\n/).filter(x=>x.trim()).length:0;
+    const paragraphs=text.trim()
+        ?text.split(/\n\s*\n/).length
+        :0;
 
     document.getElementById("words").textContent=words;
 
-    document.getElementById("characters").textContent=text.length;
+    document.getElementById("chars").textContent=text.length;
 
-    document.getElementById("noSpaces").textContent=text.replace(/\s/g,"").length;
+    document.getElementById("charsNoSpace").textContent=
+        text.replace(/\s/g,"").length;
 
     document.getElementById("sentences").textContent=sentences;
 
     document.getElementById("lines").textContent=lines;
 
     document.getElementById("paragraphs").textContent=paragraphs;
-
 }
 
 
-/* =========================
-   PASSWORD
-========================= */
+/* =========================================================
+   PASSWORD GENERATOR
+========================================================= */
+
+function updateLength(){
+
+    const value=document.getElementById("passwordLength").value;
+
+    document.getElementById("lengthValue").textContent=value;
+}
 
 function secureRandom(max){
 
@@ -1552,72 +1476,75 @@ function secureRandom(max){
 
     crypto.getRandomValues(array);
 
-    return array[0]%max;
-
+    return array[0] % max;
 }
-
 
 function generatePassword(){
 
+    const length=parseInt(
+        document.getElementById("passwordLength").value
+    );
+
     let chars="";
 
-    const upper="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const lower="abcdefghijklmnopqrstuvwxyz";
-    const numbers="0123456789";
-    const symbols="!@#$%^&*()_+-=[]{}|;:,.<>?";
+    if(document.getElementById("upperCheck").checked)
+        chars+="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    if(document.getElementById("passUpper").value==="yes")
-        chars+=upper;
+    if(document.getElementById("lowerCheck").checked)
+        chars+="abcdefghijklmnopqrstuvwxyz";
 
-    if(document.getElementById("passLower").value==="yes")
-        chars+=lower;
+    if(document.getElementById("numberCheck").checked)
+        chars+="0123456789";
 
-    if(document.getElementById("passNumbers").value==="yes")
-        chars+=numbers;
-
-    if(document.getElementById("passSymbols").value==="yes")
-        chars+=symbols;
+    if(document.getElementById("symbolCheck").checked)
+        chars+="!@#$%^&*()_+-=[]{}<>?";
 
     if(!chars){
+
         alert("Select at least one character type.");
         return;
     }
 
-    let length=parseInt(document.getElementById("passLength").value);
-
-    if(length<4) length=4;
-    if(length>64) length=64;
-
     let password="";
 
     for(let i=0;i<length;i++){
+
         password+=chars[secureRandom(chars.length)];
     }
 
-    document.getElementById("passwordResult").textContent=password;
+    document.getElementById("passwordResult").value=password;
 
     updateStrength(password);
-
 }
-
 
 function updateStrength(password){
 
     let score=0;
 
-    if(password.length>=8) score++;
-    if(password.length>=12) score++;
-    if(/[A-Z]/.test(password)) score++;
-    if(/[a-z]/.test(password)) score++;
-    if(/[0-9]/.test(password)) score++;
-    if(/[^A-Za-z0-9]/.test(password)) score++;
+    if(password.length>=8)
+        score++;
 
-    const bar=document.getElementById("strengthBar");
+    if(password.length>=14)
+        score++;
+
+    if(/[A-Z]/.test(password))
+        score++;
+
+    if(/[a-z]/.test(password))
+        score++;
+
+    if(/[0-9]/.test(password))
+        score++;
+
+    if(/[^A-Za-z0-9]/.test(password))
+        score++;
+
+    const fill=document.getElementById("strengthFill");
     const text=document.getElementById("strengthText");
 
-    const percent=Math.min(100,score/6*100);
+    let percent=Math.min(score/6*100,100);
 
-    bar.style.width=percent+"%";
+    fill.style.width=percent+"%";
 
     if(score<=2)
         text.textContent="Weak";
@@ -1627,78 +1554,74 @@ function updateStrength(password){
 
     else
         text.textContent="Strong";
-
 }
 
 
-function copyPassword(){
-
-    const password=document.getElementById("passwordResult").textContent;
-
-    navigator.clipboard.writeText(password);
-
-}
-
-
-/* =========================
+/* =========================================================
    IMAGE RESIZER
-========================= */
+========================================================= */
 
 let resizeImageObject=null;
 
-document.getElementById("resizeFile").addEventListener("change",function(){
+function loadResizeImage(event){
 
-    const file=this.files[0];
+    const file=event.target.files[0];
 
-    if(!file)return;
+    if(!file)
+        return;
 
-    const reader=new FileReader();
+    const img=new Image();
 
-    reader.onload=e=>{
+    img.onload=()=>{
 
-        const img=new Image();
+        resizeImageObject=img;
 
-        img.onload=()=>{
+        document.getElementById("resizeWidth").value=img.width;
+        document.getElementById("resizeHeight").value=img.height;
 
-            resizeImageObject=img;
+        const preview=document.getElementById("resizePreview");
 
-            document.getElementById("resizeWidth").value=img.width;
-            document.getElementById("resizeHeight").value=img.height;
-
-        };
-
-        img.src=e.target.result;
-
+        preview.src=img.src;
+        preview.style.display="block";
     };
 
-    reader.readAsDataURL(file);
+    img.src=URL.createObjectURL(file);
+}
 
+document.getElementById("resizeWidth")
+.addEventListener("input",()=>{
+
+    if(!resizeImageObject)
+        return;
+
+    if(document.getElementById("lockRatio").checked){
+
+        const ratio=
+            resizeImageObject.height/
+            resizeImageObject.width;
+
+        document.getElementById("resizeHeight").value=
+            Math.round(
+                document.getElementById("resizeWidth").value*ratio
+            );
+    }
 });
-
-
-document.getElementById("resizeWidth").addEventListener("input",function(){
-
-    if(!document.getElementById("lockRatio").checked)return;
-    if(!resizeImageObject)return;
-
-    const ratio=resizeImageObject.height/resizeImageObject.width;
-
-    document.getElementById("resizeHeight").value=Math.round(this.value*ratio);
-
-});
-
 
 function resizeImage(){
 
     if(!resizeImageObject){
+
         alert("Please select an image.");
         return;
     }
 
-    const width=parseInt(document.getElementById("resizeWidth").value);
-    const height=parseInt(document.getElementById("resizeHeight").value);
+    const width=parseInt(
+        document.getElementById("resizeWidth").value
+    );
 
-    if(!width || !height)return;
+    const height=parseInt(
+        document.getElementById("resizeHeight").value
+    );
 
     const canvas=document.createElement("canvas");
 
@@ -1707,163 +1630,228 @@ function resizeImage(){
 
     const ctx=canvas.getContext("2d");
 
-    ctx.drawImage(resizeImageObject,0,0,width,height);
+    ctx.drawImage(
+        resizeImageObject,
+        0,
+        0,
+        width,
+        height
+    );
 
-    const url=canvas.toDataURL("image/png");
+    const link=document.createElement("a");
 
-    document.getElementById("resizeResult").innerHTML=`
-        <img class="preview" src="${url}">
-        <a class="download" href="${url}" download="resized-image.png">
-            ⬇️ Download Image
-        </a>
-    `;
+    link.href=canvas.toDataURL("image/png");
+    link.download="naw-resized.png";
 
+    link.click();
 }
 
 
-/* =========================
-   COMPRESSOR
-========================= */
+/* =========================================================
+   IMAGE COMPRESSOR
+========================================================= */
 
-document.getElementById("compressQuality").addEventListener("input",function(){
+let compressImageObject=null;
+let compressOriginalSize=0;
 
-    document.getElementById("qualityValue").textContent=this.value;
+function loadCompressImage(event){
 
-});
+    const file=event.target.files[0];
 
-
-async function compressImage(){
-
-    const file=document.getElementById("compressFile").files[0];
-
-    if(!file){
-        alert("Please select an image.");
+    if(!file)
         return;
-    }
 
-    const quality=parseInt(document.getElementById("compressQuality").value)/100;
+    compressOriginalSize=file.size;
 
     const img=new Image();
 
     img.onload=()=>{
 
-        const canvas=document.createElement("canvas");
+        compressImageObject=img;
 
-        canvas.width=img.width;
-        canvas.height=img.height;
+        const preview=document.getElementById("compressPreview");
 
-        const ctx=canvas.getContext("2d");
+        preview.src=img.src;
+        preview.style.display="block";
 
-        ctx.drawImage(img,0,0);
-
-        canvas.toBlob(blob=>{
-
-            const url=URL.createObjectURL(blob);
-
-            const original=(file.size/1024).toFixed(1);
-            const compressed=(blob.size/1024).toFixed(1);
-
-            const reduction=((1-blob.size/file.size)*100).toFixed(1);
-
-            document.getElementById("compressInfo").innerHTML=`
-                <p>Original: ${original} KB</p>
-                <p>Compressed: ${compressed} KB</p>
-                <p>Reduction: ${reduction}%</p>
-            `;
-
-            document.getElementById("compressResult").innerHTML=`
-                <img class="preview" src="${url}">
-                <a class="download" href="${url}" download="compressed-image.jpg">
-                    ⬇️ Download Compressed Image
-                </a>
-            `;
-
-        },"image/jpeg",quality);
-
+        document.getElementById("compressInfo").textContent=
+            "Original: "+formatBytes(file.size);
     };
 
     img.src=URL.createObjectURL(file);
+}
 
+function updateQuality(){
+
+    const value=document.getElementById("compressQuality").value;
+
+    document.getElementById("qualityValue").textContent=value;
+}
+
+function compressImage(){
+
+    if(!compressImageObject){
+
+        alert("Please select an image.");
+        return;
+    }
+
+    const quality=
+        parseInt(document.getElementById("compressQuality").value)/100;
+
+    const canvas=document.createElement("canvas");
+
+    canvas.width=compressImageObject.width;
+    canvas.height=compressImageObject.height;
+
+    const ctx=canvas.getContext("2d");
+
+    ctx.drawImage(
+        compressImageObject,
+        0,
+        0
+    );
+
+    canvas.toBlob(blob=>{
+
+        if(!blob)
+            return;
+
+        const reduction=
+            ((compressOriginalSize-blob.size)/
+            compressOriginalSize)*100;
+
+        document.getElementById("compressInfo").textContent=
+            "Original: "+formatBytes(compressOriginalSize)+
+            " • Compressed: "+formatBytes(blob.size)+
+            " • Reduction: "+Math.max(0,reduction).toFixed(1)+"%";
+
+        const link=document.createElement("a");
+
+        link.href=URL.createObjectURL(blob);
+        link.download="naw-compressed.jpg";
+
+        link.click();
+
+    },"image/jpeg",quality);
+}
+
+function formatBytes(bytes){
+
+    if(bytes<1024)
+        return bytes+" B";
+
+    if(bytes<1024*1024)
+        return (bytes/1024).toFixed(1)+" KB";
+
+    return (bytes/1024/1024).toFixed(2)+" MB";
 }
 
 
-/* =========================
+/* =========================================================
    IMAGE CONVERTER
-========================= */
+========================================================= */
+
+let convertImageObject=null;
+
+function loadConvertImage(event){
+
+    const file=event.target.files[0];
+
+    if(!file)
+        return;
+
+    const img=new Image();
+
+    img.onload=()=>{
+
+        convertImageObject=img;
+
+        const preview=document.getElementById("convertPreview");
+
+        preview.src=img.src;
+        preview.style.display="block";
+    };
+
+    img.src=URL.createObjectURL(file);
+}
+
+function updateConvertQuality(){
+
+    const value=document.getElementById("convertQuality").value;
+
+    document.getElementById("convertQualityValue").textContent=value;
+}
 
 function convertImage(){
 
-    const file=document.getElementById("convertFile").files[0];
+    if(!convertImageObject){
 
-    if(!file){
         alert("Please select an image.");
         return;
     }
 
     const format=document.getElementById("convertFormat").value;
-    const quality=parseFloat(document.getElementById("convertQuality").value);
 
-    const img=new Image();
+    const quality=
+        parseInt(document.getElementById("convertQuality").value)/100;
 
-    img.onload=()=>{
+    const canvas=document.createElement("canvas");
 
-        const canvas=document.createElement("canvas");
+    canvas.width=convertImageObject.width;
+    canvas.height=convertImageObject.height;
 
-        canvas.width=img.width;
-        canvas.height=img.height;
+    const ctx=canvas.getContext("2d");
 
-        const ctx=canvas.getContext("2d");
+    if(format==="image/jpeg"){
 
-        if(format==="image/jpeg"){
+        ctx.fillStyle="#fff";
+        ctx.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+    }
 
-            ctx.fillStyle="#ffffff";
-            ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.drawImage(
+        convertImageObject,
+        0,
+        0
+    );
 
-        }
+    const extension=
+        format==="image/png"
+        ?"png"
+        :format==="image/webp"
+        ?"webp"
+        :"jpg";
 
-        ctx.drawImage(img,0,0);
+    const link=document.createElement("a");
 
-        const url=canvas.toDataURL(format,quality);
+    link.href=canvas.toDataURL(format,quality);
+    link.download="naw-converted."+extension;
 
-        let extension="png";
-
-        if(format==="image/jpeg") extension="jpg";
-        if(format==="image/webp") extension="webp";
-
-        document.getElementById("convertResult").innerHTML=`
-            <img class="preview" src="${url}">
-            <a class="download" href="${url}" download="converted-image.${extension}">
-                ⬇️ Download Converted Image
-            </a>
-        `;
-
-    };
-
-    img.src=URL.createObjectURL(file);
-
+    link.click();
 }
 
 
-/* =========================
+/* =========================================================
    COLOR TOOLKIT
-========================= */
-
-const colorPicker=document.getElementById("colorPicker");
-
-colorPicker.addEventListener("input",updateColor);
+========================================================= */
 
 function hexToRgb(hex){
 
-    const bigint=parseInt(hex.slice(1),16);
+    hex=hex.replace("#","");
+
+    const bigint=parseInt(hex,16);
 
     return {
         r:(bigint>>16)&255,
         g:(bigint>>8)&255,
         b:bigint&255
     };
-
 }
-
 
 function rgbToHsl(r,g,b){
 
@@ -1879,14 +1867,15 @@ function rgbToHsl(r,g,b){
 
     if(max===min){
 
-        h=0;
-        s=0;
+        h=s=0;
 
     }else{
 
         const d=max-min;
 
-        s=l>.5?d/(2-max-min):d/(max+min);
+        s=l>.5
+            ?d/(2-max-min)
+            :d/(max+min);
 
         switch(max){
 
@@ -1901,42 +1890,39 @@ function rgbToHsl(r,g,b){
             case b:
                 h=(r-g)/d+4;
                 break;
-
         }
 
         h/=6;
-
     }
 
-    return [
-        Math.round(h*360),
-        Math.round(s*100),
-        Math.round(l*100)
-    ];
-
+    return {
+        h:Math.round(h*360),
+        s:Math.round(s*100),
+        l:Math.round(l*100)
+    };
 }
-
 
 function updateColor(){
 
-    const hex=colorPicker.value.toUpperCase();
+    const hex=document.getElementById("colorPicker").value;
 
     const rgb=hexToRgb(hex);
 
-    const hsl=rgbToHsl(rgb.r,rgb.g,rgb.b);
+    const hsl=rgbToHsl(
+        rgb.r,
+        rgb.g,
+        rgb.b
+    );
 
     document.getElementById("colorPreview").style.background=hex;
 
-    document.getElementById("hexValue").textContent=hex;
+    document.getElementById("colorResult").innerHTML=
+        "HEX: "+hex.toUpperCase()+"<br>"+
+        "RGB: rgb("+rgb.r+", "+rgb.g+", "+rgb.b+")<br>"+
+        "HSL: hsl("+hsl.h+", "+hsl.s+"%, "+hsl.l+"%)";
 
-    document.getElementById("rgbValue").textContent=
-        `${rgb.r},${rgb.g},${rgb.b}`;
-
-    document.getElementById("hslValue").textContent=
-        `${hsl[0]},${hsl[1]}%,${hsl[2]}%`;
-
+    generatePalette(hex);
 }
-
 
 function randomColor(){
 
@@ -1947,90 +1933,80 @@ function randomColor(){
     for(let i=0;i<6;i++)
         hex+=chars[Math.floor(Math.random()*16)];
 
-    colorPicker.value=hex;
+    document.getElementById("colorPicker").value=hex;
 
     updateColor();
-
 }
 
+function generatePalette(hex){
 
-function copyColor(){
-
-    navigator.clipboard.writeText(colorPicker.value.toUpperCase());
-
-}
-
-
-function generatePalette(){
-
-    const base=colorPicker.value;
-
-    const rgb=hexToRgb(base);
+    const rgb=hexToRgb(hex);
 
     const palette=document.getElementById("palette");
 
     palette.innerHTML="";
 
-    for(let i=0;i<5;i++){
+    const colors=[
+        hex,
+        "#"+toHex(Math.min(255,rgb.r+35))+
+        toHex(Math.min(255,rgb.g+35))+
+        toHex(Math.min(255,rgb.b+35)),
 
-        const factor=.55+i*.15;
+        "#"+toHex(Math.max(0,rgb.r-35))+
+        toHex(Math.max(0,rgb.g-35))+
+        toHex(Math.max(0,rgb.b-35)),
 
-        const r=Math.min(255,Math.round(rgb.r*factor));
-        const g=Math.min(255,Math.round(rgb.g*factor));
-        const b=Math.min(255,Math.round(rgb.b*factor));
+        "#FFFFFF",
+        "#000000"
+    ];
 
-        const hex=
-            "#"+
-            [r,g,b]
-            .map(x=>x.toString(16).padStart(2,"0"))
-            .join("")
-            .toUpperCase();
+    colors.forEach(color=>{
 
-        const div=document.createElement("div");
+        const box=document.createElement("div");
 
-        div.style.background=hex;
-        div.title=hex;
+        box.style.height="45px";
+        box.style.borderRadius="8px";
+        box.style.background=color;
+        box.style.border="1px solid rgba(255,255,255,.12)";
+        box.title=color;
 
-        div.onclick=()=>{
-            navigator.clipboard.writeText(hex);
+        box.onclick=()=>{
+            copyValue(color);
         };
 
-        palette.appendChild(div);
+        palette.appendChild(box);
+    });
 
-    }
+    document.getElementById("gradient").style.background=
+        "linear-gradient(90deg,"+
+        hex+
+        ",#FFFFFF)";
+}
 
+function toHex(value){
+
+    return value
+        .toString(16)
+        .padStart(2,"0")
+        .toUpperCase();
+}
+
+function copyColorCSS(){
+
+    const hex=document.getElementById("colorPicker").value;
+
+    const css=
+        "color: "+hex+";";
+
+    copyValue(css);
 }
 
 
-document.getElementById("gradient1").addEventListener("input",updateGradient);
-document.getElementById("gradient2").addEventListener("input",updateGradient);
+/* =========================================================
+   INITIALIZE
+========================================================= */
 
-function updateGradient(){
-
-    const c1=document.getElementById("gradient1").value;
-    const c2=document.getElementById("gradient2").value;
-
-    document.getElementById("gradientPreview").style.background=
-        `linear-gradient(135deg,${c1},${c2})`;
-
-}
-
-
-function copyGradient(){
-
-    const c1=document.getElementById("gradient1").value;
-    const c2=document.getElementById("gradient2").value;
-
-    const css=`linear-gradient(135deg, ${c1}, ${c2})`;
-
-    navigator.clipboard.writeText(css);
-
-}
-
-
-updateColor();
-generatePalette();
-updateGradient();
+generatePalette("#E50914");
 
 </script>
 
