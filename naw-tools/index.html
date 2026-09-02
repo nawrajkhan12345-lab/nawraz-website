@@ -1,13 +1,11 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NAW TOOLS | Free Online Tools</title>
-
-<meta name="description" content="NAW TOOLS — free online tools by Nawraz Khan including fancy text, QR codes, converters, image tools, password generator and color tools.">
+<title>NAW TOOLS | Free Creative Tools</title>
+<meta name="description" content="NAW TOOLS - Free creative tools by Nawraz Khan. Fancy text, QR codes, image tools, color tools and more.">
 
 <style>
 *{
@@ -17,396 +15,306 @@
     scroll-behavior:smooth;
 }
 
-:root{
-    --bg:#070816;
-    --glass:rgba(16,20,42,.55);
-    --glass2:rgba(25,29,57,.42);
-    --border:rgba(255,255,255,.13);
-    --text:#f5f7ff;
-    --muted:#aeb4cf;
-    --blue:#65b8ff;
-    --purple:#a978ff;
-    --cyan:#64e6ff;
-}
-
 body{
     font-family:Arial,Helvetica,sans-serif;
-    color:var(--text);
-    min-height:100vh;
-    background:
-        radial-gradient(circle at 15% 20%,rgba(82,67,180,.24),transparent 32%),
-        radial-gradient(circle at 85% 25%,rgba(38,129,209,.20),transparent 30%),
-        linear-gradient(135deg,#050611,#0a0c20 45%,#070816);
+    background:#070914;
+    color:#fff;
     overflow-x:hidden;
 }
 
-/* anime atmosphere */
-
+/* BACKGROUND */
 body::before{
     content:"";
     position:fixed;
     inset:0;
-    pointer-events:none;
     background:
-        linear-gradient(115deg,transparent 20%,rgba(108,120,255,.05) 50%,transparent 80%);
-    animation:atmosphere 10s ease-in-out infinite alternate;
+        radial-gradient(circle at 20% 20%,rgba(93,62,255,.18),transparent 30%),
+        radial-gradient(circle at 80% 30%,rgba(0,170,255,.14),transparent 30%),
+        radial-gradient(circle at 50% 100%,rgba(166,50,255,.15),transparent 35%);
+    pointer-events:none;
     z-index:-3;
 }
 
-@keyframes atmosphere{
-    from{transform:translateX(-4%) scale(1);}
-    to{transform:translateX(4%) scale(1.08);}
+.grid{
+    position:fixed;
+    inset:0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:45px 45px;
+    mask-image:linear-gradient(to bottom,transparent,black 20%,black 80%,transparent);
+    pointer-events:none;
+    z-index:-2;
 }
-
-/* city silhouette */
 
 .city{
     position:fixed;
-    left:0;
-    right:0;
     bottom:0;
-    height:190px;
-    z-index:-2;
-    opacity:.35;
-    background:
-        linear-gradient(to top,rgba(1,2,10,.95),transparent),
-        repeating-linear-gradient(
-            90deg,
-            transparent 0 18px,
-            rgba(95,110,190,.18) 18px 21px,
-            transparent 21px 48px
-        );
-    clip-path:polygon(
-        0 65%,5% 65%,5% 45%,9% 45%,9% 72%,
-        13% 72%,13% 35%,17% 35%,17% 58%,
-        21% 58%,21% 43%,26% 43%,26% 68%,
-        31% 68%,31% 30%,36% 30%,36% 55%,
-        40% 55%,40% 39%,45% 39%,45% 64%,
-        51% 64%,51% 28%,55% 28%,55% 51%,
-        61% 51%,61% 36%,66% 36%,66% 68%,
-        72% 68%,72% 42%,77% 42%,77% 59%,
-        83% 59%,83% 32%,88% 32%,88% 67%,
-        94% 67%,94% 45%,100% 45%,100% 100%,0 100%
-    );
-}
-
-/* particles */
-
-.particles{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
+    left:0;
+    width:100%;
+    height:130px;
+    opacity:.28;
     z-index:-1;
-    overflow:hidden;
+    display:flex;
+    align-items:end;
+    gap:4px;
 }
 
-.particles span{
-    position:absolute;
+.building{
+    flex:1;
+    background:linear-gradient(to top,#11152a,#20264a);
+    border-top:1px solid rgba(140,130,255,.3);
+}
+
+.b1{height:35%}
+.b2{height:55%}
+.b3{height:75%}
+.b4{height:45%}
+.b5{height:90%}
+.b6{height:62%}
+.b7{height:80%}
+.b8{height:48%}
+.b9{height:70%}
+.b10{height:95%}
+
+.particle{
+    position:fixed;
     width:3px;
     height:3px;
-    background:#b9c8ff;
+    background:#fff;
     border-radius:50%;
-    box-shadow:0 0 12px #7898ff;
-    animation:float 9s linear infinite;
-    opacity:.65;
+    opacity:.45;
+    animation:float 8s infinite ease-in-out;
+    z-index:-1;
 }
 
-.particles span:nth-child(1){left:8%;top:20%;animation-delay:0s;}
-.particles span:nth-child(2){left:18%;top:70%;animation-delay:2s;}
-.particles span:nth-child(3){left:32%;top:15%;animation-delay:4s;}
-.particles span:nth-child(4){left:47%;top:60%;animation-delay:1s;}
-.particles span:nth-child(5){left:62%;top:25%;animation-delay:3s;}
-.particles span:nth-child(6){left:76%;top:72%;animation-delay:5s;}
-.particles span:nth-child(7){left:88%;top:18%;animation-delay:2s;}
-.particles span:nth-child(8){left:94%;top:55%;animation-delay:6s;}
+.p1{left:10%;top:30%}
+.p2{left:25%;top:70%;animation-delay:2s}
+.p3{left:48%;top:25%;animation-delay:4s}
+.p4{left:70%;top:60%;animation-delay:1s}
+.p5{left:88%;top:35%;animation-delay:3s}
+.p6{left:58%;top:80%;animation-delay:5s}
 
 @keyframes float{
-    0%{transform:translateY(40px);opacity:0;}
-    20%{opacity:.7;}
-    80%{opacity:.7;}
-    100%{transform:translateY(-140px);opacity:0;}
+    0%,100%{transform:translateY(0);opacity:.2}
+    50%{transform:translateY(-25px);opacity:.8}
 }
 
-/* mouse glow */
-
-.cursor-glow{
+/* MOUSE GLOW */
+.mouse-glow{
     position:fixed;
-    width:280px;
-    height:280px;
+    width:350px;
+    height:350px;
     border-radius:50%;
+    background:radial-gradient(circle,rgba(100,80,255,.13),transparent 70%);
     pointer-events:none;
-    background:radial-gradient(circle,rgba(100,150,255,.11),transparent 68%);
     transform:translate(-50%,-50%);
-    z-index:0;
+    z-index:-1;
 }
 
-/* navigation */
-
+/* NAVBAR */
 nav{
     position:sticky;
-    top:15px;
+    top:0;
     z-index:100;
-    width:min(1150px,92%);
-    margin:15px auto 0;
-    padding:15px 22px;
+    padding:18px 6%;
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    background:rgba(10,13,31,.62);
-    backdrop-filter:blur(22px);
-    -webkit-backdrop-filter:blur(22px);
-    border:1px solid var(--border);
-    border-radius:22px;
-    box-shadow:
-        0 15px 50px rgba(0,0,0,.35),
-        inset 0 1px rgba(255,255,255,.06);
+    align-items:center;
+    background:rgba(7,9,20,.65);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.07);
 }
 
 .logo{
     font-size:20px;
     font-weight:900;
     letter-spacing:3px;
-    background:linear-gradient(90deg,#fff,var(--blue),var(--purple));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
 }
 
-nav a{
-    color:#dfe4ff;
+.logo span{
+    color:#8c7cff;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+}
+
+.nav-links a{
+    color:#bbb;
     text-decoration:none;
-    margin-left:24px;
     font-size:14px;
     transition:.3s;
 }
 
-nav a:hover{
+.nav-links a:hover{
     color:#fff;
-    text-shadow:0 0 15px var(--blue);
 }
 
-/* hero */
-
+/* HERO */
 .hero{
-    width:min(1100px,92%);
-    margin:100px auto 80px;
+    min-height:75vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     text-align:center;
+    padding:80px 20px;
+}
+
+.hero-content{
+    max-width:900px;
 }
 
 .badge{
     display:inline-block;
-    padding:8px 16px;
-    border-radius:999px;
-    background:rgba(100,130,255,.10);
-    border:1px solid rgba(120,150,255,.2);
-    color:#cbd8ff;
-    font-size:13px;
-    margin-bottom:22px;
-    backdrop-filter:blur(10px);
+    padding:9px 16px;
+    border:1px solid rgba(140,124,255,.35);
+    background:rgba(140,124,255,.08);
+    border-radius:30px;
+    color:#bdb5ff;
+    font-size:12px;
+    margin-bottom:25px;
 }
 
 .hero h1{
-    font-size:clamp(48px,9vw,92px);
-    line-height:1;
-    letter-spacing:-4px;
-    background:linear-gradient(90deg,#fff 10%,#8bc8ff 45%,#b18aff 80%);
+    font-size:clamp(55px,10vw,120px);
+    line-height:.9;
+    letter-spacing:8px;
+    background:linear-gradient(90deg,#fff,#a99cff,#6fdcff,#fff);
+    background-size:300%;
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
-    text-shadow:0 0 50px rgba(100,130,255,.18);
+    animation:shine 8s linear infinite;
+}
+
+@keyframes shine{
+    to{background-position:300%}
 }
 
 .hero p{
-    color:var(--muted);
+    margin:30px auto;
     max-width:650px;
-    margin:25px auto 0;
-    font-size:17px;
-    line-height:1.7;
+    color:#a8adbd;
+    line-height:1.8;
+    font-size:16px;
 }
 
-.hero-button{
+.hero-btn{
     display:inline-block;
-    margin-top:32px;
     padding:14px 25px;
-    color:white;
+    border-radius:12px;
+    color:#fff;
     text-decoration:none;
-    border-radius:14px;
-    background:linear-gradient(135deg,rgba(93,159,255,.25),rgba(153,104,255,.24));
-    border:1px solid rgba(140,170,255,.28);
-    box-shadow:0 0 35px rgba(86,118,255,.12);
+    background:linear-gradient(135deg,#6457ff,#9c4dff);
+    box-shadow:0 10px 35px rgba(105,80,255,.25);
     transition:.3s;
 }
 
-.hero-button:hover{
+.hero-btn:hover{
     transform:translateY(-3px);
-    box-shadow:0 0 40px rgba(104,140,255,.28);
 }
 
-/* sections */
-
-.container{
-    width:min(1100px,92%);
-    margin:auto;
+/* SECTION */
+section{
+    padding:70px 6%;
 }
 
 .section-title{
     text-align:center;
-    margin:30px 0 35px;
+    margin-bottom:40px;
 }
 
 .section-title h2{
-    font-size:32px;
-    margin-bottom:8px;
+    font-size:34px;
+    margin-bottom:10px;
 }
 
 .section-title p{
-    color:var(--muted);
+    color:#8f94a8;
 }
 
-/* tool cards */
-
+/* TOOL CARDS */
 .tools-grid{
+    max-width:1200px;
+    margin:auto;
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
     gap:20px;
 }
 
 .tool-card{
-    position:relative;
     padding:25px;
-    min-height:180px;
-    border-radius:22px;
-    background:
-        linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.025)),
-        var(--glass);
-    border:1px solid var(--border);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-    box-shadow:
-        0 20px 50px rgba(0,0,0,.25),
-        inset 0 1px rgba(255,255,255,.06);
-    transition:.4s;
-    overflow:hidden;
-}
-
-.tool-card::before{
-    content:"";
-    position:absolute;
-    width:140px;
-    height:140px;
-    top:-80px;
-    right:-60px;
-    border-radius:50%;
-    background:rgba(100,150,255,.13);
-    filter:blur(25px);
+    border-radius:20px;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.09);
+    backdrop-filter:blur(18px);
+    transition:.35s;
+    cursor:pointer;
 }
 
 .tool-card:hover{
-    transform:translateY(-7px);
-    border-color:rgba(120,160,255,.35);
-    box-shadow:
-        0 25px 60px rgba(0,0,0,.35),
-        0 0 35px rgba(90,130,255,.09);
+    transform:translateY(-6px);
+    border-color:rgba(140,124,255,.45);
+    box-shadow:0 15px 50px rgba(70,50,180,.18);
 }
 
-.tool-number{
-    color:#8296d6;
-    font-size:12px;
-    letter-spacing:2px;
-    margin-bottom:12px;
+.tool-icon{
+    font-size:30px;
+    margin-bottom:15px;
 }
 
 .tool-card h3{
-    font-size:20px;
-    margin-bottom:9px;
+    margin-bottom:8px;
 }
 
 .tool-card p{
-    color:var(--muted);
-    line-height:1.5;
+    color:#8f94a8;
     font-size:14px;
+    line-height:1.6;
 }
 
-.open-tool{
-    display:inline-block;
-    margin-top:18px;
-    color:#b9d5ff;
-    text-decoration:none;
-    font-size:13px;
-}
-
-/* tool sections */
-
+/* TOOL BOX */
 .tool-section{
-    margin:75px 0;
-    padding:32px;
-    border-radius:26px;
-    background:rgba(12,16,36,.58);
-    border:1px solid var(--border);
-    backdrop-filter:blur(25px);
-    -webkit-backdrop-filter:blur(25px);
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.28),
-        inset 0 1px rgba(255,255,255,.055);
+    max-width:1050px;
+    margin:0 auto 50px;
 }
 
-.tool-header{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    margin-bottom:25px;
+.tool-box{
+    padding:28px;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:22px;
+    backdrop-filter:blur(20px);
 }
-
-.tool-header .icon{
-    font-size:32px;
-}
-
-.tool-header h2{
-    font-size:25px;
-}
-
-.tool-header p{
-    color:var(--muted);
-    margin-top:4px;
-}
-
-/* inputs */
 
 textarea,
-input[type="text"],
-input[type="number"],
-input[type="password"],
+input,
 select{
     width:100%;
     padding:13px 15px;
-    border-radius:13px;
-    border:1px solid rgba(255,255,255,.12);
+    margin:7px 0;
     background:rgba(0,0,0,.25);
-    color:white;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:10px;
+    color:#fff;
     outline:none;
-    transition:.3s;
 }
 
 textarea{
-    min-height:130px;
+    min-height:120px;
     resize:vertical;
 }
 
-textarea:focus,
-input:focus,
-select:focus{
-    border-color:rgba(100,170,255,.55);
-    box-shadow:0 0 20px rgba(80,140,255,.10);
-}
-
 button{
-    border:0;
-    padding:12px 18px;
-    border-radius:12px;
-    color:white;
+    padding:11px 17px;
+    margin:6px 4px 6px 0;
+    border:none;
+    border-radius:9px;
+    background:linear-gradient(135deg,#6558ff,#914fff);
+    color:#fff;
     cursor:pointer;
-    font-weight:bold;
-    background:linear-gradient(135deg,#397dce,#8054ca);
-    box-shadow:0 8px 25px rgba(70,90,200,.2);
-    transition:.3s;
+    transition:.25s;
 }
 
 button:hover{
@@ -414,136 +322,127 @@ button:hover{
     filter:brightness(1.12);
 }
 
+.secondary{
+    background:rgba(255,255,255,.08);
+}
+
 .controls{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-    margin-top:15px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:10px;
 }
 
 .result{
     margin-top:18px;
-    padding:18px;
-    border-radius:15px;
-    background:rgba(0,0,0,.22);
-    border:1px solid rgba(255,255,255,.08);
-    min-height:55px;
-    word-break:break-word;
 }
 
-.grid-2{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
+/* FANCY TEXT */
+.fancy-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:13px;
+    margin:8px 0;
+    border-radius:12px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.06);
 }
-
-.grid-3{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-}
-
-label{
-    display:block;
-    color:#c7cce0;
-    font-size:13px;
-    margin-bottom:7px;
-}
-
-/* fancy */
 
 .fancy-output{
-    font-size:22px;
-    line-height:2;
+    flex:1;
+    word-break:break-word;
+    color:#eee;
+    font-size:16px;
 }
 
-/* counter */
+.copy-fancy{
+    flex-shrink:0;
+    margin:0;
+    padding:8px 13px;
+}
 
+/* STATS */
 .stats{
     display:grid;
-    grid-template-columns:repeat(6,1fr);
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
     gap:10px;
     margin-top:15px;
 }
 
 .stat{
-    padding:15px 8px;
+    padding:16px;
     text-align:center;
-    border-radius:14px;
     background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.07);
+    border-radius:12px;
 }
 
 .stat strong{
     display:block;
-    font-size:20px;
-}
-
-.stat span{
-    color:var(--muted);
-    font-size:11px;
+    font-size:25px;
+    color:#a99cff;
 }
 
 /* QR */
-
-.qr-box{
+.qr-area{
     text-align:center;
     margin-top:20px;
 }
 
-#qrPreview{
+.qr-area img{
     max-width:100%;
-    padding:15px;
-    border-radius:15px;
-    background:white;
+    border-radius:12px;
+    background:#fff;
+    padding:8px;
 }
 
-/* password */
-
-.password-output{
+/* PASSWORD */
+.password-result{
     font-family:monospace;
-    font-size:19px;
+    font-size:18px;
     letter-spacing:1px;
+    word-break:break-all;
 }
 
 .strength{
-    margin-top:12px;
-    height:7px;
-    background:rgba(255,255,255,.08);
-    border-radius:99px;
+    height:8px;
+    background:rgba(255,255,255,.1);
+    border-radius:20px;
     overflow:hidden;
+    margin:12px 0;
 }
 
 .strength-bar{
     height:100%;
     width:0;
     transition:.3s;
-    background:linear-gradient(90deg,#ef6b6b,#f4ca68,#73e6a2);
 }
 
-/* image tools */
-
+/* IMAGE */
 .preview{
-    margin-top:20px;
-    text-align:center;
-}
-
-.preview img{
     max-width:100%;
     max-height:350px;
-    border-radius:15px;
-    border:1px solid rgba(255,255,255,.1);
+    margin-top:15px;
+    border-radius:12px;
+    display:block;
 }
 
-/* color */
+.download{
+    display:inline-block;
+    padding:11px 17px;
+    margin-top:10px;
+    border-radius:9px;
+    color:#fff;
+    text-decoration:none;
+    background:linear-gradient(135deg,#6558ff,#914fff);
+}
 
+/* COLOR */
 .color-preview{
     width:100%;
-    height:150px;
-    border-radius:20px;
-    margin-top:15px;
-    border:1px solid rgba(255,255,255,.12);
-    box-shadow:inset 0 0 50px rgba(0,0,0,.15);
+    height:120px;
+    border-radius:15px;
+    border:1px solid rgba(255,255,255,.1);
+    margin:15px 0;
 }
 
 .palette{
@@ -554,106 +453,62 @@ label{
 }
 
 .palette div{
-    height:75px;
-    border-radius:12px;
-    border:1px solid rgba(255,255,255,.12);
+    height:70px;
+    border-radius:10px;
+    cursor:pointer;
 }
 
-/* about */
-
+/* ABOUT */
 .about{
-    margin:80px auto;
     max-width:800px;
+    margin:auto;
     text-align:center;
-    padding:35px;
-    border-radius:25px;
-    background:rgba(15,19,42,.5);
-    border:1px solid var(--border);
-    backdrop-filter:blur(22px);
-}
-
-.about p{
-    color:var(--muted);
+    color:#a8adbd;
     line-height:1.8;
 }
 
-/* connect */
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:45px 20px;
+    border-top:1px solid rgba(255,255,255,.07);
+    color:#777d91;
+}
 
 .socials{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:15px;
-    margin-top:25px;
+    margin-top:15px;
 }
 
 .socials a{
+    color:#aaa;
     text-decoration:none;
-    color:white;
-    padding:13px 20px;
-    border-radius:14px;
-    background:rgba(255,255,255,.055);
-    border:1px solid rgba(255,255,255,.1);
+    margin:0 8px;
     transition:.3s;
 }
 
 .socials a:hover{
-    transform:translateY(-4px);
-    background:rgba(100,130,255,.13);
-    border-color:rgba(130,160,255,.35);
-}
-
-/* footer */
-
-footer{
-    text-align:center;
-    padding:45px 20px;
-    color:#777f9e;
-    font-size:13px;
-}
-
-/* responsive */
-
-@media(max-width:850px){
-    .tools-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .stats{
-        grid-template-columns:repeat(3,1fr);
-    }
+    color:#fff;
 }
 
 @media(max-width:600px){
-    nav{
-        padding:13px 15px;
-    }
-
-    nav a{
-        margin-left:10px;
-        font-size:12px;
-    }
-
-    .hero{
-        margin-top:75px;
+    .nav-links{
+        display:none;
     }
 
     .hero h1{
-        letter-spacing:-2px;
+        letter-spacing:4px;
     }
 
-    .tools-grid,
-    .grid-2,
-    .grid-3{
-        grid-template-columns:1fr;
+    .tool-box{
+        padding:18px;
     }
 
-    .tool-section{
-        padding:20px;
+    .fancy-item{
+        align-items:flex-start;
     }
 
-    .stats{
-        grid-template-columns:repeat(2,1fr);
+    .copy-fancy{
+        margin-top:0;
     }
 }
 </style>
@@ -661,502 +516,533 @@ footer{
 
 <body>
 
-<div class="cursor-glow" id="cursorGlow"></div>
+<div class="grid"></div>
 
-<div class="particles">
-    <span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span>
+<div class="city">
+    <div class="building b1"></div>
+    <div class="building b2"></div>
+    <div class="building b3"></div>
+    <div class="building b4"></div>
+    <div class="building b5"></div>
+    <div class="building b6"></div>
+    <div class="building b7"></div>
+    <div class="building b8"></div>
+    <div class="building b9"></div>
+    <div class="building b10"></div>
 </div>
 
-<div class="city"></div>
+<div class="particle p1"></div>
+<div class="particle p2"></div>
+<div class="particle p3"></div>
+<div class="particle p4"></div>
+<div class="particle p5"></div>
+<div class="particle p6"></div>
+
+<div class="mouse-glow" id="mouseGlow"></div>
 
 <nav>
-    <div class="logo">NAW TOOLS</div>
-    <div>
-        <a href="#home">Home</a>
+    <div class="logo">NAW <span>TOOLS</span></div>
+
+    <div class="nav-links">
         <a href="#tools">Tools</a>
         <a href="#about">About</a>
     </div>
 </nav>
 
-<section class="hero" id="home">
-    <div class="badge">✦ free creative tools by nawraz khan</div>
+<header class="hero">
+    <div class="hero-content">
 
-    <h1>NAW TOOLS</h1>
+        <div class="badge">✦ FREE CREATIVE TOOLS BY NAWRAZ KHAN</div>
 
-    <p>
-        A collection of simple, fast and useful online tools
-        for creators, students and everyday digital work.
-    </p>
+        <h1>NAW TOOLS</h1>
 
-    <a class="hero-button" href="#tools">🛠️ Explore My Tools</a>
+        <p>
+            Simple, fast and free tools for creators, students and everyone.
+            Create fancy text, QR codes, edit images, generate passwords
+            and more — directly in your browser.
+        </p>
+
+        <a href="#tools" class="hero-btn">🛠️ Explore My Tools</a>
+
+    </div>
+</header>
+
+<section id="tools">
+
+    <div class="section-title">
+        <h2>My Tools</h2>
+        <p>Everything you need, in one place.</p>
+    </div>
+
+    <div class="tools-grid">
+
+        <div class="tool-card" onclick="location.href='#fancy'">
+            <div class="tool-icon">✨</div>
+            <h3>Fancy Text Generator</h3>
+            <p>Create 50+ stylish Unicode text designs.</p>
+        </div>
+
+        <div class="tool-card" onclick="location.href='#case'">
+            <div class="tool-icon">🔤</div>
+            <h3>Case Converter</h3>
+            <p>Convert text into different letter cases.</p>
+        </div>
+
+        <div class="tool-card" onclick="location.href='#qr'">
+            <div class="tool-icon">📱</div>
+            <h3>QR Code Generator</h3>
+            <p>Create real downloadable QR codes.</p>
+        </div>
+
+        <div class="tool-card" onclick="location.href='#counter'">
+            <div class="tool-icon">📝</div>
+            <h3>Word & Character Counter</h3>
+            <p>Count words, characters, sentences and more.</p>
+        </div>
+
+        <div class="tool-card" onclick="location.href='#password'">
+            <div class="tool-icon">🔐</div>
+            <h3>Password Generator</h3>
+            <p>Generate strong random passwords.</p>
+        </div>
+
+        <div class="tool-card" onclick="location.href='#resize'">
+            <div class="tool-icon">📐</div>
+            <h3>Image Resizer</h3>
+            <p>Resize images directly in your browser.</p>
+        </div>
+
+        <div class="tool-card" onclick="location.href='#compress'">
+            <div class="tool-icon">🖼️</div>
+            <h3>Image Compressor</h3>
+            <p>Reduce image file size quickly.</p>
+        </div>
+
+        <div class="tool-card" onclick="location.href='#convert'">
+            <div class="tool-icon">🔄</div>
+            <h3>Image Converter</h3>
+            <p>Convert images between PNG, JPG and WebP.</p>
+        </div>
+
+        <div class="tool-card" onclick="location.href='#color'">
+            <div class="tool-icon">🎨</div>
+            <h3>Color Toolkit</h3>
+            <p>HEX, RGB, HSL, palettes and gradients.</p>
+        </div>
+
+    </div>
 </section>
 
-<main class="container" id="tools">
 
-<section class="section-title">
-    <h2>My Tools</h2>
-    <p>Everything you need in one futuristic workspace.</p>
-</section>
-
-<div class="tools-grid">
-
-<div class="tool-card">
-    <div class="tool-number">01</div>
-    <h3>✨ Fancy Text Generator</h3>
-    <p>Create stylish text using 50+ unique Unicode styles.</p>
-    <a class="open-tool" href="#fancy">Open tool →</a>
-</div>
-
-<div class="tool-card">
-    <div class="tool-number">02</div>
-    <h3>🔤 Case Converter</h3>
-    <p>Convert text between uppercase, lowercase, title case and more.</p>
-    <a class="open-tool" href="#case">Open tool →</a>
-</div>
-
-<div class="tool-card">
-    <div class="tool-number">03</div>
-    <h3>📱 QR Code Generator</h3>
-    <p>Create real downloadable QR codes for text and URLs.</p>
-    <a class="open-tool" href="#qr">Open tool →</a>
-</div>
-
-<div class="tool-card">
-    <div class="tool-number">04</div>
-    <h3>📝 Word & Character Counter</h3>
-    <p>Count words, characters, sentences, lines and paragraphs.</p>
-    <a class="open-tool" href="#counter">Open tool →</a>
-</div>
-
-<div class="tool-card">
-    <div class="tool-number">05</div>
-    <h3>🔐 Password Generator</h3>
-    <p>Generate strong random passwords using secure browser randomness.</p>
-    <a class="open-tool" href="#password">Open tool →</a>
-</div>
-
-<div class="tool-card">
-    <div class="tool-number">06</div>
-    <h3>📐 Image Resizer</h3>
-    <p>Resize images directly in your browser.</p>
-    <a class="open-tool" href="#resizer">Open tool →</a>
-</div>
-
-<div class="tool-card">
-    <div class="tool-number">07</div>
-    <h3>🖼️ Image Compressor</h3>
-    <p>Reduce image file size with adjustable quality.</p>
-    <a class="open-tool" href="#compressor">Open tool →</a>
-</div>
-
-<div class="tool-card">
-    <div class="tool-number">08</div>
-    <h3>🔄 Image Converter</h3>
-    <p>Convert images between PNG, JPG and WebP.</p>
-    <a class="open-tool" href="#converter">Open tool →</a>
-</div>
-
-<div class="tool-card">
-    <div class="tool-number">09</div>
-    <h3>🎨 Color Toolkit</h3>
-    <p>Pick colors, generate palettes and create CSS gradients.</p>
-    <a class="open-tool" href="#colors">Open tool →</a>
-</div>
-
-</div>
-
-
-<!-- 01 FANCY -->
-
+<!-- 1 FANCY TEXT -->
 <section class="tool-section" id="fancy">
 
-<div class="tool-header">
-    <div class="icon">✨</div>
-    <div>
-        <h2>Fancy Text Generator</h2>
-        <p>50+ stylish text effects</p>
+    <div class="section-title">
+        <h2>✨ Fancy Text Generator</h2>
+        <p>50+ stylish text designs</p>
     </div>
-</div>
 
-<textarea id="fancyInput" placeholder="Type something...">Nawraz Khan</textarea>
+    <div class="tool-box">
 
-<div class="result fancy-output" id="fancyOutput"></div>
+        <textarea id="fancyInput" placeholder="Type something...">Nawraz Khan</textarea>
 
+        <div id="fancyResults" class="result"></div>
+
+    </div>
 </section>
 
 
-<!-- 02 CASE -->
-
+<!-- 2 CASE -->
 <section class="tool-section" id="case">
 
-<div class="tool-header">
-    <div class="icon">🔤</div>
-    <div>
-        <h2>Case Converter</h2>
-        <p>Change the capitalization of your text.</p>
+    <div class="section-title">
+        <h2>🔤 Case Converter</h2>
+        <p>Change your text case instantly</p>
     </div>
-</div>
 
-<textarea id="caseInput" placeholder="Enter your text..."></textarea>
+    <div class="tool-box">
 
-<div class="controls">
-    <button onclick="convertCase('upper')">UPPERCASE</button>
-    <button onclick="convertCase('lower')">lowercase</button>
-    <button onclick="convertCase('title')">Title Case</button>
-    <button onclick="convertCase('sentence')">Sentence case</button>
-    <button onclick="convertCase('alternate')">aLtErNaTe</button>
-    <button onclick="convertCase('inverse')">iNVERSE</button>
-    <button onclick="copyText('caseOutput')">Copy</button>
-</div>
+        <textarea id="caseInput" placeholder="Enter your text..."></textarea>
 
-<div class="result" id="caseOutput"></div>
+        <button onclick="convertCase('upper')">UPPERCASE</button>
+        <button onclick="convertCase('lower')">lowercase</button>
+        <button onclick="convertCase('title')">Title Case</button>
+        <button onclick="convertCase('sentence')">Sentence case</button>
+        <button onclick="convertCase('alternate')">aLtErNaTe</button>
+        <button onclick="convertCase('inverse')">iNVERSE</button>
 
+        <textarea id="caseOutput" placeholder="Result..." readonly></textarea>
+
+        <button onclick="copyText('caseOutput')">📋 Copy Result</button>
+
+    </div>
 </section>
 
 
-<!-- 03 QR -->
-
+<!-- 3 QR -->
 <section class="tool-section" id="qr">
 
-<div class="tool-header">
-    <div class="icon">📱</div>
-    <div>
-        <h2>QR Code Generator</h2>
-        <p>Create real scannable QR codes.</p>
-    </div>
-</div>
-
-<textarea id="qrInput" placeholder="Enter text or URL..."></textarea>
-
-<div class="grid-2">
-    <div>
-        <label>Error correction</label>
-        <select id="qrLevel">
-            <option value="L">Low</option>
-            <option value="M" selected>Medium</option>
-            <option value="Q">Quartile</option>
-            <option value="H">High</option>
-        </select>
+    <div class="section-title">
+        <h2>📱 QR Code Generator</h2>
+        <p>Create real downloadable QR codes</p>
     </div>
 
-    <div>
-        <label>Size</label>
-        <select id="qrSize">
-            <option value="180">180 × 180</option>
-            <option value="240" selected>240 × 240</option>
-            <option value="320">320 × 320</option>
-            <option value="400">400 × 400</option>
-        </select>
+    <div class="tool-box">
+
+        <textarea id="qrInput" placeholder="Enter text or URL..."></textarea>
+
+        <div class="controls">
+
+            <div>
+                <label>Error Correction</label>
+                <select id="qrLevel">
+                    <option value="L">Low</option>
+                    <option value="M" selected>Medium</option>
+                    <option value="Q">Quartile</option>
+                    <option value="H">High</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Size</label>
+                <select id="qrSize">
+                    <option value="180">180px</option>
+                    <option value="240" selected>240px</option>
+                    <option value="320">320px</option>
+                    <option value="400">400px</option>
+                </select>
+            </div>
+
+        </div>
+
+        <button onclick="generateQR()">Generate QR</button>
+
+        <div id="qrArea" class="qr-area"></div>
+
     </div>
-</div>
-
-<div class="controls">
-    <button onclick="generateQR()">Generate QR</button>
-    <button onclick="downloadQR()">Download</button>
-</div>
-
-<div class="qr-box" id="qrPreview"></div>
-
 </section>
 
 
-<!-- 04 COUNTER -->
-
+<!-- 4 COUNTER -->
 <section class="tool-section" id="counter">
 
-<div class="tool-header">
-    <div class="icon">📝</div>
-    <div>
-        <h2>Word & Character Counter</h2>
-        <p>Live text statistics.</p>
+    <div class="section-title">
+        <h2>📝 Word & Character Counter</h2>
+        <p>Live text statistics</p>
     </div>
-</div>
 
-<textarea id="counterInput" placeholder="Start typing..."></textarea>
+    <div class="tool-box">
 
-<div class="stats">
-    <div class="stat"><strong id="words">0</strong><span>Words</span></div>
-    <div class="stat"><strong id="chars">0</strong><span>Characters</span></div>
-    <div class="stat"><strong id="charsNoSpace">0</strong><span>No Spaces</span></div>
-    <div class="stat"><strong id="sentences">0</strong><span>Sentences</span></div>
-    <div class="stat"><strong id="lines">0</strong><span>Lines</span></div>
-    <div class="stat"><strong id="paragraphs">0</strong><span>Paragraphs</span></div>
-</div>
+        <textarea id="counterInput" placeholder="Start typing..."></textarea>
 
+        <div class="stats">
+
+            <div class="stat">
+                <strong id="words">0</strong>
+                Words
+            </div>
+
+            <div class="stat">
+                <strong id="characters">0</strong>
+                Characters
+            </div>
+
+            <div class="stat">
+                <strong id="noSpaces">0</strong>
+                No Spaces
+            </div>
+
+            <div class="stat">
+                <strong id="sentences">0</strong>
+                Sentences
+            </div>
+
+            <div class="stat">
+                <strong id="lines">0</strong>
+                Lines
+            </div>
+
+            <div class="stat">
+                <strong id="paragraphs">0</strong>
+                Paragraphs
+            </div>
+
+        </div>
+
+    </div>
 </section>
 
 
-<!-- 05 PASSWORD -->
-
+<!-- 5 PASSWORD -->
 <section class="tool-section" id="password">
 
-<div class="tool-header">
-    <div class="icon">🔐</div>
-    <div>
-        <h2>Password Generator</h2>
-        <p>Create strong random passwords.</p>
+    <div class="section-title">
+        <h2>🔐 Password Generator</h2>
+        <p>Generate strong random passwords</p>
     </div>
-</div>
 
-<div class="grid-2">
+    <div class="tool-box">
 
-<div>
-    <label>Password length</label>
-    <input type="number" id="passLength" min="4" max="64" value="16">
-</div>
+        <div class="controls">
 
-<div>
-    <label>Options</label>
+            <div>
+                <label>Length</label>
+                <input id="passLength" type="number" min="4" max="64" value="16">
+            </div>
 
-    <div class="controls">
-        <label><input type="checkbox" id="upper" checked> Uppercase</label>
-        <label><input type="checkbox" id="lower" checked> Lowercase</label>
-        <label><input type="checkbox" id="numbers" checked> Numbers</label>
-        <label><input type="checkbox" id="symbols" checked> Symbols</label>
+            <div>
+                <label>Uppercase</label>
+                <select id="passUpper">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Lowercase</label>
+                <select id="passLower">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Numbers</label>
+                <select id="passNumbers">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Symbols</label>
+                <select id="passSymbols">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+
+        </div>
+
+        <button onclick="generatePassword()">Generate Password</button>
+
+        <div class="password-result" id="passwordResult">
+            Click generate...
+        </div>
+
+        <div class="strength">
+            <div class="strength-bar" id="strengthBar"></div>
+        </div>
+
+        <div id="strengthText"></div>
+
+        <button onclick="copyPassword()">📋 Copy Password</button>
+
     </div>
-</div>
-
-</div>
-
-<div class="controls">
-    <button onclick="generatePassword()">Generate Password</button>
-    <button onclick="copyText('passwordOutput')">Copy</button>
-</div>
-
-<div class="result password-output" id="passwordOutput">Click generate...</div>
-
-<div class="strength">
-    <div class="strength-bar" id="strengthBar"></div>
-</div>
-
-<p id="strengthText" style="color:#aeb4cf;margin-top:8px;"></p>
-
 </section>
 
 
-<!-- 06 RESIZER -->
+<!-- 6 RESIZER -->
+<section class="tool-section" id="resize">
 
-<section class="tool-section" id="resizer">
-
-<div class="tool-header">
-    <div class="icon">📐</div>
-    <div>
-        <h2>Image Resizer</h2>
-        <p>Resize images in your browser.</p>
+    <div class="section-title">
+        <h2>📐 Image Resizer</h2>
+        <p>Resize images in your browser</p>
     </div>
-</div>
 
-<input type="file" id="resizeFile" accept="image/*">
+    <div class="tool-box">
 
-<div class="grid-2" style="margin-top:18px;">
+        <input type="file" id="resizeFile" accept="image/*">
 
-<div>
-    <label>Width</label>
-    <input type="number" id="resizeWidth">
-</div>
+        <div class="controls">
 
-<div>
-    <label>Height</label>
-    <input type="number" id="resizeHeight">
-</div>
+            <div>
+                <label>Width</label>
+                <input type="number" id="resizeWidth">
+            </div>
 
-</div>
+            <div>
+                <label>Height</label>
+                <input type="number" id="resizeHeight">
+            </div>
 
-<div style="margin-top:15px;">
-    <label>
-        <input type="checkbox" id="lockRatio" checked>
-        Lock aspect ratio
-    </label>
-</div>
+        </div>
 
-<div class="controls">
-    <button onclick="resizeImage()">Resize Image</button>
-    <button onclick="downloadCanvas('resizeCanvas','resized-image.png')">Download</button>
-</div>
+        <label>
+            <input type="checkbox" id="lockRatio" checked style="width:auto">
+            Lock aspect ratio
+        </label>
 
-<div class="preview">
-    <canvas id="resizeCanvas" style="max-width:100%;display:none;"></canvas>
-</div>
+        <button onclick="resizeImage()">Resize Image</button>
 
+        <div id="resizeResult"></div>
+
+    </div>
 </section>
 
 
-<!-- 07 COMPRESSOR -->
+<!-- 7 COMPRESSOR -->
+<section class="tool-section" id="compress">
 
-<section class="tool-section" id="compressor">
-
-<div class="tool-header">
-    <div class="icon">🖼️</div>
-    <div>
-        <h2>Image Compressor</h2>
-        <p>Reduce image size while controlling quality.</p>
+    <div class="section-title">
+        <h2>🖼️ Image Compressor</h2>
+        <p>Reduce image size while keeping quality</p>
     </div>
-</div>
 
-<input type="file" id="compressFile" accept="image/*">
+    <div class="tool-box">
 
-<div style="margin-top:18px;">
-    <label>Quality: <span id="qualityValue">80</span>%</label>
-    <input type="range" id="quality" min="10" max="100" value="80"
-           oninput="qualityValue.textContent=this.value">
-</div>
+        <input type="file" id="compressFile" accept="image/*">
 
-<div class="controls">
-    <button onclick="compressImage()">Compress Image</button>
-    <button onclick="downloadCanvas('compressCanvas','compressed-image.jpg','image/jpeg')">Download</button>
-</div>
+        <label>Quality: <span id="qualityValue">80</span>%</label>
 
-<div class="result" id="compressInfo">Upload an image to begin.</div>
+        <input
+            type="range"
+            id="compressQuality"
+            min="10"
+            max="100"
+            value="80"
+        >
 
-<div class="preview">
-    <canvas id="compressCanvas" style="max-width:100%;display:none;"></canvas>
-</div>
+        <button onclick="compressImage()">Compress Image</button>
 
+        <div id="compressInfo"></div>
+
+        <div id="compressResult"></div>
+
+    </div>
 </section>
 
 
-<!-- 08 CONVERTER -->
+<!-- 8 CONVERTER -->
+<section class="tool-section" id="convert">
 
-<section class="tool-section" id="converter">
-
-<div class="tool-header">
-    <div class="icon">🔄</div>
-    <div>
-        <h2>Image Converter</h2>
-        <p>Convert PNG, JPG and WebP.</p>
+    <div class="section-title">
+        <h2>🔄 Image Converter</h2>
+        <p>Convert PNG, JPG and WebP</p>
     </div>
-</div>
 
-<input type="file" id="convertFile" accept="image/*">
+    <div class="tool-box">
 
-<div class="grid-2" style="margin-top:18px;">
+        <input type="file" id="convertFile" accept="image/*">
 
-<div>
-    <label>Output format</label>
-    <select id="convertFormat">
-        <option value="image/png">PNG</option>
-        <option value="image/jpeg">JPG</option>
-        <option value="image/webp">WebP</option>
-    </select>
-</div>
+        <div class="controls">
 
-<div>
-    <label>Quality</label>
-    <select id="convertQuality">
-        <option value="1">100%</option>
-        <option value=".9" selected>90%</option>
-        <option value=".8">80%</option>
-        <option value=".7">70%</option>
-        <option value=".6">60%</option>
-    </select>
-</div>
+            <div>
+                <label>Output Format</label>
+                <select id="convertFormat">
+                    <option value="image/png">PNG</option>
+                    <option value="image/jpeg">JPG</option>
+                    <option value="image/webp">WebP</option>
+                </select>
+            </div>
 
-</div>
+            <div>
+                <label>Quality</label>
+                <select id="convertQuality">
+                    <option value="1">100%</option>
+                    <option value=".9" selected>90%</option>
+                    <option value=".8">80%</option>
+                    <option value=".7">70%</option>
+                </select>
+            </div>
 
-<div class="controls">
-    <button onclick="convertImage()">Convert Image</button>
-    <button onclick="downloadConverted()">Download</button>
-</div>
+        </div>
 
-<div class="preview">
-    <canvas id="convertCanvas" style="max-width:100%;display:none;"></canvas>
-</div>
+        <button onclick="convertImage()">Convert Image</button>
 
+        <div id="convertResult"></div>
+
+    </div>
 </section>
 
 
-<!-- 09 COLORS -->
+<!-- 9 COLOR -->
+<section class="tool-section" id="color">
 
-<section class="tool-section" id="colors">
-
-<div class="tool-header">
-    <div class="icon">🎨</div>
-    <div>
-        <h2>Color Toolkit</h2>
-        <p>Pick colors, generate palettes and create gradients.</p>
+    <div class="section-title">
+        <h2>🎨 Color Toolkit</h2>
+        <p>Explore colors, palettes and gradients</p>
     </div>
-</div>
 
-<div class="grid-2">
+    <div class="tool-box">
 
-<div>
-    <label>Choose a color</label>
-    <input type="color" id="colorPicker" value="#7c5cff"
-           style="width:100%;height:60px;padding:5px;">
+        <input type="color" id="colorPicker" value="#7c5cff">
 
-    <div class="result" id="colorInfo"></div>
-</div>
+        <div class="color-preview" id="colorPreview"></div>
 
-<div>
-    <label>Preview</label>
-    <div class="color-preview" id="colorPreview"></div>
-</div>
+        <div class="stats">
 
-</div>
+            <div class="stat">
+                <strong id="hexValue">#7C5CFF</strong>
+                HEX
+            </div>
 
-<div class="controls">
-    <button onclick="randomColor()">Random Color</button>
-    <button onclick="generatePalette()">Generate Palette</button>
-</div>
+            <div class="stat">
+                <strong id="rgbValue">124,92,255</strong>
+                RGB
+            </div>
 
-<div class="palette" id="palette"></div>
+            <div class="stat">
+                <strong id="hslValue">251,100%,68%</strong>
+                HSL
+            </div>
 
-<hr style="border-color:rgba(255,255,255,.08);margin:30px 0;">
+        </div>
 
-<h3>Gradient Generator</h3>
+        <button onclick="randomColor()">🎲 Random Color</button>
+        <button onclick="copyColor()">📋 Copy HEX</button>
 
-<div class="grid-2" style="margin-top:18px;">
+        <h3 style="margin-top:25px">🎨 Palette</h3>
 
-<div>
-    <label>Color 1</label>
-    <input type="color" id="gradient1" value="#5b8cff"
-           style="width:100%;height:55px;">
-</div>
+        <div class="palette" id="palette"></div>
 
-<div>
-    <label>Color 2</label>
-    <input type="color" id="gradient2" value="#a05cff"
-           style="width:100%;height:55px;">
-</div>
+        <h3 style="margin-top:25px">🌈 Gradient Generator</h3>
 
-</div>
+        <div class="controls">
 
-<div class="color-preview" id="gradientPreview"
-style="background:linear-gradient(135deg,#5b8cff,#a05cff);"></div>
+            <input type="color" id="gradient1" value="#6558ff">
+            <input type="color" id="gradient2" value="#ff4fd8">
 
-<div class="controls">
-    <button onclick="updateGradient()">Update Gradient</button>
-    <button onclick="copyGradient()">Copy CSS</button>
-</div>
+        </div>
 
+        <div class="color-preview" id="gradientPreview"></div>
+
+        <button onclick="copyGradient()">📋 Copy CSS</button>
+
+    </div>
 </section>
 
-</main>
 
+<section id="about">
 
-<section class="about" id="about">
+    <div class="section-title">
+        <h2>About NAW TOOLS</h2>
+    </div>
 
-<h2>About NAW TOOLS</h2>
+    <div class="about">
 
-<p style="margin-top:15px;">
-    NAW TOOLS is a personal collection of useful online tools
-    created by <strong>Nawraz Khan</strong>.
-    The goal is to make everyday digital tasks simple,
-    fast and accessible.
-</p>
+        <p>
+            NAW TOOLS is a free collection of useful browser-based tools
+            created by <strong>Nawraz Khan</strong>.
+            The goal is simple: make useful tools that are fast,
+            clean and easy for everyone to use.
+        </p>
 
-<div class="socials">
-    <a href="https://instagram.com/_bixuuu_" target="_blank">📸 Instagram</a>
-    <a href="https://youtube.com/@playwithnawcorebabe" target="_blank">▶️ YouTube</a>
-    <a href="https://x.com/Nawraz808" target="_blank">𝕏 X</a>
-</div>
+    </div>
 
 </section>
 
 
 <footer>
-    © 2026 NAW TOOLS • Created by Nawraz Khan
+
+    <div>© 2026 NAW TOOLS — Made by Nawraz Khan</div>
+
+    <div class="socials">
+        <a href="https://instagram.com/_bixuuu_" target="_blank">Instagram</a>
+        <a href="https://youtube.com/@playwithnawcorebabe" target="_blank">YouTube</a>
+        <a href="https://x.com/Nawraz808" target="_blank">X</a>
+    </div>
+
 </footer>
 
 
@@ -1169,90 +1055,371 @@ style="background:linear-gradient(135deg,#5b8cff,#a05cff);"></div>
    MOUSE GLOW
 ========================= */
 
-const cursorGlow=document.getElementById("cursorGlow");
+const mouseGlow = document.getElementById("mouseGlow");
 
-document.addEventListener("mousemove",e=>{
-    cursorGlow.style.left=e.clientX+"px";
-    cursorGlow.style.top=e.clientY+"px";
+document.addEventListener("mousemove", e => {
+    mouseGlow.style.left = e.clientX + "px";
+    mouseGlow.style.top = e.clientY + "px";
 });
 
 
 /* =========================
-   FANCY TEXT
+   FANCY TEXT GENERATOR
+   50+ STYLES + COPY BUTTON
 ========================= */
 
-const fancyStyles=[
-    t=>`𝓕𝓪𝓷𝓬𝔂: ${t}`,
-    t=>`𝔉𝔞𝔫𝔠𝔶: ${t}`,
-    t=>`𝕱𝖆𝖓𝖈𝖞: ${t}`,
-    t=>`𝙁𝙖𝙣𝙘𝙮: ${t}`,
-    t=>`𝘍𝘢𝘯𝘤𝘺: ${t}`,
-    t=>`𝐅𝐚𝐧𝐜𝐲: ${t}`,
-    t=>`𝑭𝒂𝒏𝒄𝒚: ${t}`,
-    t=>`𝗙𝗮𝗻𝗰𝘆: ${t}`,
-    t=>`Ｆａｎｃｙ: ${t}`,
-    t=>`ⓕⓐⓝⓒⓨ: ${t}`,
-    t=>`ⒻⒶⓃⒸⓎ: ${t}`,
-    t=>`🅵🅰🅽🅲🆈: ${t}`,
-    t=>`F̶a̶n̶c̶y̶: ${t}`,
-    t=>`F̲a̲n̲c̲y̲: ${t}`,
-    t=>`F̳a̳n̳c̳y̳: ${t}`,
-    t=>`F͟a͟n͟c͟y͟: ${t}`,
-    t=>`F̷a̷n̷c̷y̷: ${t}`,
-    t=>`F̸a̸n̸c̸y̸: ${t}`,
-    t=>`F̶̷a̶̷n̶̷c̶̷y̶̷: ${t}`,
-    t=>`★彡 ${t} 彡★`,
-    t=>`『${t}』`,
-    t=>`【${t}】`,
-    t=>`《${t}》`,
-    t=>`꧁${t}꧂`,
-    t=>`༺${t}༻`,
-    t=>`𓆩 ${t} 𓆪`,
-    t=>`✦ ${t} ✦`,
-    t=>`✧･ﾟ: ${t} :･ﾟ✧`,
-    t=>`•°¯ ${t} ¯°•`,
-    t=>`×º°”˜ ${t} ˜”°º×`,
-    t=>`░▒▓█ ${t} █▓▒░`,
-    t=>`╰☆☆ ${t} ☆☆╮`,
-    t=>`╔═*.·:·. ${t} .·:·.*═╗`,
-    t=>`╚═*.·:·. ${t} .·:·.*═╝`,
-    t=>`☾ ${t} ☽`,
-    t=>`☼ ${t} ☼`,
-    t=>`⚡ ${t} ⚡`,
-    t=>`☁ ${t} ☁`,
-    t=>`♡ ${t} ♡`,
-    t=>`♥ ${t} ♥`,
-    t=>`❀ ${t} ❀`,
-    t=>`✿ ${t} ✿`,
-    t=>`⚔ ${t} ⚔`,
-    t=>`♛ ${t} ♛`,
-    t=>`♚ ${t} ♚`,
-    t=>`𒆜 ${t} 𒆜`,
-    t=>`乂 ${t} 乂`,
-    t=>`メ ${t} メ`
+const fancyInput = document.getElementById("fancyInput");
+const fancyResults = document.getElementById("fancyResults");
+
+const fancyStyles = [
+
+    ["Bold","𝐀𝐁𝐂𝐃𝐄𝐅𝐆𝐇𝐈𝐉𝐊𝐋𝐌𝐍𝐎𝐏𝐐𝐑𝐒𝐓𝐔𝐕𝐖𝐗𝐘𝐙"],
+    ["Bold Serif","𝗔𝗕𝗖𝗗𝗘𝗙𝗚𝗛𝗜𝗝𝗞𝗟𝗠𝗡𝗢𝗣𝗤𝗥𝗦𝗧𝗨𝗩𝗪𝗫𝗬𝗭"],
+    ["Italic","𝘈𝘉𝘊𝘋𝘌𝘍𝘎𝘏𝘐𝘑𝘒𝘓𝘔𝘕𝘖𝘗𝘘𝘙𝘚𝘛𝘜𝘝𝘞𝘟𝘠𝘡"],
+    ["Bold Italic","𝘼𝘽𝘾𝘿𝙀𝙁𝙂𝙃𝙄𝙅𝙆𝙇𝙈𝙉𝙊𝙋𝙌𝙍𝙎𝙏𝙐𝙑𝙒𝙓𝙔𝙕"],
+    ["Script","𝒜ℬ𝒞𝒟ℰℱ𝒢ℋℐ𝒥𝒦ℒℳ𝒩𝒪𝒫𝒬ℛ𝒮𝒯𝒰𝒱𝒲𝒳𝒴𝒵"],
+    ["Bold Script","𝓐𝓑𝓒𝓓𝓔𝓕𝓖𝓗𝓘𝓙𝓚𝓛𝓜𝓝𝓞𝓟𝓠𝓡𝓢𝓣𝓤𝓥𝓦𝓧𝓨𝓩"],
+    ["Fraktur","𝔄𝔅ℭ𝔇𝔈𝔉𝔊ℌℑ𝔍𝔎𝔏𝔐𝔑𝔒𝔓𝔔ℜ𝔖𝔗𝔘𝔙𝔚𝔛𝔜ℨ"],
+    ["Bold Fraktur","𝕬𝕭𝕮𝕯𝕰𝕱𝕲𝕳𝕴𝕵𝕶𝕷𝕸𝕹𝕺𝕻𝕼𝕽𝕾𝕿𝖀𝖁𝖂𝖃𝖄𝖅"],
+    ["Double","𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ"],
+    ["Monospace","𝙰𝙱𝙲𝙳𝙴𝙵𝙶𝙷𝙸𝙹𝙺𝙻𝙼𝙽𝙾𝙿𝚀𝚁𝚂𝚃𝚄𝚅𝚆𝚇𝚈𝚉"],
+
+    ["Small Caps","ᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ"],
+    ["Circled","ⒶⒷⒸⒹⒺⒻⒼⒽⒾⒿⓀⓁⓂⓃⓄⓅⓆⓇⓈⓉⓊⓋⓌⓍⓎⓏ"],
+    ["Squared","🄰🄱🄲🄳🄴🄵🄶🄷🄸🄹🄺🄻🄼🄽🄾🄿🅀🅁🅂🅃🅄🅅🅆🅇🅈🅉"],
+    ["Parenthesized","⒜⒝⒞⒟⒠⒡⒢⒣⒤⒥⒦⒧⒨⒩⒪⒫⒬⒭⒮⒯⒰⒱⒲⒳⒴⒵"],
+    ["Fullwidth","ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ"],
+
+    ["Underline","A̲B̲C̲D̲E̲F̲G̲H̲I̲J̲K̲L̲M̲N̲O̲P̲Q̲R̲S̲T̲U̲V̲W̲X̲Y̲Z̲"],
+    ["Strike","A̶B̶C̶D̶E̶F̶G̶H̶I̶J̶K̶L̶M̶N̶O̶P̶Q̶R̶S̶T̶U̶V̶W̶X̶Y̶Z̶"],
+    ["Slash","A̷B̷C̷D̷E̷F̷G̷H̷I̷J̷K̷L̷M̷N̷O̷P̷Q̷R̷S̷T̷U̷V̷W̷X̷Y̷Z̷"],
+    ["Dot","ȦḂĊḊĖḞĠḢİJ̇K̇L̇ṀṄȮṖQ̇ṘṠṪU̇V̇ẆẊẎŻ"],
+    ["Wave","ÃB̃C̃D̃ẼF̃G̃H̃ĨJ̃K̃L̃M̃ÑÕP̃Q̃R̃S̃T̃ŨṼW̃X̃ỸZ̃"],
+
+    ["Stars","★彡 TEXT 彡★"],
+    ["Sparkle","✧･ﾟ: *✧･ﾟ:* TEXT *:･ﾟ✧*:･ﾟ✧"],
+    ["Royal","♛ TEXT ♛"],
+    ["Crown","♔ TEXT ♔"],
+    ["Hearts","♡ TEXT ♡"],
+    ["Love","♥ TEXT ♥"],
+    ["Arrow","➳ TEXT ➳"],
+    ["Wings","ʚɞ TEXT ʚɞ"],
+    ["Fire","🔥 TEXT 🔥"],
+    ["Diamond","◆ TEXT ◆"],
+    ["Flower","❀ TEXT ❀"],
+    ["Music","♪ TEXT ♪"],
+    ["Lightning","⚡ TEXT ⚡"],
+    ["Cloud","☁ TEXT ☁"],
+    ["Moon","☾ TEXT ☽"],
+    ["Sun","☀ TEXT ☀"],
+    ["Cross","✞ TEXT ✞"],
+    ["Angel","꧁ TEXT ꧂"],
+    ["Luxury","『 TEXT 』"],
+    ["Bracket","【 TEXT 】"],
+    ["Japanese","『 TEXT 』"],
+    ["Dark","༺ TEXT ༻"],
+    ["Mystic","༒ TEXT ༒"],
+    ["Aesthetic","•°¯`•• TEXT ••´¯°•"],
+    ["Cute","૮ ˶ᵔ ᵕ ᵔ˶ ა TEXT"],
+    ["Minimal","— TEXT —"],
+    ["Box","╔══ TEXT ══╗"],
+    ["Wave Frame","〰 TEXT 〰"],
+    ["Point","• TEXT •"],
+    ["Star Frame","☆.｡.:* TEXT *:.｡.☆"],
+    ["Fancy Frame","╭─❀ TEXT ❀─╮"],
+    ["Neon","⚡『 TEXT 』⚡"],
+    ["Galaxy","✦｡ﾟ TEXT ﾟ｡✦"],
+    ["Magic","⋆｡°✩ TEXT ✩°｡⋆"]
+
 ];
 
-function updateFancy(){
-    const text=document.getElementById("fancyInput").value || "Nawraz Khan";
 
-    document.getElementById("fancyOutput").innerHTML=
-        fancyStyles.map((fn,i)=>
-            `<div><small style="color:#7180a9;">${i+1}.</small> ${escapeHTML(fn(text))}</div>`
-        ).join("");
+/* Unicode transformation maps */
+
+const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+const maps = {
+
+bold:"𝐀𝐁𝐂𝐃𝐄𝐅𝐆𝐇𝐈𝐉𝐊𝐋𝐌𝐍𝐎𝐏𝐐𝐑𝐒𝐓𝐔𝐕𝐖𝐗𝐘𝐙",
+boldSerif:"𝗔𝗕𝗖𝗗𝗘𝗙𝗚𝗛𝗜𝗝𝗞𝗟𝗠𝗡𝗢𝗣𝗤𝗥𝗦𝗧𝗨𝗩𝗪𝗫𝗬𝗭",
+italic:"𝘈𝘉𝘊𝘋𝘌𝘍𝘎𝘏𝘐𝘑𝘒𝘓𝘔𝘕𝘖𝘗𝘘𝘙𝘚𝘛𝘜𝘝𝘞𝘟𝘠𝘡",
+boldItalic:"𝘼𝘽𝘾𝘿𝙀𝙁𝙂𝙃𝙄𝙅𝙆𝙇𝙈𝙉𝙊𝙋𝙌𝙍𝙎𝙏𝙐𝙑𝙒𝙓𝙔𝙕",
+script:"𝒜ℬ𝒞𝒟ℰℱ𝒢ℋℐ𝒥𝒦ℒℳ𝒩𝒪𝒫𝒬ℛ𝒮𝒯𝒰𝒱𝒲𝒳𝒴𝒵",
+boldScript:"𝓐𝓑𝓒𝓓𝓔𝓕𝓖𝓗𝓘𝓙𝓚𝓛𝓜𝓝𝓞𝓟𝓠𝓡𝓢𝓣𝓤𝓥𝓦𝓧𝓨𝓩",
+fraktur:"𝔄𝔅ℭ𝔇𝔈𝔉𝔊ℌℑ𝔍𝔎𝔏𝔐𝔑𝔒𝔓𝔔ℜ𝔖𝔗𝔘𝔙𝔚𝔛𝔜ℨ",
+double:"𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ",
+mono:"𝙰𝙱𝙲𝙳𝙴𝙵𝙶𝙷𝙸𝙹𝙺𝙻𝙼𝙽𝙾𝙿𝚀𝚁𝚂𝚃𝚄𝚅𝚆𝚇𝚈𝚉"
+};
+
+
+function unicodeMap(text,map){
+
+    return [...text].map(char => {
+
+        const index = upper.indexOf(char.toUpperCase());
+
+        if(index === -1) return char;
+
+        let result = map[index];
+
+        if(char === char.toLowerCase()){
+            const lowerMap = [...map];
+            result = lowerMap[index] || result;
+        }
+
+        return result;
+
+    }).join("");
+
 }
 
-function escapeHTML(str){
-    return str.replace(/[&<>"']/g,m=>({
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#039;"
-    }[m]));
+
+function decorate(text,style){
+
+    if(style === "Stars")
+        return "★彡 " + text + " 彡★";
+
+    if(style === "Sparkle")
+        return "✧･ﾟ: *✧･ﾟ:* " + text + " *:･ﾟ✧*:･ﾟ✧";
+
+    if(style === "Royal")
+        return "♛ " + text + " ♛";
+
+    if(style === "Crown")
+        return "♔ " + text + " ♔";
+
+    if(style === "Hearts")
+        return "♡ " + text + " ♡";
+
+    if(style === "Love")
+        return "♥ " + text + " ♥";
+
+    if(style === "Arrow")
+        return "➳ " + text + " ➳";
+
+    if(style === "Wings")
+        return "ʚɞ " + text + " ʚɞ";
+
+    if(style === "Fire")
+        return "🔥 " + text + " 🔥";
+
+    if(style === "Diamond")
+        return "◆ " + text + " ◆";
+
+    if(style === "Flower")
+        return "❀ " + text + " ❀";
+
+    if(style === "Music")
+        return "♪ " + text + " ♪";
+
+    if(style === "Lightning")
+        return "⚡ " + text + " ⚡";
+
+    if(style === "Cloud")
+        return "☁ " + text + " ☁";
+
+    if(style === "Moon")
+        return "☾ " + text + " ☽";
+
+    if(style === "Sun")
+        return "☀ " + text + " ☀";
+
+    if(style === "Cross")
+        return "✞ " + text + " ✞";
+
+    if(style === "Angel")
+        return "꧁ " + text + " ꧂";
+
+    if(style === "Luxury")
+        return "『 " + text + " 』";
+
+    if(style === "Bracket")
+        return "【 " + text + " 】";
+
+    if(style === "Japanese")
+        return "『 " + text + " 』";
+
+    if(style === "Dark")
+        return "༺ " + text + " ༻";
+
+    if(style === "Mystic")
+        return "༒ " + text + " ༒";
+
+    if(style === "Aesthetic")
+        return "•°¯`•• " + text + " ••´¯°•";
+
+    if(style === "Cute")
+        return "૮ ˶ᵔ ᵕ ᵔ˶ ა " + text;
+
+    if(style === "Minimal")
+        return "— " + text + " —";
+
+    if(style === "Box")
+        return "╔══ " + text + " ══╗";
+
+    if(style === "Wave Frame")
+        return "〰 " + text + " 〰";
+
+    if(style === "Point")
+        return "• " + text + " •";
+
+    if(style === "Star Frame")
+        return "☆.｡.:* " + text + " *:.｡.☆";
+
+    if(style === "Fancy Frame")
+        return "╭─❀ " + text + " ❀─╮";
+
+    if(style === "Neon")
+        return "⚡『 " + text + " 』⚡";
+
+    if(style === "Galaxy")
+        return "✦｡ﾟ " + text + " ﾟ｡✦";
+
+    if(style === "Magic")
+        return "⋆｡°✩ " + text + " ✩°｡⋆";
+
+    return text;
 }
 
-document.getElementById("fancyInput").addEventListener("input",updateFancy);
-updateFancy();
+
+function makeFancy(text,style){
+
+    if(style === "Bold")
+        return unicodeMap(text,maps.bold);
+
+    if(style === "Bold Serif")
+        return unicodeMap(text,maps.boldSerif);
+
+    if(style === "Italic")
+        return unicodeMap(text,maps.italic);
+
+    if(style === "Bold Italic")
+        return unicodeMap(text,maps.boldItalic);
+
+    if(style === "Script")
+        return unicodeMap(text,maps.script);
+
+    if(style === "Bold Script")
+        return unicodeMap(text,maps.boldScript);
+
+    if(style === "Fraktur")
+        return unicodeMap(text,maps.fraktur);
+
+    if(style === "Double")
+        return unicodeMap(text,maps.double);
+
+    if(style === "Monospace")
+        return unicodeMap(text,maps.mono);
+
+    if(style === "Small Caps")
+        return text.toUpperCase().replace(/[A-Z]/g,c =>
+            "ᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ"[upper.indexOf(c)]
+        );
+
+    if(style === "Fullwidth")
+        return [...text].map(c=>{
+            if(c===" ") return "　";
+            const code=c.charCodeAt(0);
+            if(code>=33 && code<=126)
+                return String.fromCharCode(code+65248);
+            return c;
+        }).join("");
+
+    if(style === "Underline")
+        return [...text].map(c=>c+"̲").join("");
+
+    if(style === "Strike")
+        return [...text].map(c=>c+"̶").join("");
+
+    if(style === "Slash")
+        return [...text].map(c=>c+"̷").join("");
+
+    if(style === "Dot")
+        return [...text].map(c=>c+"̇").join("");
+
+    if(style === "Wave")
+        return [...text].map(c=>c+"̃").join("");
+
+    return decorate(text,style);
+}
+
+
+function renderFancy(){
+
+    const text = fancyInput.value || " ";
+
+    fancyResults.innerHTML = "";
+
+    fancyStyles.forEach((style,index)=>{
+
+        const output = makeFancy(text,style[0]);
+
+        const item = document.createElement("div");
+        item.className = "fancy-item";
+
+        const outputDiv = document.createElement("div");
+        outputDiv.className = "fancy-output";
+        outputDiv.textContent = output;
+
+        const button = document.createElement("button");
+        button.className = "copy-fancy";
+        button.textContent = "📋 Copy";
+
+        button.addEventListener("click", async ()=>{
+
+            try{
+
+                await navigator.clipboard.writeText(output);
+
+                button.textContent = "✅ Copied!";
+
+                setTimeout(()=>{
+                    button.textContent = "📋 Copy";
+                },1200);
+
+            }catch{
+
+                const temp = document.createElement("textarea");
+                temp.value = output;
+                document.body.appendChild(temp);
+                temp.select();
+                document.execCommand("copy");
+                temp.remove();
+
+                button.textContent = "✅ Copied!";
+
+                setTimeout(()=>{
+                    button.textContent = "📋 Copy";
+                },1200);
+            }
+
+        });
+
+        item.appendChild(outputDiv);
+        item.appendChild(button);
+
+        fancyResults.appendChild(item);
+
+    });
+
+}
+
+fancyInput.addEventListener("input",renderFancy);
+
+renderFancy();
+
+
+/* =========================
+   COPY GENERAL
+========================= */
+
+function copyText(id){
+
+    const element=document.getElementById(id);
+
+    navigator.clipboard.writeText(element.value);
+
+}
 
 
 /* =========================
@@ -1261,40 +1428,38 @@ updateFancy();
 
 function convertCase(type){
 
-    let text=document.getElementById("caseInput").value;
+    const input=document.getElementById("caseInput").value;
 
-    if(type==="upper") text=text.toUpperCase();
+    let output="";
 
-    if(type==="lower") text=text.toLowerCase();
+    if(type==="upper")
+        output=input.toUpperCase();
+
+    if(type==="lower")
+        output=input.toLowerCase();
 
     if(type==="title")
-        text=text.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());
+        output=input.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());
 
     if(type==="sentence")
-        text=text.toLowerCase().replace(/(^\s*\w|[.!?]\s+\w)/g,
-        c=>c.toUpperCase());
+        output=input.toLowerCase().replace(/(^\s*\w|[.!?]\s+\w)/g,c=>c.toUpperCase());
 
-    if(type==="alternate"){
-        text=[...text].map((c,i)=>
-            i%2===0?c.toLowerCase():c.toUpperCase()
-        ).join("");
-    }
+    if(type==="alternate")
+        output=[...input].map((c,i)=>i%2?c.toLowerCase():c.toUpperCase()).join("");
 
-    if(type==="inverse"){
-        text=[...text].map(c=>
-            c===c.toUpperCase()?c.toLowerCase():c.toUpperCase()
-        ).join("");
-    }
+    if(type==="inverse")
+        output=[...input].map(c=>{
+            return c===c.toUpperCase()?c.toLowerCase():c.toUpperCase();
+        }).join("");
 
-    document.getElementById("caseOutput").textContent=text;
+    document.getElementById("caseOutput").value=output;
+
 }
 
 
 /* =========================
    QR GENERATOR
 ========================= */
-
-let currentQR=null;
 
 function generateQR(){
 
@@ -1305,37 +1470,40 @@ function generateQR(){
         return;
     }
 
-    if(typeof qrcode==="undefined"){
-        alert("QR library is still loading. Please try again.");
-        return;
-    }
-
     const level=document.getElementById("qrLevel").value;
     const size=parseInt(document.getElementById("qrSize").value);
 
-    currentQR=qrcode(0,level);
-    currentQR.addData(text);
-    currentQR.make();
+    const qr=qrcode(0,level);
 
-    const url=currentQR.createDataURL(5,0);
+    qr.addData(text);
+    qr.make();
 
-    document.getElementById("qrPreview").innerHTML=
-        `<img id="qrImage" src="${url}" width="${size}" height="${size}" alt="QR Code">`;
-}
+    const dataURL=qr.createDataURL(6,0);
 
-function downloadQR(){
+    const area=document.getElementById("qrArea");
 
-    const img=document.getElementById("qrImage");
+    area.innerHTML="";
 
-    if(!img){
-        alert("Generate a QR code first.");
-        return;
-    }
+    const img=document.createElement("img");
 
-    const link=document.createElement("a");
-    link.href=img.src;
-    link.download="naw-tools-qr.png";
-    link.click();
+    img.src=dataURL;
+    img.width=size;
+    img.height=size;
+    img.alt="Generated QR Code";
+
+    const br=document.createElement("br");
+
+    const download=document.createElement("a");
+
+    download.href=dataURL;
+    download.download="naw-tools-qr.png";
+    download.className="download";
+    download.textContent="⬇️ Download QR";
+
+    area.appendChild(img);
+    area.appendChild(br);
+    area.appendChild(download);
+
 }
 
 
@@ -1353,26 +1521,24 @@ function updateCounter(){
 
     const words=text.trim()?text.trim().split(/\s+/).length:0;
 
-    const chars=text.length;
-
-    const noSpace=text.replace(/\s/g,"").length;
-
-    const sentences=text.trim()
-        ?(text.match(/[.!?]+(?=\s|$)/g)||[]).length
-        :0;
+    const sentences=text.trim()?text.split(/[.!?]+/).filter(x=>x.trim()).length:0;
 
     const lines=text?text.split("\n").length:0;
 
-    const paragraphs=text.trim()
-        ?text.trim().split(/\n\s*\n/).length
-        :0;
+    const paragraphs=text.trim()?text.split(/\n\s*\n/).filter(x=>x.trim()).length:0;
 
     document.getElementById("words").textContent=words;
-    document.getElementById("chars").textContent=chars;
-    document.getElementById("charsNoSpace").textContent=noSpace;
+
+    document.getElementById("characters").textContent=text.length;
+
+    document.getElementById("noSpaces").textContent=text.replace(/\s/g,"").length;
+
     document.getElementById("sentences").textContent=sentences;
+
     document.getElementById("lines").textContent=lines;
+
     document.getElementById("paragraphs").textContent=paragraphs;
+
 }
 
 
@@ -1381,80 +1547,96 @@ function updateCounter(){
 ========================= */
 
 function secureRandom(max){
+
     const array=new Uint32Array(1);
+
     crypto.getRandomValues(array);
+
     return array[0]%max;
+
 }
 
+
 function generatePassword(){
+
+    let chars="";
+
+    const upper="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const lower="abcdefghijklmnopqrstuvwxyz";
+    const numbers="0123456789";
+    const symbols="!@#$%^&*()_+-=[]{}|;:,.<>?";
+
+    if(document.getElementById("passUpper").value==="yes")
+        chars+=upper;
+
+    if(document.getElementById("passLower").value==="yes")
+        chars+=lower;
+
+    if(document.getElementById("passNumbers").value==="yes")
+        chars+=numbers;
+
+    if(document.getElementById("passSymbols").value==="yes")
+        chars+=symbols;
+
+    if(!chars){
+        alert("Select at least one character type.");
+        return;
+    }
 
     let length=parseInt(document.getElementById("passLength").value);
 
     if(length<4) length=4;
     if(length>64) length=64;
 
-    const sets=[];
-
-    if(document.getElementById("upper").checked)
-        sets.push("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-
-    if(document.getElementById("lower").checked)
-        sets.push("abcdefghijklmnopqrstuvwxyz");
-
-    if(document.getElementById("numbers").checked)
-        sets.push("0123456789");
-
-    if(document.getElementById("symbols").checked)
-        sets.push("!@#$%^&*()_+-=[]{}|;:,.<>?");
-
-    if(!sets.length){
-        alert("Select at least one character type.");
-        return;
-    }
-
     let password="";
 
-    sets.forEach(set=>{
-        password+=set[secureRandom(set.length)];
-    });
-
-    let all=sets.join("");
-
-    while(password.length<length){
-        password+=all[secureRandom(all.length)];
+    for(let i=0;i<length;i++){
+        password+=chars[secureRandom(chars.length)];
     }
 
-    password=[...password]
-        .sort(()=>secureRandom(2)-1)
-        .join("");
-
-    document.getElementById("passwordOutput").textContent=password;
+    document.getElementById("passwordResult").textContent=password;
 
     updateStrength(password);
+
 }
+
 
 function updateStrength(password){
 
     let score=0;
 
-    if(password.length>=8)score++;
-    if(password.length>=12)score++;
-    if(/[A-Z]/.test(password))score++;
-    if(/[a-z]/.test(password))score++;
-    if(/[0-9]/.test(password))score++;
-    if(/[^A-Za-z0-9]/.test(password))score++;
+    if(password.length>=8) score++;
+    if(password.length>=12) score++;
+    if(/[A-Z]/.test(password)) score++;
+    if(/[a-z]/.test(password)) score++;
+    if(/[0-9]/.test(password)) score++;
+    if(/[^A-Za-z0-9]/.test(password)) score++;
 
-    const percent=Math.min(score/6*100,100);
+    const bar=document.getElementById("strengthBar");
+    const text=document.getElementById("strengthText");
 
-    document.getElementById("strengthBar").style.width=percent+"%";
+    const percent=Math.min(100,score/6*100);
 
-    let text="Weak";
+    bar.style.width=percent+"%";
 
-    if(score>=3)text="Medium";
-    if(score>=5)text="Strong";
+    if(score<=2)
+        text.textContent="Weak";
 
-    document.getElementById("strengthText").textContent=
-        "Strength: "+text;
+    else if(score<=4)
+        text.textContent="Medium";
+
+    else
+        text.textContent="Strong";
+
+}
+
+
+function copyPassword(){
+
+    const password=document.getElementById("passwordResult").textContent;
+
+    navigator.clipboard.writeText(password);
+
 }
 
 
@@ -1462,151 +1644,146 @@ function updateStrength(password){
    IMAGE RESIZER
 ========================= */
 
-let resizeImageObj=null;
+let resizeImageObject=null;
 
-document.getElementById("resizeFile").addEventListener("change",e=>{
+document.getElementById("resizeFile").addEventListener("change",function(){
 
-    const file=e.target.files[0];
+    const file=this.files[0];
 
     if(!file)return;
 
     const reader=new FileReader();
 
-    reader.onload=()=>{
-        resizeImageObj=new Image();
+    reader.onload=e=>{
 
-        resizeImageObj.onload=()=>{
+        const img=new Image();
 
-            document.getElementById("resizeWidth").value=
-                resizeImageObj.width;
+        img.onload=()=>{
 
-            document.getElementById("resizeHeight").value=
-                resizeImageObj.height;
+            resizeImageObject=img;
+
+            document.getElementById("resizeWidth").value=img.width;
+            document.getElementById("resizeHeight").value=img.height;
+
         };
 
-        resizeImageObj.src=reader.result;
+        img.src=e.target.result;
+
     };
 
     reader.readAsDataURL(file);
+
 });
 
-document.getElementById("resizeWidth").addEventListener("input",()=>{
 
-    if(
-        document.getElementById("lockRatio").checked &&
-        resizeImageObj
-    ){
-        const ratio=
-            resizeImageObj.height/resizeImageObj.width;
+document.getElementById("resizeWidth").addEventListener("input",function(){
 
-        document.getElementById("resizeHeight").value=
-            Math.round(
-                document.getElementById("resizeWidth").value*ratio
-            );
-    }
+    if(!document.getElementById("lockRatio").checked)return;
+    if(!resizeImageObject)return;
+
+    const ratio=resizeImageObject.height/resizeImageObject.width;
+
+    document.getElementById("resizeHeight").value=Math.round(this.value*ratio);
+
 });
+
 
 function resizeImage(){
 
-    if(!resizeImageObj){
-        alert("Upload an image first.");
+    if(!resizeImageObject){
+        alert("Please select an image.");
         return;
     }
 
-    const canvas=document.getElementById("resizeCanvas");
-
     const width=parseInt(document.getElementById("resizeWidth").value);
     const height=parseInt(document.getElementById("resizeHeight").value);
+
+    if(!width || !height)return;
+
+    const canvas=document.createElement("canvas");
 
     canvas.width=width;
     canvas.height=height;
 
     const ctx=canvas.getContext("2d");
 
-    ctx.drawImage(resizeImageObj,0,0,width,height);
+    ctx.drawImage(resizeImageObject,0,0,width,height);
 
-    canvas.style.display="block";
+    const url=canvas.toDataURL("image/png");
+
+    document.getElementById("resizeResult").innerHTML=`
+        <img class="preview" src="${url}">
+        <a class="download" href="${url}" download="resized-image.png">
+            ⬇️ Download Image
+        </a>
+    `;
+
 }
 
 
 /* =========================
-   IMAGE COMPRESSOR
+   COMPRESSOR
 ========================= */
 
-let compressObj=null;
+document.getElementById("compressQuality").addEventListener("input",function(){
 
-document.getElementById("compressFile").addEventListener("change",e=>{
+    document.getElementById("qualityValue").textContent=this.value;
 
-    const file=e.target.files[0];
-
-    if(!file)return;
-
-    compressObj={file:file};
-
-    document.getElementById("compressInfo").textContent=
-        "Original size: "+formatBytes(file.size);
 });
 
-function compressImage(){
 
-    if(!compressObj){
-        alert("Upload an image first.");
+async function compressImage(){
+
+    const file=document.getElementById("compressFile").files[0];
+
+    if(!file){
+        alert("Please select an image.");
         return;
     }
 
-    const reader=new FileReader();
+    const quality=parseInt(document.getElementById("compressQuality").value)/100;
 
-    reader.onload=()=>{
+    const img=new Image();
 
-        const img=new Image();
+    img.onload=()=>{
 
-        img.onload=()=>{
+        const canvas=document.createElement("canvas");
 
-            const canvas=document.getElementById("compressCanvas");
+        canvas.width=img.width;
+        canvas.height=img.height;
 
-            canvas.width=img.width;
-            canvas.height=img.height;
+        const ctx=canvas.getContext("2d");
 
-            const ctx=canvas.getContext("2d");
+        ctx.drawImage(img,0,0);
 
-            ctx.drawImage(img,0,0);
+        canvas.toBlob(blob=>{
 
-            const quality=
-                parseInt(document.getElementById("quality").value)/100;
+            const url=URL.createObjectURL(blob);
 
-            canvas.toBlob(blob=>{
+            const original=(file.size/1024).toFixed(1);
+            const compressed=(blob.size/1024).toFixed(1);
 
-                canvas.style.display="block";
+            const reduction=((1-blob.size/file.size)*100).toFixed(1);
 
-                const reduction=
-                    ((1-blob.size/compressObj.file.size)*100).toFixed(1);
+            document.getElementById("compressInfo").innerHTML=`
+                <p>Original: ${original} KB</p>
+                <p>Compressed: ${compressed} KB</p>
+                <p>Reduction: ${reduction}%</p>
+            `;
 
-                document.getElementById("compressInfo").textContent=
-                    "Original: "+formatBytes(compressObj.file.size)+
-                    " • Compressed: "+formatBytes(blob.size)+
-                    " • Reduction: "+Math.max(reduction,0)+"%";
+            document.getElementById("compressResult").innerHTML=`
+                <img class="preview" src="${url}">
+                <a class="download" href="${url}" download="compressed-image.jpg">
+                    ⬇️ Download Compressed Image
+                </a>
+            `;
 
-            },"image/jpeg",quality);
-        };
+        },"image/jpeg",quality);
 
-        img.src=reader.result;
     };
 
-    reader.readAsDataURL(compressObj.file);
-}
+    img.src=URL.createObjectURL(file);
 
-function formatBytes(bytes){
-
-    if(!bytes)return"0 B";
-
-    const units=["B","KB","MB","GB"];
-
-    const i=Math.floor(Math.log(bytes)/Math.log(1024));
-
-    return(
-        (bytes/Math.pow(1024,i)).toFixed(i?2:0)
-        +" "+units[i]
-    );
 }
 
 
@@ -1614,80 +1791,56 @@ function formatBytes(bytes){
    IMAGE CONVERTER
 ========================= */
 
-let convertObj=null;
-let convertedURL=null;
-
-document.getElementById("convertFile").addEventListener("change",e=>{
-
-    convertObj=e.target.files[0];
-});
-
 function convertImage(){
 
-    if(!convertObj){
-        alert("Upload an image first.");
-        return;
-    }
+    const file=document.getElementById("convertFile").files[0];
 
-    const reader=new FileReader();
-
-    reader.onload=()=>{
-
-        const img=new Image();
-
-        img.onload=()=>{
-
-            const canvas=document.getElementById("convertCanvas");
-
-            canvas.width=img.width;
-            canvas.height=img.height;
-
-            const ctx=canvas.getContext("2d");
-
-            const format=document.getElementById("convertFormat").value;
-
-            if(format==="image/jpeg"){
-                ctx.fillStyle="#ffffff";
-                ctx.fillRect(0,0,canvas.width,canvas.height);
-            }
-
-            ctx.drawImage(img,0,0);
-
-            const quality=
-                parseFloat(document.getElementById("convertQuality").value);
-
-            convertedURL=canvas.toDataURL(format,quality);
-
-            canvas.style.display="block";
-
-            canvas.dataset.url=convertedURL;
-        };
-
-        img.src=reader.result;
-    };
-
-    reader.readAsDataURL(convertObj);
-}
-
-function downloadConverted(){
-
-    if(!convertedURL){
-        alert("Convert an image first.");
+    if(!file){
+        alert("Please select an image.");
         return;
     }
 
     const format=document.getElementById("convertFormat").value;
+    const quality=parseFloat(document.getElementById("convertQuality").value);
 
-    let ext="png";
+    const img=new Image();
 
-    if(format==="image/jpeg")ext="jpg";
-    if(format==="image/webp")ext="webp";
+    img.onload=()=>{
 
-    const link=document.createElement("a");
+        const canvas=document.createElement("canvas");
 
-    link.href=convertedURL;
-    link.download="naw-tools-converted."+ext;
-    link.click();
+        canvas.width=img.width;
+        canvas.height=img.height;
+
+        const ctx=canvas.getContext("2d");
+
+        if(format==="image/jpeg"){
+
+            ctx.fillStyle="#ffffff";
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+
+        }
+
+        ctx.drawImage(img,0,0);
+
+        const url=canvas.toDataURL(format,quality);
+
+        let extension="png";
+
+        if(format==="image/jpeg") extension="jpg";
+        if(format==="image/webp") extension="webp";
+
+        document.getElementById("convertResult").innerHTML=`
+            <img class="preview" src="${url}">
+            <a class="download" href="${url}" download="converted-image.${extension}">
+                ⬇️ Download Converted Image
+            </a>
+        `;
+
+    };
+
+    img.src=URL.createObjectURL(file);
+
 }
 
 
@@ -1697,18 +1850,20 @@ function downloadConverted(){
 
 const colorPicker=document.getElementById("colorPicker");
 
+colorPicker.addEventListener("input",updateColor);
+
 function hexToRgb(hex){
 
-    hex=hex.replace("#","");
+    const bigint=parseInt(hex.slice(1),16);
 
-    const bigint=parseInt(hex,16);
-
-    return{
+    return {
         r:(bigint>>16)&255,
         g:(bigint>>8)&255,
         b:bigint&255
     };
+
 }
+
 
 function rgbToHsl(r,g,b){
 
@@ -1723,14 +1878,18 @@ function rgbToHsl(r,g,b){
     const l=(max+min)/2;
 
     if(max===min){
-        h=s=0;
+
+        h=0;
+        s=0;
+
     }else{
 
         const d=max-min;
 
-        s=l>0.5?d/(2-max-min):d/(max+min);
+        s=l>.5?d/(2-max-min):d/(max+min);
 
         switch(max){
+
             case r:
                 h=(g-b)/d+(g<b?6:0);
                 break;
@@ -1742,89 +1901,109 @@ function rgbToHsl(r,g,b){
             case b:
                 h=(r-g)/d+4;
                 break;
+
         }
 
         h/=6;
+
     }
 
-    return{
-        h:Math.round(h*360),
-        s:Math.round(s*100),
-        l:Math.round(l*100)
-    };
+    return [
+        Math.round(h*360),
+        Math.round(s*100),
+        Math.round(l*100)
+    ];
+
 }
+
 
 function updateColor(){
 
-    const hex=colorPicker.value;
+    const hex=colorPicker.value.toUpperCase();
 
     const rgb=hexToRgb(hex);
 
     const hsl=rgbToHsl(rgb.r,rgb.g,rgb.b);
 
-    document.getElementById("colorInfo").innerHTML=
-        `<strong>HEX:</strong> ${hex}<br>
-         <strong>RGB:</strong> rgb(${rgb.r}, ${rgb.g}, ${rgb.b})<br>
-         <strong>HSL:</strong> hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
-
     document.getElementById("colorPreview").style.background=hex;
+
+    document.getElementById("hexValue").textContent=hex;
+
+    document.getElementById("rgbValue").textContent=
+        `${rgb.r},${rgb.g},${rgb.b}`;
+
+    document.getElementById("hslValue").textContent=
+        `${hsl[0]},${hsl[1]}%,${hsl[2]}%`;
+
 }
 
-colorPicker.addEventListener("input",updateColor);
-
-updateColor();
 
 function randomColor(){
 
-    const hex="#"+Math.floor(Math.random()*16777215)
-        .toString(16).padStart(6,"0");
+    const chars="0123456789ABCDEF";
+
+    let hex="#";
+
+    for(let i=0;i<6;i++)
+        hex+=chars[Math.floor(Math.random()*16)];
 
     colorPicker.value=hex;
 
     updateColor();
+
 }
+
+
+function copyColor(){
+
+    navigator.clipboard.writeText(colorPicker.value.toUpperCase());
+
+}
+
 
 function generatePalette(){
 
-    const base=hexToRgb(colorPicker.value);
+    const base=colorPicker.value;
 
-    let html="";
+    const rgb=hexToRgb(base);
+
+    const palette=document.getElementById("palette");
+
+    palette.innerHTML="";
 
     for(let i=0;i<5;i++){
 
-        const factor=.55+(i*.22);
+        const factor=.55+i*.15;
 
-        const r=Math.min(255,Math.round(base.r*factor));
-        const g=Math.min(255,Math.round(base.g*factor));
-        const b=Math.min(255,Math.round(base.b*factor));
+        const r=Math.min(255,Math.round(rgb.r*factor));
+        const g=Math.min(255,Math.round(rgb.g*factor));
+        const b=Math.min(255,Math.round(rgb.b*factor));
 
-        const hex="#"+
+        const hex=
+            "#"+
             [r,g,b]
             .map(x=>x.toString(16).padStart(2,"0"))
-            .join("");
+            .join("")
+            .toUpperCase();
 
-        html+=`
-            <div
-                title="${hex}"
-                style="background:${hex};"
-                onclick="copyColor('${hex}')">
-            </div>`;
+        const div=document.createElement("div");
+
+        div.style.background=hex;
+        div.title=hex;
+
+        div.onclick=()=>{
+            navigator.clipboard.writeText(hex);
+        };
+
+        palette.appendChild(div);
+
     }
 
-    document.getElementById("palette").innerHTML=html;
-}
-
-function copyColor(hex){
-
-    navigator.clipboard.writeText(hex);
-
-    alert(hex+" copied!");
 }
 
 
-/* =========================
-   GRADIENT
-========================= */
+document.getElementById("gradient1").addEventListener("input",updateGradient);
+document.getElementById("gradient2").addEventListener("input",updateGradient);
 
 function updateGradient(){
 
@@ -1833,39 +2012,27 @@ function updateGradient(){
 
     document.getElementById("gradientPreview").style.background=
         `linear-gradient(135deg,${c1},${c2})`;
+
 }
+
 
 function copyGradient(){
 
     const c1=document.getElementById("gradient1").value;
     const c2=document.getElementById("gradient2").value;
 
-    const css=
-        `background: linear-gradient(135deg, ${c1}, ${c2});`;
+    const css=`linear-gradient(135deg, ${c1}, ${c2})`;
 
     navigator.clipboard.writeText(css);
 
-    alert("CSS copied!");
 }
 
 
-/* =========================
-   COPY
-========================= */
-
-function copyText(id){
-
-    const text=document.getElementById(id).textContent;
-
-    if(!text)return;
-
-    navigator.clipboard.writeText(text);
-
-    alert("Copied!");
-}
+updateColor();
+generatePalette();
+updateGradient();
 
 </script>
 
 </body>
 </html>
-```
